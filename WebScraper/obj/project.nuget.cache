@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "LBN/jpNi2zdfFQ4nWz9uebpb1eYbV+SZslhiPH60TJfU8SKi/erI4wGsk+ZCsACLandXCxuO09QRW2TC1tpiwQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\WebScraper\\WebScraper.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\tseko\\.nuget\\packages\\htmlagilitypack\\1.11.51\\htmlagilitypack.1.11.51.nupkg.sha512"
+  ],
+  "logs": []
+}
