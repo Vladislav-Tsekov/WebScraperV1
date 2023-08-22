@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-class Program
+class Scraper
 {
     static async Task Main(string[] args)
     {
@@ -13,6 +13,11 @@ class Program
         string url = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=thgxfy&f1=1";
 
         // Insert a function that finds the "next" button - Web Crawler
+
+        // Creating collections to store the scraped information, at first - three different collections for title, price and year
+        List<string> motorcycleTitle = new List<string>();
+        List<string> motorcyclePrice = new List<string>();
+        List<string> motorcycleYear = new List<string>();
 
         // Create an instance of HttpClient
         using HttpClient client = new();
@@ -30,23 +35,26 @@ class Program
 
                 string htmlContent = await reader.ReadToEndAsync();
 
-                // Parse the HTML content using HtmlAgilityPack
+                // Parse the HTML content
                 HtmlDocument doc = new();
                 doc.LoadHtml(htmlContent);
 
                 // Extract the motorcycle title using XPath
-                var nameNodes = doc.DocumentNode.SelectNodes("//a[@class='mmm']");
+                var titleNodes = doc.DocumentNode.SelectNodes("//a[@class='mmm']");
 
-                if (nameNodes != null)
+                if (titleNodes != null)
                 {
-                    foreach (var nameNode in nameNodes)
+                    foreach (var titleNode in titleNodes)
                     {
-                        string name = nameNode.InnerText;
-                        if (string.IsNullOrEmpty(name))
-                        {
-                            continue;
-                        }
-                        Console.WriteLine($"Name: {name}");
+                        string title = titleNode.InnerText;
+
+                        //if (string.IsNullOrEmpty(name))
+                        //{
+                        //    continue;
+                        //}
+
+                        Console.WriteLine($"Name: {title}");
+                        motorcycleTitle.Add(title);
                     }
                 }
                 else
