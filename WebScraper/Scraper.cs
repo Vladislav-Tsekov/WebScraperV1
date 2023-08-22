@@ -48,12 +48,12 @@ class Scraper
                     {
                         string title = titleNode.InnerText;
 
-                        //if (string.IsNullOrEmpty(name))
-                        //{
-                        //    continue;
-                        //}
+                        if (string.IsNullOrEmpty(title))
+                        {
+                            continue;
+                        }
 
-                        Console.WriteLine($"Name: {title}");
+                        //Console.WriteLine($"Name: {title}");
                         motorcycleTitle.Add(title);
                     }
                 }
@@ -70,7 +70,7 @@ class Scraper
                     foreach (var priceNode in priceNodes)
                     {
                         string price = priceNode.InnerText;
-                        Console.WriteLine($"Price: {price}");
+                        //Console.WriteLine($"Price: {price}");
                         motorcyclePrice.Add(price);
                     }
                 }
@@ -93,7 +93,7 @@ class Scraper
                         if (yearMatch.Success)
                         {
                             string year = yearMatch.Value;
-                            Console.WriteLine($"Year: {year}");
+                            //Console.WriteLine($"Year: {year}");
                             motorcycleYear.Add(year);
                         }
                     }
@@ -111,6 +111,11 @@ class Scraper
         catch (Exception ex)
         {
             Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+
+        for (int i = 0; i < motorcycleTitle.Count; i++)
+        {
+            Console.WriteLine($"{motorcycleTitle[i]} - {motorcyclePrice[i]} - {motorcycleYear[i]}");
         }
     }
 }
