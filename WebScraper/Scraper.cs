@@ -71,6 +71,7 @@ class Scraper
                     {
                         string price = priceNode.InnerText;
                         Console.WriteLine($"Price: {price}");
+                        motorcyclePrice.Add(price);
                     }
                 }
                 else
@@ -93,6 +94,7 @@ class Scraper
                         {
                             string year = yearMatch.Value;
                             Console.WriteLine($"Year: {year}");
+                            motorcycleYear.Add(year);
                         }
                     }
                 }
