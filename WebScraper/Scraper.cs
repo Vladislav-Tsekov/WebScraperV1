@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System.Text;
 using System.Text.RegularExpressions;
+using WebScraper;
 
 class Scraper
 {
@@ -81,7 +82,7 @@ class Scraper
                 }
                 else
                 {
-                    Console.WriteLine("No motorcycle titles found on the page.");
+                    Console.WriteLine(string.Format(Utilities.NoTitleFound));
                 }
 
                 // Extract the motorcycle prices using XPath
@@ -99,7 +100,7 @@ class Scraper
                 }
                 else
                 {
-                    Console.WriteLine("No motorcycle prices found on the page.");
+                    Console.WriteLine(string.Format(Utilities.NoPriceFound));
                 }
 
                 // Extract the motorcycle year using XPath and regular expressions
@@ -123,12 +124,12 @@ class Scraper
                 }
                 else
                 {
-                    Console.WriteLine("No motorcycle information found on the page.");
+                    Console.WriteLine(string.Format(Utilities.NoYearFound));
                 }
             }
             else
             {
-                Console.WriteLine("Failed to retrieve the web page.");
+                Console.WriteLine(string.Format(Utilities.WebpageFailed));
             }
         }
         catch (Exception ex)

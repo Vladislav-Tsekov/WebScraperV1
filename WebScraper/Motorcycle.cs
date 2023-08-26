@@ -13,7 +13,7 @@
             {
                 if (string.IsNullOrEmpty(value))
                 {
-
+                    Console.WriteLine(string.Format(Utilities.MakeIsNullOrEmpty));
                 }
                 make = value; 
             }
@@ -25,8 +25,8 @@
             private set 
             {
                 if (string.IsNullOrEmpty(value))
-                { 
-                    
+                {
+                    Console.WriteLine(string.Format(Utilities.ModelIsNullOrEmpty));
                 }
                 model = value; 
             }
