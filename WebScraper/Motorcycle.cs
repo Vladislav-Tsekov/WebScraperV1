@@ -4,38 +4,52 @@
     {
         private string? make;
         private string? model;
-        private int cc;
         private int year;
-        private int price;
+        private bool isTooOld = false;
 
         public string Make
         {
             get { return make; }
-            set { make = value; }
+            private set 
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+
+                }
+                make = value; 
+            }
         }
 
         public string Model
         {
             get { return model; }
-            set { model = value; }
+            private set 
+            {
+                if (string.IsNullOrEmpty(value))
+                { 
+                    
+                }
+                model = value; 
+            }
         }
 
-        public int CC
-        {
-            get { return cc; }
-            set { cc = value; }
-        }
+        public int CC { get; private set; }
 
         public int Year
         {
             get { return year; }
-            set { year = value; }
+            private set 
+            {
+                if (value < 2005)
+                {
+                    IsTooOld = true;
+                }
+                year = value; 
+            }
         }
 
-        public int Price
-        {
-            get { return price; }
-            set { price = value; }
-        }
+        public int Price { get; private set; }
+
+        public bool IsTooOld { get; private set; }
     }
 }

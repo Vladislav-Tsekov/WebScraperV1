@@ -60,7 +60,7 @@ class Scraper
 
                         string make = makeMatch.Success ? makeMatch.Groups[1].Value.Trim() : "";
                         string model = modelMatch.Success ? modelMatch.Groups[1].Value.Trim() : "";
-                        string cc = ccMatch.Success ? ccMatch.Groups[1].Value.Trim() : "";
+                        string cc = ccMatch.Success ? ccMatch.Groups[1].Value.Trim() : "N/A";
 
                         if (string.IsNullOrEmpty(make))
                         {
