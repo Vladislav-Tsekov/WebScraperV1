@@ -4,6 +4,7 @@
     {
         private string? make;
         private string? model;
+        private string? cc;
         private int year;
 
         public Motorcycle(string make, string model, string cc, int year, int price)
@@ -22,7 +23,7 @@
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    Console.WriteLine(string.Format(Utilities.MakeIsNullOrEmpty));
+                    throw new ArgumentNullException(string.Format(Utilities.MakeIsNullOrEmpty));
                 }
                 make = value; 
             }
@@ -35,13 +36,24 @@
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    Console.WriteLine(string.Format(Utilities.ModelIsNullOrEmpty));
+                    throw new ArgumentNullException(string.Format(Utilities.ModelIsNullOrEmpty));
                 }
                 model = value; 
             }
         }
 
-        public string CC { get; private set; }
+        public string CC
+        {
+            get => cc; private set
+            {
+                if (value.Length < 3 || value.Length > 3)
+                {
+                    cc = "N/A";
+                    return;
+                }
+                cc = value;
+            }
+        }
 
         public int Year
         {

@@ -27,23 +27,19 @@ class Scraper
             {
                 string currentPageURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=thgxfy&f1=" + i;
 
-                // Send an HTTP request to the URL
                 HttpResponseMessage response = await client.GetAsync(currentPageURL);
 
                 if (response.IsSuccessStatusCode)
                 {
                     Stream contentStream = await response.Content.ReadAsStreamAsync();
 
-                    // Read the stream with the correct encoding (windows-1251 for Cyrillic)
                     using StreamReader reader = new(contentStream, Encoding.GetEncoding("windows-1251"));
 
                     string htmlContent = await reader.ReadToEndAsync();
 
-                    // Parse the HTML content
                     HtmlDocument doc = new();
                     doc.LoadHtml(htmlContent);
 
-                    // Extract the motorcycle title using XPath
                     var titleNodes = doc.DocumentNode.SelectNodes("//a[@class='mmm']");
 
                     if (titleNodes != null)
@@ -52,11 +48,9 @@ class Scraper
                         {
                             string title = titleNode.InnerText;
 
-                            // Defined regex patterns to capture the make, model and cc - separately
-
-                            string makePattern = @"^(.*?)(?:\s+|$)"; // Find the make (Ktm, Yamaha, etc)
-                            string modelPattern = @"(?:\s+|^)(.*?)(?:\s+\d+|$)"; // Find the model (EXC, WR, etc)
-                            string ccPattern = @"(?:\s+|^)(\d+)?(?:\s+|$)"; // Find the engine size (250, 300, etc)
+                            string makePattern = @"^(.*?)(?:\s+|$)"; 
+                            string modelPattern = @"(?:\s+|^)(.*?)(?:\s+\d+|$)";
+                            string ccPattern = @"(?:\s+|^)(\d+)?(?:\s+|$)"; 
 
                             Match makeMatch = Regex.Match(title, makePattern);
                             Match modelMatch = Regex.Match(title, modelPattern);
@@ -88,7 +82,6 @@ class Scraper
                         Console.WriteLine(string.Format(Utilities.NoTitleFound));
                     }
 
-                    // Extract the motorcycle prices using XPath
                     var priceNodes = doc.DocumentNode.SelectNodes("//span[@class='price']");
 
                     if (priceNodes != null)
@@ -96,8 +89,7 @@ class Scraper
                         foreach (var priceNode in priceNodes)
                         {
                             string priceInnerText = priceNode.InnerText;
-                            string price = Regex.Replace(priceInnerText, @"[^\d]", ""); // SHOULD REMOVE ".ЛВ" AT THE END
-                            //Console.WriteLine($"Price: {price}");
+                            string price = Regex.Replace(priceInnerText, @"[^\d]", "");
                             int convertedPrice = int.Parse(price);
                             motorcyclePrices.Add(convertedPrice);
                         }
@@ -107,7 +99,6 @@ class Scraper
                         Console.WriteLine(string.Format(Utilities.NoPriceFound));
                     }
 
-                    // Extract the motorcycle year using XPath and regular expressions
                     var infoNodes = doc.DocumentNode.SelectNodes("//td[(contains(@colspan,'3') or contains(@colspan,'4')) and contains(@style,'padding-left:')]");
 
                     if (infoNodes != null)
@@ -122,7 +113,6 @@ class Scraper
                             {
                                 string year = yearMatch.Value;
                                 int convertedYear = int.Parse(year);
-                                //Console.WriteLine($"Year: {year}");
                                 motorcycleYears.Add(convertedYear);
                             }
                         }
@@ -144,8 +134,6 @@ class Scraper
         }
 
         List<Motorcycle> currPageMotorcycles = new();
-
-        // Print command for testing the output and merging collections
 
         for (int i = 0; i < motorcycleTitles.Count; i++)
         {
