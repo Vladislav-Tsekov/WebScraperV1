@@ -50,7 +50,7 @@ class Scraper
 
                             string makePattern = @"^(.*?)(?:\s+|$)"; 
                             string modelPattern = @"(?:\s+|^)(.*?)(?:\s+\d+|$)";
-                            string ccPattern = @"(?:\s+|^)(\d+)?(?:\s+|$)"; 
+                            string ccPattern = @"(?:\s+|^)(\d{3})(?:\s+|$)";
 
                             Match makeMatch = Regex.Match(title, makePattern);
                             Match modelMatch = Regex.Match(title, modelPattern);
@@ -133,15 +133,25 @@ class Scraper
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
 
-        List<Motorcycle> currPageMotorcycles = new();
+        List<Motorcycle> allMotorcycles = new();
 
         for (int i = 0; i < motorcycleTitles.Count; i++)
         {
             var currentMotorcycle = new Motorcycle(motorcycleTitles[i][0], motorcycleTitles[i][1], motorcycleTitles[i][2], motorcycleYears[i], motorcyclePrices[i]);
 
-            currPageMotorcycles.Add(currentMotorcycle);
-
-            Console.WriteLine($"{i+1}. Make: {motorcycleTitles[i][0]}, Model: {motorcycleTitles[i][1]}, CC: {motorcycleTitles[i][2]}, Year: {motorcycleYears[i]}, Price: {motorcyclePrices[i]}");
+            allMotorcycles.Add(currentMotorcycle);
         }
+
+        var sortedMotorcycles = allMotorcycles.OrderByDescending(m => m.Make).ThenBy(m => m.Year).ThenBy(m => m.Price);
+
+        //EXPORT DATA TO TEXT FILE
+        using StreamWriter txtWriter = new(@"../../../Enduro.txt");
+
+        foreach (var motorcycle in sortedMotorcycles)
+        {
+            txtWriter.Write($"{motorcycle.Make}, {motorcycle.Model}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
+        }
+
+        Console.WriteLine($"Scraping has ended, {motorcycleTitles.Count} motorcycles were scraped successfully!");
     }
 }

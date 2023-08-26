@@ -5,7 +5,6 @@
         private string? make;
         private string? model;
         private string? cc;
-        private int year;
 
         public Motorcycle(string make, string model, string cc, int year, int price)
         {
@@ -55,21 +54,8 @@
             }
         }
 
-        public int Year
-        {
-            get { return year; }
-            private set 
-            {
-                if (value < 2005)
-                {
-                    IsTooOld = true;
-                }
-                year = value; 
-            }
-        }
+        public int Year { get; private set; }
 
         public int Price { get; private set; }
-
-        public bool IsTooOld { get; private set; }
     }
 }
