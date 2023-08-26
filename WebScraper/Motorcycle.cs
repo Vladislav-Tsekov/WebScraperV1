@@ -5,7 +5,6 @@
         private string? make;
         private string? model;
         private int year;
-        private bool isTooOld = false;
 
         public string Make
         {
