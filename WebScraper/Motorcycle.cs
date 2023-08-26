@@ -6,6 +6,15 @@
         private string? model;
         private int year;
 
+        public Motorcycle(string make, string model, string cc, int year, int price)
+        {
+            Make = make;
+            Model = model;
+            CC = cc;
+            Year = year;
+            Price = price;
+        }
+
         public string Make
         {
             get { return make; }
@@ -32,7 +41,7 @@
             }
         }
 
-        public int CC { get; private set; }
+        public string CC { get; private set; }
 
         public int Year
         {

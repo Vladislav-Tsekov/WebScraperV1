@@ -15,10 +15,9 @@ class Scraper
 
         // Insert a function that finds the "next" button - Web Crawler
 
-        // Creating collections to store the scraped information, at first - three different collections for title, price and year
-        List<string> motorcycleTitle = new();
-        List<string> motorcyclePrice = new();
-        List<string> motorcycleYear = new();
+        List<string[]> motorcycleTitles = new();
+        List<int> motorcycleYears = new();
+        List<int> motorcyclePrices = new();
 
         // Create an instance of HttpClient
         using HttpClient client = new();
@@ -75,9 +74,9 @@ class Scraper
                             model = model.Substring(0, firstSpaceIndex);
                         }
 
-                        Console.WriteLine($"Make: {make}, Model: {model}, Engine Size: {cc}");
+                        string[] motoTitle = { make, model, cc }; 
 
-                        //motorcycleTitle.Add(title);
+                        motorcycleTitles.Add(motoTitle);
                     }
                 }
                 else
@@ -95,7 +94,8 @@ class Scraper
                         string priceInnerText = priceNode.InnerText;
                         string price = Regex.Replace(priceInnerText, @"[^\d]", ""); // SHOULD REMOVE ".ЛВ" AT THE END
                         //Console.WriteLine($"Price: {price}");
-                        motorcyclePrice.Add(price);
+                        int convertedPrice = int.Parse(price);
+                        motorcyclePrices.Add(convertedPrice);
                     }
                 }
                 else
@@ -117,8 +117,9 @@ class Scraper
                         if (yearMatch.Success)
                         {
                             string year = yearMatch.Value;
+                            int convertedYear = int.Parse(year);
                             //Console.WriteLine($"Year: {year}");
-                            motorcycleYear.Add(year);
+                            motorcycleYears.Add(convertedYear);
                         }
                     }
                 }
@@ -137,14 +138,16 @@ class Scraper
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
 
-        // Print command for testing the output
+        List<Motorcycle> motorcycles = new();
 
-        //for (int i = 0; i < motorcycleTitle.Count; i++)
-        //{
-        //    Console.WriteLine($"{motorcycleTitle[i]} - {motorcyclePrice[i]} - {motorcycleYear[i]}");
-        //}
+        // Print command for testing the output and merging collections
+
+        for (int i = 0; i < motorcycleTitles.Count; i++)
+        {
+            var currentMotorcycle = new Motorcycle(motorcycleTitles[i][0], motorcycleTitles[i][1], motorcycleTitles[i][2], motorcycleYears[i], motorcyclePrices[i]);
+            motorcycles.Add(currentMotorcycle);
+
+            Console.WriteLine($"{i+1}. Make: {motorcycleTitles[i][0]}, Model: {motorcycleTitles[i][1]}, CC: {motorcycleTitles[i][2]}, Year: {motorcycleYears[i]}, Price: {motorcyclePrices[i]}");
+        }
     }
 }
-
-
-
