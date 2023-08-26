@@ -15,9 +15,9 @@ class Scraper
         // Insert a function that finds the "next" button - Web Crawler
 
         // Creating collections to store the scraped information, at first - three different collections for title, price and year
-        List<string> motorcycleTitle = new List<string>();
-        List<string> motorcyclePrice = new List<string>();
-        List<string> motorcycleYear = new List<string>();
+        List<string> motorcycleTitle = new();
+        List<string> motorcyclePrice = new();
+        List<string> motorcycleYear = new();
 
         // Create an instance of HttpClient
         using HttpClient client = new();
@@ -53,13 +53,13 @@ class Scraper
                             continue;
                         }
 
-                        //Console.WriteLine($"Name: {title}");
+                        //Console.WriteLine($"Title: {title}");
                         motorcycleTitle.Add(title);
                     }
                 }
                 else
                 {
-                    Console.WriteLine("No motorcycle names found on the page.");
+                    Console.WriteLine("No motorcycle titles found on the page.");
                 }
 
                 // Extract the motorcycle prices using XPath
@@ -69,7 +69,8 @@ class Scraper
                 {
                     foreach (var priceNode in priceNodes)
                     {
-                        string price = priceNode.InnerText;
+                        string priceInnerText = priceNode.InnerText;
+                        string price = Regex.Replace(priceInnerText, @"[^\d]", ""); // SHOULD REMOVE ".ЛВ" AT THE END
                         //Console.WriteLine($"Price: {price}");
                         motorcyclePrice.Add(price);
                     }
