@@ -48,13 +48,35 @@ class Scraper
                     {
                         string title = titleNode.InnerText;
 
-                        if (string.IsNullOrEmpty(title))
+                        // Defined regex patterns to capture the make, model and cc - separately
+
+                        string makePattern = @"^(.*?)(?:\s+|$)"; // Find the make (Ktm, Yamaha, etc)
+                        string modelPattern = @"(?:\s+|^)(.*?)(?:\s+\d+|$)"; // Find the model (EXC, WR, etc)
+                        string ccPattern = @"(?:\s+|^)(\d+)?(?:\s+|$)"; // Find the engine size (250, 300, etc)
+
+                        Match makeMatch = Regex.Match(title, makePattern);
+                        Match modelMatch = Regex.Match(title, modelPattern);
+                        Match ccMatch = Regex.Match(title, ccPattern);
+
+                        string make = makeMatch.Success ? makeMatch.Groups[1].Value.Trim() : "";
+                        string model = modelMatch.Success ? modelMatch.Groups[1].Value.Trim() : "";
+                        string cc = ccMatch.Success ? ccMatch.Groups[1].Value.Trim() : "";
+
+                        if (string.IsNullOrEmpty(make))
                         {
                             continue;
                         }
 
-                        //Console.WriteLine($"Title: {title}");
-                        motorcycleTitle.Add(title);
+                        model = model.Replace(make, "").Trim();
+                        int firstSpaceIndex = model.IndexOf(" ");
+                        if (firstSpaceIndex >= 0)
+                        {
+                            model = model.Substring(0, firstSpaceIndex);
+                        }
+
+                        Console.WriteLine($"Make: {make}, Model: {model}, Engine Size: {cc}");
+
+                        //motorcycleTitle.Add(title);
                     }
                 }
                 else
@@ -114,10 +136,12 @@ class Scraper
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
 
-        for (int i = 0; i < motorcycleTitle.Count; i++)
-        {
-            Console.WriteLine($"{motorcycleTitle[i]} - {motorcyclePrice[i]} - {motorcycleYear[i]}");
-        }
+        // Print command for testing the output
+
+        //for (int i = 0; i < motorcycleTitle.Count; i++)
+        //{
+        //    Console.WriteLine($"{motorcycleTitle[i]} - {motorcyclePrice[i]} - {motorcycleYear[i]}");
+        //}
     }
 }
 
