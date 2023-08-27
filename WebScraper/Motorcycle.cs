@@ -20,10 +20,10 @@
             get { return make; }
             private set 
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentNullException(string.Format(Utilities.MakeIsNullOrEmpty));
-                }
+                //if (string.IsNullOrEmpty(value))
+                //{
+                //    throw new ArgumentNullException(string.Format(Utilities.MakeIsNullOrEmpty));
+                //}
                 make = value; 
             }
         }
@@ -33,10 +33,10 @@
             get { return model; }
             private set 
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentNullException(string.Format(Utilities.ModelIsNullOrEmpty));
-                }
+                //if (string.IsNullOrEmpty(value))
+                //{
+                //    throw new ArgumentNullException(string.Format(Utilities.ModelIsNullOrEmpty));
+                //}
                 model = value; 
             }
         }

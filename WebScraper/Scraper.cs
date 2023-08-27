@@ -2,7 +2,6 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using WebScraper;
-using static System.Net.WebRequestMethods;
 
 class Scraper
 {
@@ -19,17 +18,14 @@ class Scraper
         try
         {
             // BASE URL IS USED BECAUSE THE URL STRUCTURE IS SIMILAR AND ONLY THE LAST SYMBOL (COUNTER) CHANGES
-            string enduroBaseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=thgxfy&f1=";
-
-            // FOR YAMAHA, HONDA AND KAWASAKI
-            string motocrossBaseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=tk5q5w&f1=";
+            string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=thgxfy&f1=";
 
             // MAX NUMBER OF PAGES TO SCRAPE
-            int maxPages = 11; // ADJUST THIS IF NEEDED
+            int maxPages = 9; // ADJUST THIS IF NEEDED, CURRENT NUMBER = 9 (26.08.2023)
 
             for (int i = 0; i < maxPages; i++)
             {
-                string currentPageURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=tk5q5w&f1=" + i;
+                string currentPageURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=thgxfy&f1=" + i;
 
                 HttpResponseMessage response = await client.GetAsync(currentPageURL);
 
@@ -52,7 +48,7 @@ class Scraper
                         {
                             string title = titleNode.InnerText;
 
-                            string makePattern = @"^(.*?)(?:\s+|$)"; 
+                            string makePattern = @"^(.*?)(?:\s+|$)";
                             string modelPattern = @"(?:\s+|^)(.*?)(?:\s+\d+|$)";
                             string ccPattern = @"(?:\s+|^)(\d{3})(?:\s+|$)";
 
@@ -74,11 +70,6 @@ class Scraper
                             if (firstSpaceIndex >= 0)
                             {
                                 model = model.Substring(0, firstSpaceIndex);
-                            }
-
-                            if (string.IsNullOrEmpty(model))
-                            {
-                                continue;
                             }
 
                             string[] motoTitle = { make, model, cc };
@@ -144,9 +135,8 @@ class Scraper
 
         List<Motorcycle> allMotorcycles = new();
 
-        for (int i = 0; i < motorcycleYears.Count; i++)
+        for (int i = 0; i < motorcycleTitles.Count; i++)
         {
-            Console.WriteLine($"{motorcycleTitles[i][0]}, {motorcycleTitles[i][1]}, {motorcycleTitles[i][2]}, {motorcycleYears[i]}, {motorcyclePrices[i]}");
             var currentMotorcycle = new Motorcycle(motorcycleTitles[i][0], motorcycleTitles[i][1], motorcycleTitles[i][2], motorcycleYears[i], motorcyclePrices[i]);
 
             allMotorcycles.Add(currentMotorcycle);
@@ -154,20 +144,12 @@ class Scraper
 
         var sortedMotorcycles = allMotorcycles.OrderByDescending(m => m.Make).ThenBy(m => m.Year).ThenBy(m => m.Price);
 
-        //EXPORT ENDURO DATA TO TEXT FILE
-        //using StreamWriter enduroWriter = new(@"../../../Enduro.txt");
-
-        //foreach (var motorcycle in sortedMotorcycles)
-        //{
-        //    enduroWriter.Write($"{motorcycle.Make}, {motorcycle.Model}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
-        //}
-
-        //EXPORT MOTOCROSS DATA TO TEXT FILE
-        using StreamWriter mxWriter = new(@"../../../Motocross.txt");
+        //EXPORT DATA TO TEXT FILE
+        using StreamWriter txtWriter = new(@"../../../Enduro.txt");
 
         foreach (var motorcycle in sortedMotorcycles)
         {
-            mxWriter.Write($"{motorcycle.Make}, {motorcycle.Model}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
+            txtWriter.Write($"{motorcycle.Make}, {motorcycle.Model}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
         }
 
         Console.WriteLine($"Scraping has ended, {motorcycleTitles.Count} motorcycles were scraped successfully!");
