@@ -1,4 +1,7 @@
-﻿class Engine
+﻿using WebScraper.Models;
+using WebScraper.Utilities;
+
+class Engine
 {
     static void Main(string[] args)
     {
@@ -12,15 +15,19 @@
 
             if (path.ToLower() == "m")
             {
-
+                MXScraper mxScraper = new MXScraper();
+                mxScraper.RunMXScraper();
+                break;
             }
             else if (path.ToLower() == "e")
             {
-
+                EnduroScraper enduroScraper = new EnduroScraper();
+                enduroScraper.RunEnduroScraper();
+                break;
             }
             else
             {
-                Console.WriteLine("Invalid input. Try again.");
+                Console.WriteLine(string.Format(Messages.InvalidInput));
             }
         }
 

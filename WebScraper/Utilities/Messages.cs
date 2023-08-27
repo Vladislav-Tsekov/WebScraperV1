@@ -1,6 +1,6 @@
 ﻿namespace WebScraper.Utilities
 {
-    public class Utilities
+    public class Messages
     {
         // OUTPUT MESSAGES
 
@@ -8,6 +8,7 @@
         public const string NoPriceFound = "Error finding motorcycle prices!";
         public const string NoYearFound = "Error finding motorcycle years!";
         public const string WebpageFailed = "Failed to retreive webpage!";
+        public const string InvalidInput = "Invalid input. Try again.";
 
         // EXCEPTION MESSAGES 
 
