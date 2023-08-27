@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using WebScraper;
+using static System.Net.WebRequestMethods;
 
 class Scraper
 {
@@ -19,14 +20,16 @@ class Scraper
         {
             // BASE URL IS USED BECAUSE THE URL STRUCTURE IS SIMILAR AND ONLY THE LAST SYMBOL (COUNTER) CHANGES
             string enduroBaseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=thgxfy&f1=";
-            string motocrossBaseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=tk5jax&f1=";
+
+            // FOR YAMAHA, HONDA AND KAWASAKI
+            string motocrossBaseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=tk5q5w&f1=";
 
             // MAX NUMBER OF PAGES TO SCRAPE
-            int maxPages = 22; // ADJUST THIS IF NEEDED, CURRENT NUMBER = 9 (26.08.2023) / MX = 22 (27.08.2023)
+            int maxPages = 11; // ADJUST THIS IF NEEDED
 
             for (int i = 0; i < maxPages; i++)
             {
-                string currentPageURL = motocrossBaseURL + i;
+                string currentPageURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=tk5q5w&f1=" + i;
 
                 HttpResponseMessage response = await client.GetAsync(currentPageURL);
 
@@ -71,6 +74,11 @@ class Scraper
                             if (firstSpaceIndex >= 0)
                             {
                                 model = model.Substring(0, firstSpaceIndex);
+                            }
+
+                            if (string.IsNullOrEmpty(model))
+                            {
+                                continue;
                             }
 
                             string[] motoTitle = { make, model, cc };
@@ -136,8 +144,9 @@ class Scraper
 
         List<Motorcycle> allMotorcycles = new();
 
-        for (int i = 0; i < motorcycleTitles.Count; i++)
+        for (int i = 0; i < motorcycleYears.Count; i++)
         {
+            Console.WriteLine($"{motorcycleTitles[i][0]}, {motorcycleTitles[i][1]}, {motorcycleTitles[i][2]}, {motorcycleYears[i]}, {motorcyclePrices[i]}");
             var currentMotorcycle = new Motorcycle(motorcycleTitles[i][0], motorcycleTitles[i][1], motorcycleTitles[i][2], motorcycleYears[i], motorcyclePrices[i]);
 
             allMotorcycles.Add(currentMotorcycle);
