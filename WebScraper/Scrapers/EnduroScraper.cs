@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace WebScraper
+namespace WebScraper.Models
 {
     public class EnduroScraper
     {

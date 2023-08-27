@@ -1,4 +1,4 @@
-﻿namespace WebScraper
+﻿namespace WebScraper.Models
 {
     public class Motorcycle
     {
@@ -18,26 +18,26 @@
         public string Make
         {
             get { return make; }
-            private set 
+            private set
             {
                 //if (string.IsNullOrEmpty(value))
                 //{
                 //    throw new ArgumentNullException(string.Format(Utilities.MakeIsNullOrEmpty));
                 //}
-                make = value; 
+                make = value;
             }
         }
 
         public string Model
         {
             get { return model; }
-            private set 
+            private set
             {
                 //if (string.IsNullOrEmpty(value))
                 //{
                 //    throw new ArgumentNullException(string.Format(Utilities.ModelIsNullOrEmpty));
                 //}
-                model = value; 
+                model = value;
             }
         }
 

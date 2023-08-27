@@ -1,4 +1,4 @@
-﻿namespace WebScraper
+﻿namespace WebScraper.Utilities
 {
     public class Utilities
     {
