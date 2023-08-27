@@ -18,14 +18,15 @@ class Scraper
         try
         {
             // BASE URL IS USED BECAUSE THE URL STRUCTURE IS SIMILAR AND ONLY THE LAST SYMBOL (COUNTER) CHANGES
-            string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=thgxfy&f1=";
-            
+            string enduroBaseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=thgxfy&f1=";
+            string motocrossBaseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=tk5jax&f1=";
+
             // MAX NUMBER OF PAGES TO SCRAPE
-            int maxPages = 9; // ADJUST THIS IF NEEDED, CURRENT NUMBER = 9 (26.08.2023)
+            int maxPages = 22; // ADJUST THIS IF NEEDED, CURRENT NUMBER = 9 (26.08.2023) / MX = 22 (27.08.2023)
 
             for (int i = 0; i < maxPages; i++)
             {
-                string currentPageURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=thgxfy&f1=" + i;
+                string currentPageURL = motocrossBaseURL + i;
 
                 HttpResponseMessage response = await client.GetAsync(currentPageURL);
 
@@ -144,12 +145,20 @@ class Scraper
 
         var sortedMotorcycles = allMotorcycles.OrderByDescending(m => m.Make).ThenBy(m => m.Year).ThenBy(m => m.Price);
 
-        //EXPORT DATA TO TEXT FILE
-        using StreamWriter txtWriter = new(@"../../../Enduro.txt");
+        //EXPORT ENDURO DATA TO TEXT FILE
+        //using StreamWriter enduroWriter = new(@"../../../Enduro.txt");
+
+        //foreach (var motorcycle in sortedMotorcycles)
+        //{
+        //    enduroWriter.Write($"{motorcycle.Make}, {motorcycle.Model}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
+        //}
+
+        //EXPORT MOTOCROSS DATA TO TEXT FILE
+        using StreamWriter mxWriter = new(@"../../../Motocross.txt");
 
         foreach (var motorcycle in sortedMotorcycles)
         {
-            txtWriter.Write($"{motorcycle.Make}, {motorcycle.Model}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
+            mxWriter.Write($"{motorcycle.Make}, {motorcycle.Model}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
         }
 
         Console.WriteLine($"Scraping has ended, {motorcycleTitles.Count} motorcycles were scraped successfully!");
