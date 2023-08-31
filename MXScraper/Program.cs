@@ -5,9 +5,7 @@ using System.Text.RegularExpressions;
 namespace WebScraper.Models
 {
     public class MXScraper
-    {
-        public void RunMXScraper()
-        {
+    {   
             static async Task Main(string[] args)
             {
                 // Register 'windows-1251' encoding provider in order to read Cyrillic
@@ -21,14 +19,14 @@ namespace WebScraper.Models
                 try
                 {
                     // BASE URL IS USED BECAUSE THE URL STRUCTURE IS SIMILAR AND ONLY THE LAST SYMBOL (COUNTER) CHANGES
-                    string motocrossBaseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=tm7kns&f1=";
+                    string motocrossBaseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=tm7yxz&f1=";
 
                     // MAX NUMBER OF PAGES TO SCRAPE
-                    int maxPages = 5; // ADJUST THIS IF NEEDED
+                    int maxPages = 3; // ADJUST THIS IF NEEDED
 
                     for (int i = 0; i < maxPages; i++)
                     {
-                        string currentPageURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=tm7kns&f1=" + i;
+                        string currentPageURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=tm7yxz&f1=" + i;
 
                         HttpResponseMessage response = await client.GetAsync(currentPageURL);
 
@@ -146,7 +144,7 @@ namespace WebScraper.Models
 
                 List<Motorcycle> allMotorcycles = new();
 
-                for (int i = 0; i < motorcycleTitles.Count; i++)
+                for (int i = 0; i < motorcyclePrices.Count; i++)
                 {
                     //Console.WriteLine($"{motorcycleTitles[i][0]}, {motorcycleTitles[i][1]}, {motorcycleTitles[i][2]}, {motorcycleYears[i]}, {motorcyclePrices[i]}");
                     var currentMotorcycle = new Motorcycle(motorcycleTitles[i][0], motorcycleTitles[i][1], motorcycleTitles[i][2], motorcycleYears[i], motorcyclePrices[i]);
@@ -166,6 +164,6 @@ namespace WebScraper.Models
 
                 Console.WriteLine($"Scraping has ended, {motorcycleTitles.Count} motorcycles were scraped successfully!");
             }
-        }
     }
 }
+

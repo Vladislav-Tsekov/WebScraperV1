@@ -1,4 +1,5 @@
-﻿using WebScraper.Models;
+﻿using System.Diagnostics;
+using WebScraper.Models;
 using WebScraper.Utilities;
 
 class Engine
@@ -12,11 +13,32 @@ class Engine
             Console.WriteLine("Are you here to scavenge Motocross (M) or Enduro (E) motorcycles? (Options: M/E)");
 
             string path = Console.ReadLine();
+            string subprocess = string.Empty;
 
             if (path.ToLower() == "m")
             {
-                MXScraper mxScraper = new MXScraper();
-                mxScraper.RunMXScraper();
+                //MXScraper mxScraper = new MXScraper();
+                //mxScraper.RunMXScraper();
+
+                string pathToSubprocess = @"C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\MXScraper\bin\Debug\net6.0\MXScraper.exe";
+
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = pathToSubprocess,
+                    UseShellExecute = false, // Set to false to redirect input, output, and error streams
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true // Set to true to hide the subprocess window
+                };
+
+                // Create and start the subprocess
+                using (Process startMXScraper = new Process { StartInfo = startInfo })
+                {
+                    startMXScraper.Start();
+                    startMXScraper.WaitForExit(); // Optionally wait for the subprocess to exit
+                }
+
                 break;
             }
             else if (path.ToLower() == "e")
