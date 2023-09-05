@@ -1,1 +1,1 @@
-Trying to create a WebScraper using C# and HtmlAgilityPack to scrape various websites for info and data. This Scraper will be modified to fit the needs of the "TwoWheelTrader" application.
+I'm working on developing a web scraper using C# and the HtmlAgilityPack library. The purpose of this web scraper is to extract information and data from various websites. I'll be customizing and adapting this scraper to meet the specific requirements of the "TwoWheelTrader" application.
