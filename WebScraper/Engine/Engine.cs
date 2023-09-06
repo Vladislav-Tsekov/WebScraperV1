@@ -17,9 +17,6 @@ class Engine
 
             if (path.ToLower() == "m")
             {
-                //MXScraper mxScraper = new MXScraper();
-                //mxScraper.RunMXScraper();
-
                 string pathToSubprocess = @"C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\MXScraper\bin\Debug\net6.0\MXScraper.exe";
 
                 ProcessStartInfo startInfo = new ProcessStartInfo
