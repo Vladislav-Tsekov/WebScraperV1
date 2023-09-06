@@ -157,6 +157,9 @@ namespace WebScraper.Models
                 //EXPORT MOTOCROSS DATA TO TEXT FILE
                 using StreamWriter mxWriter = new(@"../../../Motocross.txt");
 
+                // TO ADD ANOTHER STREAM
+
+
                 foreach (var motorcycle in sortedMotorcycles)
                 {
                     mxWriter.Write($"{motorcycle.Make}, {motorcycle.Model}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
