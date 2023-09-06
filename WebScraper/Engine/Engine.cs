@@ -51,6 +51,12 @@ class Engine
             {
                 Console.WriteLine(string.Format(Messages.InvalidInput));
             }
+
+            // Naked
+
+            // Sport
+
+            // Tourer
         }
 
     }

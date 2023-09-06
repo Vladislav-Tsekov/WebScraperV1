@@ -19,14 +19,14 @@ namespace WebScraper.Models
                 try
                 {
                     // BASE URL IS USED BECAUSE THE URL STRUCTURE IS SIMILAR AND ONLY THE LAST SYMBOL (COUNTER) CHANGES
-                    string motocrossBaseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=tm7yxz&f1=";
+                    string motocrossBaseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=tmpo7f&f1=";
 
                     // MAX NUMBER OF PAGES TO SCRAPE
-                    int maxPages = 3; // ADJUST THIS IF NEEDED
+                    int maxPages = 2; // ADJUST THIS IF NEEDED
 
                     for (int i = 0; i < maxPages; i++)
                     {
-                        string currentPageURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=tm7yxz&f1=" + i;
+                        string currentPageURL = motocrossBaseURL + i;
 
                         HttpResponseMessage response = await client.GetAsync(currentPageURL);
 
