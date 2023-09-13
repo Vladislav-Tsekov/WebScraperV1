@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MXScraper", "MXScraper\MXSc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestScrapeV1.1", "TestScrapeV1.1\TestScrapeV1.1.csproj", "{120CA3EC-F32D-4260-BDD3-F98FDB012F56}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseScraper", "BaseScraper\BaseScraper.csproj", "{13A19197-6635-4B0B-B036-4F2E4ABC461A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{120CA3EC-F32D-4260-BDD3-F98FDB012F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{120CA3EC-F32D-4260-BDD3-F98FDB012F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{120CA3EC-F32D-4260-BDD3-F98FDB012F56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13A19197-6635-4B0B-B036-4F2E4ABC461A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13A19197-6635-4B0B-B036-4F2E4ABC461A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13A19197-6635-4B0B-B036-4F2E4ABC461A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13A19197-6635-4B0B-B036-4F2E4ABC461A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
