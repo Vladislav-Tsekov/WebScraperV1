@@ -2,9 +2,6 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-
-// BASE SCRAPER - USED TO IDENTIFY AND AMEND ANY ERRORS, ESPECIALLY THE ONES CAUSED BY WRONG REG EX.
-
 class Scraper
 {
     static async Task Main(string[] args)
@@ -23,7 +20,7 @@ class Scraper
 
             for (int i = 1; i <= maxPages; i++)
             {
-                string currentPageURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=trjpk7&f1=" + i;
+                string currentPageURL = baseURL + i;
 
                 HttpResponseMessage response = await client.GetAsync(currentPageURL);
 
@@ -33,7 +30,6 @@ class Scraper
 
                     using StreamReader reader = new(contentStream, Encoding.GetEncoding("windows-1251"));
                     string htmlContent = await reader.ReadToEndAsync();
-
                     HtmlDocument doc = new();
                     doc.LoadHtml(htmlContent);
 
@@ -108,8 +104,6 @@ class Scraper
                     Console.WriteLine("Failed to retrieve the web page.");
                 }
             }
-
-
         }
         catch (Exception ex)
         {
