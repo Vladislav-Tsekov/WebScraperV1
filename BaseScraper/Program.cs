@@ -1,13 +1,17 @@
 ﻿using HtmlAgilityPack;
 using System.Text;
 using System.Text.RegularExpressions;
+
+
+// BASE SCRAPER - USED TO IDENTIFY AND AMEND ANY ERRORS, ESPECIALLY ONES CAUSED BY WRONG REG EX.
+
 class Scraper
 {
     static async Task Main(string[] args)
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-        string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=thgxfy&f1=1";
+        string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=trjpk7&f1=1";
 
         // Insert a function that finds the "next" button - Web Crawler
 
@@ -43,6 +47,7 @@ class Scraper
 
                         if (string.IsNullOrEmpty(title))
                         {
+                            Console.WriteLine("Empty Title");
                             continue;
                         }
 
@@ -61,11 +66,10 @@ class Scraper
                 {
                     foreach (var priceNode in priceNodes)
                     {
-                        string price = priceNode.InnerText;
                         string priceInnerText = priceNode.InnerText;
-                        string finalPrice = Regex.Replace(priceInnerText, @"[^\d]", ""); // SHOULD REMOVE ".ЛВ" AT THE END
-                        //Console.WriteLine($"Price: {price}");
-                        motorcyclePrice.Add(finalPrice);
+                        string price = Regex.Replace(priceInnerText, @"[^\d]", ""); // SHOULD REMOVE ".ЛВ" AT THE END
+                        Console.WriteLine($"Price: {price}");
+                        motorcyclePrice.Add(price);
                     }
                 }
                 else
@@ -84,8 +88,13 @@ class Scraper
                         if (yearMatch.Success)
                         {
                             string year = yearMatch.Value;
-                            //Console.WriteLine($"Year: {year}");
+                            Console.WriteLine($"Year: {year}");
                             motorcycleYear.Add(year);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No year found!");
+                            motorcycleYear.Add("N/A");
                         }
                     }
                 }
@@ -103,6 +112,7 @@ class Scraper
         {
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
+
         for (int i = 0; i < motorcycleTitle.Count; i++)
         {
             Console.WriteLine($"{motorcycleTitle[i]} - {motorcyclePrice[i]} - {motorcycleYear[i]}");

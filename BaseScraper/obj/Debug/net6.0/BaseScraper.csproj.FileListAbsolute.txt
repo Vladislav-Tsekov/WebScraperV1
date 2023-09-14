@@ -1,0 +1,17 @@
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\bin\Debug\net6.0\BaseScraper.exe
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\bin\Debug\net6.0\BaseScraper.deps.json
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\bin\Debug\net6.0\BaseScraper.runtimeconfig.json
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\bin\Debug\net6.0\BaseScraper.dll
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\bin\Debug\net6.0\BaseScraper.pdb
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\bin\Debug\net6.0\HtmlAgilityPack.dll
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\obj\Debug\net6.0\BaseScraper.csproj.AssemblyReference.cache
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\obj\Debug\net6.0\BaseScraper.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\obj\Debug\net6.0\BaseScraper.AssemblyInfoInputs.cache
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\obj\Debug\net6.0\BaseScraper.AssemblyInfo.cs
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\obj\Debug\net6.0\BaseScraper.csproj.CoreCompileInputs.cache
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\obj\Debug\net6.0\BaseScraper.csproj.CopyComplete
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\obj\Debug\net6.0\BaseScraper.dll
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\obj\Debug\net6.0\refint\BaseScraper.dll
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\obj\Debug\net6.0\BaseScraper.pdb
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\obj\Debug\net6.0\BaseScraper.genruntimeconfig.cache
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\obj\Debug\net6.0\ref\BaseScraper.dll
