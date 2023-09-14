@@ -6,7 +6,14 @@
 		private string year;
 		private string price;
 
-		public string Title
+        public Motorcycle(string title, string year, string price)
+        {
+            Title = title;
+            Year = year;
+            Price = price;
+        }
+
+        public string Title
 		{
 			get { return title; }
 			set { title = value; }
