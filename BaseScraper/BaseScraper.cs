@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using BaseScraper;
+using HtmlAgilityPack;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -109,6 +110,8 @@ class Scraper
         {
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
+
+        List<Motorcycle> motorcycles = new();
 
         for (int i = 0; i < motorcycleTitle.Count; i++)
         {
