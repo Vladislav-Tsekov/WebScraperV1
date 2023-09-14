@@ -21,7 +21,7 @@ class Scraper
             string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=trjpk7&f1=";
             int maxPages = 20;
 
-            for (int i = 0; i < maxPages; i++)
+            for (int i = 1; i <= maxPages; i++)
             {
                 string currentPageURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=trjpk7&f1=" + i;
 
