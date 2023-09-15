@@ -115,8 +115,9 @@ class Scraper
 
         for (int i = 0; i < motorcycleTitle.Count; i++)
         {
-            Console.WriteLine($"{motorcycleTitle[i]} - {motorcyclePrice[i]} - {motorcycleYear[i]}");
-            Motorcycle motorcycle = new();
+            Console.WriteLine($"{motorcycleTitle[i]} - {motorcycleYear[i]} - {motorcyclePrice[i]}");
+            Motorcycle motorcycle = new(motorcycleTitle[i], motorcycleYear[i], motorcyclePrice[i]);
+            motorcycles.Add(motorcycle);
         }
     }
 }
