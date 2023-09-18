@@ -38,6 +38,12 @@ class Scraper
                     var priceNodes = doc.DocumentNode.SelectNodes("//span[@class='price']");
                     var descriptionNodes = doc.DocumentNode.SelectNodes("//td[(contains(@colspan,'3') or contains(@colspan,'4')) and contains(@style,'padding-left:')]");
 
+                    // HOW TO SEPARATE INTO SMALLER CATEGORIES
+
+                    //string makePattern = @"^(.*?)(?:\s+|$)";
+                    //string modelPattern = @"(?:\s+|^)(.*?)(?:\s+\d+|$)";
+                    //string ccPattern = @"(?:\s+|^)(\d{3})(?:\s+|$)";
+
                     if (titleNodes != null)
                     {
                         foreach (var titleNode in titleNodes)
@@ -73,7 +79,6 @@ class Scraper
                     {
                         Console.WriteLine("No motorcycle prices found on the page.");
                     }
-
 
                     if (descriptionNodes != null)
                     {
@@ -118,6 +123,13 @@ class Scraper
             Console.WriteLine($"{motorcycleTitle[i]} - {motorcycleYear[i]} - {motorcyclePrice[i]}");
             Motorcycle motorcycle = new(motorcycleTitle[i], motorcycleYear[i], motorcyclePrice[i]);
             motorcycles.Add(motorcycle);
+        }
+
+        using StreamWriter mxWriter = new(@"../../../MotoData.csv");
+
+        foreach (var motorcycle in motorcycles)
+        {
+            mxWriter.Write($"{motorcycle.Title}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
         }
     }
 }
