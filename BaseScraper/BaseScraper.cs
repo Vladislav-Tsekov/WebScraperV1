@@ -69,7 +69,8 @@ class Scraper
                                 {
                                     if (Regex.IsMatch(cubicCent, @"\d{3}"))
                                     {
-                                        motorcycleCC.Add(cubicCent);
+                                        cc = cubicCent;
+                                        motorcycleCC.Add(cc);
                                     }
                                 }
 
