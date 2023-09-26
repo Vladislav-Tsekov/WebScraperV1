@@ -59,19 +59,19 @@ class Scraper
                             else
                             {
                                 string[] titleTokens = title.Split();
-                                string make = titleTokens[0];
-                                string cc = string.Empty;
 
-                                foreach (string engineCapacity in titleTokens)
+                                string make = titleTokens[0];
+                                motorcycleMake.Add(make);
+
+                                string cc = "N/A";
+
+                                foreach (string cubicCent in titleTokens)
                                 {
-                                    if (Regex.IsMatch(engineCapacity, @"\d{3}"))
+                                    if (Regex.IsMatch(cubicCent, @"\d{3}"))
                                     {
-                                        motorcycleCC.Add(engineCapacity);
+                                        motorcycleCC.Add(cubicCent);
                                     }
                                 }
-
-                                Console.WriteLine($"Title: {make}");
-                                motorcycleMake.Add(make);
                             }
                         }
                     }
@@ -106,7 +106,6 @@ class Scraper
                             if (yearMatch.Success)
                             {
                                 string year = yearMatch.Value;
-                                Console.WriteLine($"Year: {year}");
                                 motorcycleYear.Add(year);
                             }
                             else
@@ -137,8 +136,8 @@ class Scraper
 
         for (int i = 0; i < motorcycleMake.Count; i++)
         {
-            Console.WriteLine($"{motorcycleMake[i]} - {motorcycleYear[i]} - {motorcyclePrice[i]}");
-            Motorcycle motorcycle = new(motorcycleMake[i], motorcycleYear[i], motorcyclePrice[i]);
+            Console.WriteLine($"{motorcycleMake[i]} - {motorcycleCC[i]} - {motorcycleYear[i]} - {motorcyclePrice[i]}");
+            Motorcycle motorcycle = new(motorcycleMake[i], motorcycleCC[i], motorcycleYear[i], motorcyclePrice[i]);
             motorcycles.Add(motorcycle);
         }
 
