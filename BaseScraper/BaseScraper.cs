@@ -108,6 +108,7 @@ class Scraper
                 else
                 {
                     Console.WriteLine("Failed to retrieve the web page.");
+                    return;
                 }
             }
         }
