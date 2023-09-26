@@ -9,7 +9,7 @@ class Scraper
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-        List<string> motorcycleTitle = new();
+        List<string> motorcycleMake = new();
         List<string> motorcyclePrice = new();
         List<string> motorcycleYear = new();
 
@@ -17,7 +17,7 @@ class Scraper
         try
         {
             string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=twgj6h&f1=";
-            int maxPages = 21;
+            int maxPages = 1; // Change the number according to the pages count
 
             for (int i = 1; i <= maxPages; i++)
             {
@@ -55,9 +55,13 @@ class Scraper
                                 Console.WriteLine("Empty Title");
                                 continue;
                             }
-
-                            Console.WriteLine($"Title: {title}");
-                            motorcycleTitle.Add(title);
+                            else
+                            {
+                                string[] titleTokens = title.Split();
+                                string make = titleTokens[0];
+                                Console.WriteLine($"Title: {make}");
+                                motorcycleMake.Add(make);
+                            }
                         }
                     }
                     else
@@ -119,10 +123,10 @@ class Scraper
 
         List<Motorcycle> motorcycles = new();
 
-        for (int i = 0; i < motorcycleTitle.Count; i++)
+        for (int i = 0; i < motorcycleMake.Count; i++)
         {
-            Console.WriteLine($"{motorcycleTitle[i]} - {motorcycleYear[i]} - {motorcyclePrice[i]}");
-            Motorcycle motorcycle = new(motorcycleTitle[i], motorcycleYear[i], motorcyclePrice[i]);
+            Console.WriteLine($"{motorcycleMake[i]} - {motorcycleYear[i]} - {motorcyclePrice[i]}");
+            Motorcycle motorcycle = new(motorcycleMake[i], motorcycleYear[i], motorcyclePrice[i]);
             motorcycles.Add(motorcycle);
         }
 
