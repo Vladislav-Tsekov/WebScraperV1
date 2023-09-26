@@ -91,6 +91,7 @@ class Scraper
                             string infoText = infoNode.InnerText;
                             string yearPattern = @"\d{4}";
                             Match yearMatch = Regex.Match(infoText, yearPattern);
+
                             if (yearMatch.Success)
                             {
                                 string year = yearMatch.Value;
