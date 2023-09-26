@@ -17,8 +17,11 @@ class Scraper
         using HttpClient client = new();
         try
         {
+            // Find a work-around since the filter is not stored on the server and changes over time
             string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=twgj6h&f1=";
-            int maxPages = 1; // Change the number according to the pages count
+
+            // Change the number according to the pages count
+            int maxPages = 21; 
 
             for (int i = 1; i <= maxPages; i++)
             {
@@ -111,14 +114,13 @@ class Scraper
                             }
                             else
                             {
-                                Console.WriteLine($"No year found!");
                                 motorcycleYear.Add("N/A");
                             }
                         }
                     }
                     else
                     {
-                        Console.WriteLine("No motorcycle information found on the page.");
+                        Console.WriteLine("No motorcycle years found on the page.");
                     }
                 }
                 else
