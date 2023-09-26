@@ -59,6 +59,16 @@ class Scraper
                             {
                                 string[] titleTokens = title.Split();
                                 string make = titleTokens[0];
+                                string cc = string.Empty;
+
+                                foreach (string engineCapacity in titleTokens)
+                                {
+                                    if (Regex.IsMatch(engineCapacity, @"\d{3}"))
+                                    {
+                                        // motorcycleCC.Add(engineCapacity);
+                                    }
+                                }
+
                                 Console.WriteLine($"Title: {make}");
                                 motorcycleMake.Add(make);
                             }
