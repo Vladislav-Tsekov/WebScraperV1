@@ -16,8 +16,8 @@ class Scraper
         using HttpClient client = new();
         try
         {
-            string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=trjpk7&f1=";
-            int maxPages = 20;
+            string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=twgj6h&f1=";
+            int maxPages = 21;
 
             for (int i = 1; i <= maxPages; i++)
             {
