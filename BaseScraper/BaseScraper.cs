@@ -72,6 +72,11 @@ class Scraper
                                         motorcycleCC.Add(cubicCent);
                                     }
                                 }
+
+                                if (cc == "N/A")
+                                {
+                                    motorcycleCC.Add(cc);
+                                }
                             }
                         }
                     }
@@ -136,7 +141,7 @@ class Scraper
 
         for (int i = 0; i < motorcycleMake.Count; i++)
         {
-            Console.WriteLine($"{motorcycleMake[i]} - {motorcycleCC[i]} - {motorcycleYear[i]} - {motorcyclePrice[i]}");
+            //Console.WriteLine($"{motorcycleMake[i]} - {motorcycleCC[i]} - {motorcycleYear[i]} - {motorcyclePrice[i]}");
             Motorcycle motorcycle = new(motorcycleMake[i], motorcycleCC[i], motorcycleYear[i], motorcyclePrice[i]);
             motorcycles.Add(motorcycle);
         }
@@ -145,7 +150,7 @@ class Scraper
 
         foreach (var motorcycle in motorcycles)
         {
-            mxWriter.Write($"{motorcycle.Title}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
+            mxWriter.Write($"{motorcycle.Title}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
         }
     }
 }
