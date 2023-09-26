@@ -39,12 +39,6 @@ class Scraper
                     var priceNodes = doc.DocumentNode.SelectNodes("//span[@class='price']");
                     var descriptionNodes = doc.DocumentNode.SelectNodes("//td[(contains(@colspan,'3') or contains(@colspan,'4')) and contains(@style,'padding-left:')]");
 
-                    // HOW TO SEPARATE INTO SMALLER CATEGORIES
-
-                    //string makePattern = @"^(.*?)(?:\s+|$)";
-                    //string modelPattern = @"(?:\s+|^)(.*?)(?:\s+\d+|$)";
-                    //string ccPattern = @"(?:\s+|^)(\d{3})(?:\s+|$)";
-
                     if (titleNodes != null)
                     {
                         foreach (var titleNode in titleNodes)
@@ -67,9 +61,11 @@ class Scraper
 
                                 foreach (string cubicCent in titleTokens)
                                 {
-                                    if (Regex.IsMatch(cubicCent, @"\d{3}"))
+                                    Match ccMatch = Regex.Match(cubicCent, @"\d{3}");
+                                    if (ccMatch.Success)
                                     {
-                                        cc = cubicCent;
+                                        string ccValue = ccMatch.Value;
+                                        cc = ccValue;
                                         motorcycleCC.Add(cc);
                                     }
                                 }
@@ -92,7 +88,6 @@ class Scraper
                         {
                             string priceInnerText = priceNode.InnerText;
                             string price = Regex.Replace(priceInnerText, @"[^\d]", "");
-                            Console.WriteLine($"Price: {price}");
                             motorcyclePrice.Add(price);
                         }
                     }
@@ -142,7 +137,6 @@ class Scraper
 
         for (int i = 0; i < motorcycleMake.Count; i++)
         {
-            //Console.WriteLine($"{motorcycleMake[i]} - {motorcycleCC[i]} - {motorcycleYear[i]} - {motorcyclePrice[i]}");
             Motorcycle motorcycle = new(motorcycleMake[i], motorcycleCC[i], motorcycleYear[i], motorcyclePrice[i]);
             motorcycles.Add(motorcycle);
         }
