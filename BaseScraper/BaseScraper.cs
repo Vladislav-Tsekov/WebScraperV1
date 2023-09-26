@@ -10,6 +10,7 @@ class Scraper
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
         List<string> motorcycleMake = new();
+        List<string> motorcycleCC = new();
         List<string> motorcyclePrice = new();
         List<string> motorcycleYear = new();
 
@@ -65,7 +66,7 @@ class Scraper
                                 {
                                     if (Regex.IsMatch(engineCapacity, @"\d{3}"))
                                     {
-                                        // motorcycleCC.Add(engineCapacity);
+                                        motorcycleCC.Add(engineCapacity);
                                     }
                                 }
 
