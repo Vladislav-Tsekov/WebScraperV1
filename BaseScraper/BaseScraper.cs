@@ -134,10 +134,18 @@ class Scraper
 
                     if (linkNodes != null)
                     {
-                        foreach (var link in linkNodes)
+                        foreach (var href in linkNodes)
                         {
-                            string href = link.GetAttributeValue("href", "");
-                            Console.WriteLine(href);
+                            string link = href.GetAttributeValue("href", "");
+
+                            if (link.Length < 50)
+                            {
+                                announcementLink.Add("Missing or broken link => Double check.");
+                            }
+                            else
+                            {
+                                announcementLink.Add(link);
+                            }
                         }
                     }
                     else
