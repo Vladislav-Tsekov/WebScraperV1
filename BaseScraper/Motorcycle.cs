@@ -6,13 +6,15 @@
         private string cc;
 		private string year;
 		private double price;
+        private string link;
 
-        public Motorcycle(string make, string cc, string year, double price)
+        public Motorcycle(string make, string cc, string year, double price, string link)
         {
             Make = make;
             CC = cc;
             Year = year;
             Price = price;
+            Link = link;
         }
 
         public string Make
@@ -39,6 +41,11 @@
             set { price = value; }
         }
 
-
+        public string Link 
+        {
+        
+            get { return link; }
+            set { link = value; }
+        }
     }
 }
