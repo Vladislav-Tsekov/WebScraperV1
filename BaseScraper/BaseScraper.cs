@@ -156,6 +156,7 @@ class Scraper
 
         foreach (var motorcycle in sortedMoto)
         {
+            mxWriter.Write($"Make, CC, Year, Price{Environment.NewLine}");
             mxWriter.Write($"{motorcycle.Make}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
         }
 
