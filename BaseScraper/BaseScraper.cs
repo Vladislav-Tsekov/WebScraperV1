@@ -21,7 +21,7 @@ class Scraper
             string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=twgj6h&f1=";
 
             // Change the number according to the pages count
-            int maxPages = 21; 
+            int maxPages = 1; 
 
             for (int i = 1; i <= maxPages; i++)
             {
@@ -150,6 +150,27 @@ class Scraper
         foreach (var motorcycle in sortedMoto)
         {
             mxWriter.Write($"{motorcycle.Make}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
+        }
+
+        var averagePrices = motorcycles
+            .GroupBy(m => new { m.Year, m.Make }) // Group by year and make
+            .Select(group => new
+            {
+                group.Key.Year,
+                group.Key.Make,
+                AveragePrice = group.Average(m => int.Parse(m.Price))
+            })
+            .OrderBy(m => m.Year)
+            .ThenBy(m => m.Make);
+
+        foreach (var moto in averagePrices)
+        {
+            Console.WriteLine($"Year {moto.Year} {moto.Make}: Average Price {moto.AveragePrice:C}");
+        }
+
+        foreach (var result in averagePrices)
+        {
+            Console.WriteLine($"Year {result.Year} {result.Make}: Average Price {result.AveragePrice:C}");
         }
     }
 }
