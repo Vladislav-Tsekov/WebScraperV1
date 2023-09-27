@@ -21,7 +21,7 @@ class Scraper
             string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=twgj6h&f1=";
 
             // Change the number according to the pages count
-            int maxPages = 21; 
+            int maxPages = 5; 
 
             for (int i = 1; i <= maxPages; i++)
             {
@@ -50,7 +50,6 @@ class Scraper
 
                             if (string.IsNullOrEmpty(title))
                             {
-                                Console.WriteLine("Empty Title");
                                 continue;
                             }
                             else
@@ -170,12 +169,13 @@ class Scraper
                 group.Key.Year,
                 AveragePrice = group.Average(m => m.Price)
             })
-            .OrderBy(m => m.Year)
-            .ThenBy(m => m.Make);
+            .OrderBy(m => m.Make)
+            .ThenBy(m => m.Year)
+            .ThenBy(m => m.AveragePrice);
 
         foreach (var moto in averagePrices)
         {
-            Console.WriteLine($"Year {moto.Year} {moto.Make}: Average Price {moto.AveragePrice:C}");
+            Console.WriteLine($"{moto.Make} from {moto.Year}: Average Price {moto.AveragePrice}");
         }
     }
 }
