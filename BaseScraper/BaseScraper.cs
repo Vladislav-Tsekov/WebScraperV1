@@ -11,7 +11,7 @@ class Scraper
 
         List<string> motorcycleMake = new();
         List<string> motorcycleCC = new();
-        List<string> motorcyclePrice = new();
+        List<double> motorcyclePrice = new();
         List<string> motorcycleYear = new();
 
         using HttpClient client = new();
@@ -21,7 +21,7 @@ class Scraper
             string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=twgj6h&f1=";
 
             // Change the number according to the pages count
-            int maxPages = 1; 
+            int maxPages = 21; 
 
             for (int i = 1; i <= maxPages; i++)
             {
@@ -91,7 +91,8 @@ class Scraper
                         {
                             string priceInnerText = priceNode.InnerText;
                             string price = Regex.Replace(priceInnerText, @"[^\d]", "");
-                            motorcyclePrice.Add(price);
+                            double priceToInt = double.Parse(price);
+                            motorcyclePrice.Add(priceToInt);
                         }
                     }
                     else
@@ -152,13 +153,13 @@ class Scraper
             mxWriter.Write($"{motorcycle.Make}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
         }
 
-        var averagePrices = motorcycles
-            .GroupBy(m => new { m.Year, m.Make }) // Group by year and make
+        var averagePrices = sortedMoto
+            .GroupBy(m => new { m.Make, m.Year }) // Group by year and make
             .Select(group => new
             {
-                group.Key.Year,
                 group.Key.Make,
-                AveragePrice = group.Average(m => int.Parse(m.Price))
+                group.Key.Year,
+                AveragePrice = group.Average(m => m.Price)
             })
             .OrderBy(m => m.Year)
             .ThenBy(m => m.Make);
@@ -166,11 +167,6 @@ class Scraper
         foreach (var moto in averagePrices)
         {
             Console.WriteLine($"Year {moto.Year} {moto.Make}: Average Price {moto.AveragePrice:C}");
-        }
-
-        foreach (var result in averagePrices)
-        {
-            Console.WriteLine($"Year {result.Year} {result.Make}: Average Price {result.AveragePrice:C}");
         }
     }
 }

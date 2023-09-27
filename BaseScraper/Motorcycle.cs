@@ -5,9 +5,9 @@
 		private string make;
         private string cc;
 		private string year;
-		private string price;
+		private double price;
 
-        public Motorcycle(string make, string cc, string year, string price)
+        public Motorcycle(string make, string cc, string year, double price)
         {
             Make = make;
             CC = cc;
@@ -33,7 +33,7 @@
             set { year = value; }
         }
 
-        public string Price
+        public double Price
         {
             get { return price; }
             set { price = value; }
