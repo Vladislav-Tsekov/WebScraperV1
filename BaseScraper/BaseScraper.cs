@@ -91,9 +91,8 @@ class Scraper
                         {
                             string priceInnerText = priceNode.InnerText;
                             string price = Regex.Replace(priceInnerText, @"[^\d]", "");
-                            double priceValue = 0;
 
-                            if (double.TryParse(price, out priceValue))
+                            if (double.TryParse(price, out double priceValue))
                             {
                                 Console.WriteLine($"Parsed price: {priceValue:F2}");
                             }
