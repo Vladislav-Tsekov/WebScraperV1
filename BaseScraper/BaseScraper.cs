@@ -154,9 +154,10 @@ class Scraper
 
         using StreamWriter mxWriter = new(@"../../../MotoData.csv");
 
+        mxWriter.Write($"Make, CC, Year, Price{Environment.NewLine}");
+
         foreach (var motorcycle in sortedMoto)
         {
-            mxWriter.Write($"Make, CC, Year, Price{Environment.NewLine}");
             mxWriter.Write($"{motorcycle.Make}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
         }
 
@@ -176,9 +177,11 @@ class Scraper
 
         using StreamWriter avgPriceWriter = new(@"../../../AvgPriceModelYear.csv");
 
+        avgPriceWriter.Write($"Make, Year, Average Price{Environment.NewLine}");
+
         foreach (var moto in averagePrices)
         {
-            avgPriceWriter.Write($"{moto.Make} from {moto.Year}: Average Price {moto.AveragePrice:f2}{Environment.NewLine}");
+            avgPriceWriter.Write($"{moto.Make}, {moto.Year}, {moto.AveragePrice:f2}{Environment.NewLine}");
         }
 
         avgPriceWriter.Dispose();
