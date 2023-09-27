@@ -22,7 +22,7 @@ class Scraper
             string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=twgj6h&f1=";
 
             // Change the number according to the pages count
-            int maxPages = 1; 
+            int maxPages = 21; 
 
             for (int i = 1; i <= maxPages; i++)
             {
@@ -169,7 +169,8 @@ class Scraper
 
         for (int i = 0; i < motorcycleMake.Count; i++)
         {
-            Motorcycle motorcycle = new(motorcycleMake[i], motorcycleCC[i], motorcycleYear[i], motorcyclePrice[i]);
+            Motorcycle motorcycle = 
+                new(motorcycleMake[i], motorcycleCC[i], motorcycleYear[i], motorcyclePrice[i], announcementLink[i]);
             motorcycles.Add(motorcycle);
         }
 
