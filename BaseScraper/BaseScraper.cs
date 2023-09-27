@@ -13,6 +13,7 @@ class Scraper
         List<string> motorcycleCC = new();
         List<double> motorcyclePrice = new();
         List<string> motorcycleYear = new();
+        List<string> announcementLink = new();
 
         using HttpClient client = new();
         try
