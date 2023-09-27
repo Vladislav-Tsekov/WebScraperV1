@@ -143,7 +143,7 @@ class Scraper
             motorcycles.Add(motorcycle);
         }
 
-        List<Motorcycle> sortedMoto = motorcycles.OrderByDescending(m => m.);
+        List<Motorcycle> sortedMoto = motorcycles.OrderByDescending(m => m.Make).ThenBy(m => m.Year).ThenBy(m => m.Price).ToList();
 
         using StreamWriter mxWriter = new(@"../../../MotoData.csv");
 
