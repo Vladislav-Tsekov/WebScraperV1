@@ -21,7 +21,7 @@ class Scraper
             string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=twgj6h&f1=";
 
             // Change the number according to the pages count
-            int maxPages = 21; 
+            int maxPages = 1; 
 
             for (int i = 1; i <= maxPages; i++)
             {
@@ -41,6 +41,7 @@ class Scraper
                     var titleNodes = doc.DocumentNode.SelectNodes("//a[@class='mmm']");
                     var priceNodes = doc.DocumentNode.SelectNodes("//span[@class='price']");
                     var descriptionNodes = doc.DocumentNode.SelectNodes("//td[(contains(@colspan,'3') or contains(@colspan,'4')) and contains(@style,'padding-left:')]");
+                    var linkNodes = doc.DocumentNode.SelectNodes("//a[@class='mmm']");
 
                     if (titleNodes != null)
                     {
@@ -128,6 +129,19 @@ class Scraper
                     else
                     {
                         Console.WriteLine("No motorcycle years found on the page.");
+                    }
+
+                    if (linkNodes != null)
+                    {
+                        foreach (var link in linkNodes)
+                        {
+                            string href = link.GetAttributeValue("href", "");
+                            Console.WriteLine(href);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No matching links found.");
                     }
                 }
                 else
