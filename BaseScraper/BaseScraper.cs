@@ -150,20 +150,24 @@ class Scraper
             motorcycles.Add(motorcycle);
         }
 
-        List<Motorcycle> sortedMoto = motorcycles.OrderBy(m => m.Make).ThenBy(m => m.Year).ThenBy(m => m.Price).ToList();
+        List<Motorcycle> filteredMoto = motorcycles.Where(m => m.Price > 3000)
+                                                   .OrderBy(m => m.Make)
+                                                   .ThenBy(m => m.Year)
+                                                   .ThenBy(m => m.Price)
+                                                   .ToList();
 
         using StreamWriter mxWriter = new(@"../../../MotoData.csv");
 
         mxWriter.Write($"Make, CC, Year, Price{Environment.NewLine}");
 
-        foreach (var motorcycle in sortedMoto)
+        foreach (var motorcycle in filteredMoto)
         {
             mxWriter.Write($"{motorcycle.Make}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
         }
 
         mxWriter.Dispose();
 
-        var averagePrices = sortedMoto
+        var averagePrices = filteredMoto
             .GroupBy(m => new { m.Make, m.Year }) // Group by year and make
             .Select(group => new
             {

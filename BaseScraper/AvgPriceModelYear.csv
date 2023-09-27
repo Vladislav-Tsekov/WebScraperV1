@@ -1,104 +1,105 @@
-Други from 2023: Average Price 2404.12
-Поръчкови from 2020: Average Price 1400.00
-Bashan from 2023: Average Price 3265.71
-Bashan from N/A: Average Price 3276.67
-Beta from 2010: Average Price 7100.00
-Cfmoto from 2023: Average Price 3900.00
-GASGAS from 2021: Average Price 11924.50
-GASGAS from 2022: Average Price 9750.00
-GASGAS from 2023: Average Price 15000.00
-Honda from 2007: Average Price 5199.67
-Honda from 2008: Average Price 4400.00
-Honda from 2009: Average Price 5775.00
-Honda from 2010: Average Price 5524.75
-Honda from 2011: Average Price 6178.57
-Honda from 2012: Average Price 6759.13
-Honda from 2013: Average Price 6175.00
-Honda from 2014: Average Price 6640.00
-Honda from 2015: Average Price 7100.00
-Honda from 2016: Average Price 7529.70
-Honda from 2017: Average Price 7487.25
-Honda from 2018: Average Price 9000.00
-Honda from 2019: Average Price 8925.00
-Honda from 2020: Average Price 9834.75
-Honda from 2021: Average Price 11800.00
-Honda from 2022: Average Price 14750.00
-Honda from 2023: Average Price 10999.33
-Husqvarna from 2007: Average Price 5299.00
-Husqvarna from 2015: Average Price 8549.50
-Husqvarna from 2016: Average Price 6650.00
-Husqvarna from 2017: Average Price 9699.67
-Husqvarna from 2018: Average Price 8812.38
-Husqvarna from 2019: Average Price 9900.00
-Husqvarna from 2020: Average Price 10057.00
-Husqvarna from 2021: Average Price 14000.00
-Husqvarna from 2022: Average Price 12500.00
-Husqvarna from 2023: Average Price 13900.00
-Kawasaki from 2007: Average Price 4624.75
-Kawasaki from 2008: Average Price 5081.25
-Kawasaki from 2009: Average Price 5366.67
-Kawasaki from 2010: Average Price 5000.00
-Kawasaki from 2011: Average Price 5466.67
-Kawasaki from 2012: Average Price 6000.00
-Kawasaki from 2013: Average Price 5700.00
-Kawasaki from 2014: Average Price 6379.60
-Kawasaki from 2015: Average Price 7083.33
-Kawasaki from 2016: Average Price 7614.14
-Kawasaki from 2017: Average Price 6091.67
-Kawasaki from 2018: Average Price 7800.00
-Kawasaki from 2019: Average Price 9299.33
-Kawasaki from 2020: Average Price 10493.62
-Kawasaki from 2021: Average Price 10700.00
-Kawasaki from 2022: Average Price 10999.33
-Kawasaki from 2023: Average Price 13900.00
-Ktm from 2007: Average Price 5200.00
-Ktm from 2008: Average Price 5500.00
-Ktm from 2009: Average Price 5279.80
-Ktm from 2010: Average Price 5999.00
-Ktm from 2011: Average Price 6850.00
-Ktm from 2012: Average Price 7250.00
-Ktm from 2013: Average Price 6975.00
-Ktm from 2014: Average Price 7540.89
-Ktm from 2015: Average Price 7777.78
-Ktm from 2016: Average Price 7964.14
-Ktm from 2017: Average Price 8934.21
-Ktm from 2018: Average Price 10181.36
-Ktm from 2019: Average Price 10081.12
-Ktm from 2020: Average Price 11666.50
-Ktm from 2021: Average Price 11646.33
-Ktm from 2022: Average Price 12466.67
-Ktm from 2023: Average Price 9700.00
-Lifan from 2017: Average Price 800.00
-Moto from 2015: Average Price 1200.00
-Rieju from 2013: Average Price 5300.00
-Shineray from 2021: Average Price 2000.00
-Suzuki from 2007: Average Price 4799.80
-Suzuki from 2008: Average Price 5050.00
-Suzuki from 2009: Average Price 5000.00
-Suzuki from 2010: Average Price 6400.00
-Suzuki from 2011: Average Price 6600.00
-Suzuki from 2012: Average Price 6940.00
-Suzuki from 2014: Average Price 6000.00
-Suzuki from 2015: Average Price 6500.00
-Suzuki from 2016: Average Price 7399.67
-Suzuki from 2017: Average Price 8000.00
-Suzuki from 2018: Average Price 9700.00
-Suzuki from 2020: Average Price 9099.50
-Suzuki from 2022: Average Price 10000.00
-Telstar from 2022: Average Price 4072.00
-Telstar from 2023: Average Price 2150.00
-Yamaha from 2007: Average Price 4800.00
-Yamaha from 2008: Average Price 5285.71
-Yamaha from 2009: Average Price 5849.75
-Yamaha from 2010: Average Price 4575.00
-Yamaha from 2011: Average Price 5899.50
-Yamaha from 2012: Average Price 6649.75
-Yamaha from 2013: Average Price 6525.00
-Yamaha from 2014: Average Price 9499.00
-Yamaha from 2015: Average Price 7050.00
-Yamaha from 2016: Average Price 7249.75
-Yamaha from 2017: Average Price 8233.33
-Yamaha from 2019: Average Price 9616.50
-Yamaha from 2020: Average Price 10075.00
-Yamaha from 2021: Average Price 11500.00
-Yamaha from 2022: Average Price 9250.00
+Make, Year, Average Price
+Други, 2023, 2404.12
+Поръчкови, 2020, 1400.00
+Bashan, 2023, 3265.71
+Bashan, N/A, 3276.67
+Beta, 2010, 7100.00
+Cfmoto, 2023, 3900.00
+GASGAS, 2021, 11924.50
+GASGAS, 2022, 9750.00
+GASGAS, 2023, 15000.00
+Honda, 2007, 5199.67
+Honda, 2008, 4400.00
+Honda, 2009, 5775.00
+Honda, 2010, 5524.75
+Honda, 2011, 6178.57
+Honda, 2012, 6759.13
+Honda, 2013, 6175.00
+Honda, 2014, 6640.00
+Honda, 2015, 7100.00
+Honda, 2016, 7529.70
+Honda, 2017, 7487.25
+Honda, 2018, 9000.00
+Honda, 2019, 8925.00
+Honda, 2020, 9834.75
+Honda, 2021, 11800.00
+Honda, 2022, 14750.00
+Honda, 2023, 10999.33
+Husqvarna, 2007, 5299.00
+Husqvarna, 2015, 8549.50
+Husqvarna, 2016, 6650.00
+Husqvarna, 2017, 9699.67
+Husqvarna, 2018, 8812.38
+Husqvarna, 2019, 9900.00
+Husqvarna, 2020, 10057.00
+Husqvarna, 2021, 14000.00
+Husqvarna, 2022, 12500.00
+Husqvarna, 2023, 13900.00
+Kawasaki, 2007, 4624.75
+Kawasaki, 2008, 5081.25
+Kawasaki, 2009, 5366.67
+Kawasaki, 2010, 5000.00
+Kawasaki, 2011, 5466.67
+Kawasaki, 2012, 6000.00
+Kawasaki, 2013, 5700.00
+Kawasaki, 2014, 6379.60
+Kawasaki, 2015, 7083.33
+Kawasaki, 2016, 7614.14
+Kawasaki, 2017, 6091.67
+Kawasaki, 2018, 7800.00
+Kawasaki, 2019, 9299.33
+Kawasaki, 2020, 10493.62
+Kawasaki, 2021, 10700.00
+Kawasaki, 2022, 10999.33
+Kawasaki, 2023, 13900.00
+Ktm, 2007, 5200.00
+Ktm, 2008, 5500.00
+Ktm, 2009, 5279.80
+Ktm, 2010, 5999.00
+Ktm, 2011, 6850.00
+Ktm, 2012, 7250.00
+Ktm, 2013, 6975.00
+Ktm, 2014, 7540.89
+Ktm, 2015, 7777.78
+Ktm, 2016, 7964.14
+Ktm, 2017, 8934.21
+Ktm, 2018, 10181.36
+Ktm, 2019, 10081.12
+Ktm, 2020, 11666.50
+Ktm, 2021, 11646.33
+Ktm, 2022, 12466.67
+Ktm, 2023, 9700.00
+Lifan, 2017, 800.00
+Moto, 2015, 1200.00
+Rieju, 2013, 5300.00
+Shineray, 2021, 2000.00
+Suzuki, 2007, 4799.80
+Suzuki, 2008, 5050.00
+Suzuki, 2009, 5000.00
+Suzuki, 2010, 6400.00
+Suzuki, 2011, 6600.00
+Suzuki, 2012, 6940.00
+Suzuki, 2014, 6000.00
+Suzuki, 2015, 6500.00
+Suzuki, 2016, 7399.67
+Suzuki, 2017, 8000.00
+Suzuki, 2018, 9700.00
+Suzuki, 2020, 9099.50
+Suzuki, 2022, 10000.00
+Telstar, 2022, 4072.00
+Telstar, 2023, 2150.00
+Yamaha, 2007, 4800.00
+Yamaha, 2008, 5285.71
+Yamaha, 2009, 5849.75
+Yamaha, 2010, 4575.00
+Yamaha, 2011, 5899.50
+Yamaha, 2012, 6649.75
+Yamaha, 2013, 6525.00
+Yamaha, 2014, 9499.00
+Yamaha, 2015, 7050.00
+Yamaha, 2016, 7249.75
+Yamaha, 2017, 8233.33
+Yamaha, 2019, 9616.50
+Yamaha, 2020, 10075.00
+Yamaha, 2021, 11500.00
+Yamaha, 2022, 9250.00
