@@ -143,11 +143,11 @@ class Scraper
             motorcycles.Add(motorcycle);
         }
 
-        List<Motorcycle> sortedMoto = motorcycles.OrderByDescending(m => m.Make).ThenBy(m => m.Year).ThenBy(m => m.Price).ToList();
+        List<Motorcycle> sortedMoto = motorcycles.OrderBy(m => m.Make).ThenBy(m => m.Year).ThenBy(m => m.Price).ToList();
 
         using StreamWriter mxWriter = new(@"../../../MotoData.csv");
 
-        foreach (var motorcycle in motorcycles)
+        foreach (var motorcycle in sortedMoto)
         {
             mxWriter.Write($"{motorcycle.Make}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
         }
