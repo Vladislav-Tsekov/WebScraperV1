@@ -2,23 +2,23 @@
 {
     public class Motorcycle
     {
-		private string title;
+		private string make;
         private string cc;
 		private string year;
 		private string price;
 
-        public Motorcycle(string title, string cc, string year, string price)
+        public Motorcycle(string make, string cc, string year, string price)
         {
-            Title = title;
+            Make = make;
+            CC = cc;
             Year = year;
             Price = price;
-            CC = cc;
         }
 
-        public string Title
+        public string Make
 		{
-			get { return title; }
-			set { title = value; }
+			get { return make; }
+			set { make = value; }
 		}
 
         public string CC
