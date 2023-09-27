@@ -21,7 +21,7 @@ class Scraper
             string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=twgj6h&f1=";
 
             // Change the number according to the pages count
-            int maxPages = 5; 
+            int maxPages = 21; 
 
             for (int i = 1; i <= maxPages; i++)
             {
@@ -93,14 +93,12 @@ class Scraper
 
                             if (double.TryParse(price, out double priceValue))
                             {
-                                Console.WriteLine($"Parsed price: {priceValue:F2}");
+                                motorcyclePrice.Add(priceValue);
                             }
                             else
                             {
-                                Console.WriteLine("Failed to parse price");
+                                motorcyclePrice.Add(0);
                             }
-
-                            motorcyclePrice.Add(priceValue);
                         }
                     }
                     else
