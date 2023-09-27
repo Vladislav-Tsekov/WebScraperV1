@@ -160,6 +160,8 @@ class Scraper
             mxWriter.Write($"{motorcycle.Make}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
         }
 
+        mxWriter.Dispose();
+
         var averagePrices = sortedMoto
             .GroupBy(m => new { m.Make, m.Year }) // Group by year and make
             .Select(group => new
@@ -172,9 +174,13 @@ class Scraper
             .ThenBy(m => m.Year)
             .ThenBy(m => m.AveragePrice);
 
+        using StreamWriter avgPriceWriter = new(@"../../../AvgPriceModelYear.csv");
+
         foreach (var moto in averagePrices)
         {
-            Console.WriteLine($"{moto.Make} from {moto.Year}: Average Price {moto.AveragePrice}");
+            avgPriceWriter.Write($"{moto.Make} from {moto.Year}: Average Price {moto.AveragePrice:f2}{Environment.NewLine}");
         }
+
+        avgPriceWriter.Dispose();
     }
 }
