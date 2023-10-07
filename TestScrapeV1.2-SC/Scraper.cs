@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,30 +43,8 @@ namespace TestScrapeV1._2_SC
                         var titleNodes = doc.DocumentNode.SelectNodes("//a[@class='mmm']");
                         var priceNodes = doc.DocumentNode.SelectNodes("//span[@class='price']");
                         var descriptionNodes = doc.DocumentNode.SelectNodes("//td[(contains(@colspan,'3') or contains(@colspan,'4')) and contains(@style,'padding-left:')]");
-                        var linkNodes = doc.DocumentNode.SelectNodes("//a[@class='mmm']");
 
-                        // Scraping logic for titleNodes, priceNodes, and descriptionNodes here
 
-                        if (linkNodes != null)
-                        {
-                            foreach (var href in linkNodes)
-                            {
-                                string link = href.GetAttributeValue("href", "");
-
-                                if (IsLinkValid(link))
-                                {
-                                    announcementLink.Add(link);
-                                }
-                                else
-                                {
-                                    announcementLink.Add("Missing or unwanted link => Double check.");
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("No matching links found.");
-                        }
                     }
                     else
                     {

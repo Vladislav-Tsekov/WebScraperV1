@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "/7xnVOsF1JD90JApxAx6xd7BKR+RCo5KOTy7d/WLjxMmHIwkywW9LxtYY8/QyiDhZrcfXOWrfJqEFmrIrEpWfA==",
+  "dgSpecHash": "BJkWTxi2qrN4zt7ZfCsYg2FnC22EewmvKwdRxw9q/l9cEsbbpa8CcicR3kPkkCmDpCQ3YxO9pqsK8QwodGkOyA==",
   "success": true,
   "projectFilePath": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\TestScrapeV1.2-SC\\TestScrapeV1.2-SC.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\tseko\\.nuget\\packages\\htmlagilitypack\\1.11.54\\htmlagilitypack.1.11.54.nupkg.sha512"
+  ],
   "logs": []
 }
