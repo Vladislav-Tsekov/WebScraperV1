@@ -21,7 +21,7 @@ class Scraper
             string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=ug45d2&f1=";
 
             // Change the number according to the pages count
-            int maxPages = 1; 
+            int maxPages = 21; 
 
             for (int i = 1; i <= maxPages; i++)
             {
@@ -139,7 +139,7 @@ class Scraper
 
                             if (link.Length < 50)
                             {
-                                announcementLink.Add("Missing or broken link => Double check.");
+                                //announcementLink.Add("Missing or broken link => Double check.");
                             }
                             else
                             {
