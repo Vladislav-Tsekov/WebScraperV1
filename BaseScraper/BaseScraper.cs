@@ -18,11 +18,10 @@ class Scraper
         using HttpClient client = new();
         try
         {
-            // Find a work-around since the filter is not stored on the server and changes over time
             string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=ug45d2&f1=";
 
             // Change the number according to the pages count
-            int maxPages = 20; 
+            int maxPages = 1; 
 
             for (int i = 1; i <= maxPages; i++)
             {
@@ -174,11 +173,12 @@ class Scraper
             motorcycles.Add(motorcycle);
         }
 
-        List<Motorcycle> filteredMoto = motorcycles.Where(m => m.Price > 3000)
-                                                   .OrderBy(m => m.Make)
-                                                   .ThenBy(m => m.Year)
-                                                   .ThenBy(m => m.Price)
-                                                   .ToList();
+        List<Motorcycle> filteredMoto = motorcycles
+                                        .Where(m => m.Price > 3000)
+                                        .OrderBy(m => m.Make)
+                                        .ThenBy(m => m.Year)
+                                        .ThenBy(m => m.Price)
+                                        .ToList();
 
         using StreamWriter mxWriter = new(@"../../../MotoData.csv");
 
@@ -186,7 +186,7 @@ class Scraper
 
         foreach (var motorcycle in filteredMoto)
         {
-            mxWriter.Write($"{motorcycle.Make}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}{Environment.NewLine}");
+            mxWriter.Write($"{motorcycle.Make}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}, {motorcycle.Link}{Environment.NewLine}");
         }
 
         mxWriter.Dispose();
