@@ -19,10 +19,10 @@ namespace WebScraper.Models
                 try
                 {
                     // BASE URL IS USED BECAUSE THE URL STRUCTURE IS SIMILAR AND ONLY THE LAST SYMBOL (COUNTER) CHANGES
-                    string motocrossBaseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=tmpo7f&f1=";
+                    string motocrossBaseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=ug45d2&f1=";
 
                     // MAX NUMBER OF PAGES TO SCRAPE
-                    int maxPages = 2; // ADJUST THIS IF NEEDED
+                    int maxPages = 20; // ADJUST THIS IF NEEDED
 
                     for (int i = 0; i < maxPages; i++)
                     {

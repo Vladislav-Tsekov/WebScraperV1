@@ -19,10 +19,10 @@ class Scraper
         try
         {
             // Find a work-around since the filter is not stored on the server and changes over time
-            string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=u0mvgc&f1=";
+            string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=ug45d2&f1=";
 
             // Change the number according to the pages count
-            int maxPages = 21; 
+            int maxPages = 20; 
 
             for (int i = 1; i <= maxPages; i++)
             {
