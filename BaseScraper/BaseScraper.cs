@@ -3,6 +3,7 @@ using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.Text.RegularExpressions;
+using BaseScraper.Calculations;
 
 namespace BaseScraper
 {
@@ -198,7 +199,8 @@ namespace BaseScraper
 
             mxWriter.Dispose();
 
-            var trimPercentage = 0.05; //TRY OUT DIFFERENT VALUES
+            var trimPercentage = 0.05; 
+            var deviationThreshold = 1;
 
             var averagePrices = filteredMoto
                 .GroupBy(m => new { m.Make, m.Year })
@@ -207,7 +209,8 @@ namespace BaseScraper
                     group.Key.Make,
                     group.Key.Year,
                     AveragePrice = group.Average(m => m.Price),
-                    //AveragePriceTrim = CalculateTrim(group.Select(m => m.Price), trimPercentage)
+                    AveragePriceTrim = MeanValues.Mean(group.Select(m => m.Price), trimPercentage),
+                    AveragePriceDev = MeanValues.Dev(group.Select(m => m.Price), deviationThreshold)
                 })
                 .OrderBy(m => m.Make)
                 .ThenBy(m => m.Year)
@@ -222,19 +225,6 @@ namespace BaseScraper
                 avgPriceWriter.Write($"{moto.Make}, {moto.Year}, {moto.AveragePrice:f2}{Environment.NewLine}");
 
             avgPriceWriter.Dispose();
-        }
-
-        double CalculateTrim(IEnumerable<double> prices, double trimPercentage)
-        {
-            double[] pricesArray = prices.ToArray();
-            double[] sortedPrices = pricesArray.OrderBy(x => x).ToArray();
-
-            int trimCount = (int)(pricesArray.Length * trimPercentage);
-
-            double[] trimmedData = sortedPrices.Skip(trimCount).Take(pricesArray.Length - 2 * trimCount).ToArray();
-            double trimmedMean = trimmedData.Average();
-
-            return trimmedMean;
         }
     }
 }
