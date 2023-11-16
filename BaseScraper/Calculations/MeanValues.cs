@@ -2,6 +2,9 @@
 {
     public class MeanValues
     {
+        public const double trimPercentage = 0.20;
+        public const double deviationThreshold = 1;
+
         public static double Dev(IEnumerable<double> data, double deviationThreshold)
         {
             double[] dataArray = data.ToArray();

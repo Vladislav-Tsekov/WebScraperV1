@@ -199,9 +199,6 @@ namespace BaseScraper
 
             mxWriter.Dispose();
 
-            double trimPercentage = 0.20; 
-            double deviationThreshold = 1;
-
             var averagePrices = filteredMoto
                 .GroupBy(m => new { m.Make, m.Year })
                 .Select(group => new
@@ -209,8 +206,8 @@ namespace BaseScraper
                     group.Key.Make,
                     group.Key.Year,
                     AveragePrice = group.Average(m => m.Price),
-                    MeanPrice = MeanValues.Mean(group.Select(m => m.Price), trimPercentage),
-                    DevPrice = MeanValues.Dev(group.Select(m => m.Price), deviationThreshold),
+                    MeanPrice = MeanValues.Mean(group.Select(m => m.Price), MeanValues.trimPercentage),
+                    DevPrice = MeanValues.Dev(group.Select(m => m.Price), MeanValues.deviationThreshold),
                     MotorcycleCount = group.Count()
                 })
                 .OrderBy(m => m.Make)
