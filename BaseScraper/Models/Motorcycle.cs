@@ -1,11 +1,11 @@
-﻿namespace BaseScraper
+﻿namespace BaseScraper.Models
 {
     public class Motorcycle
     {
-		private string make;
+        private string make;
         private string cc;
-		private string year;
-		private double price;
+        private string year;
+        private double price;
         private string link;
 
         public Motorcycle(string make, string cc, string year, double price, string link)
@@ -18,10 +18,10 @@
         }
 
         public string Make
-		{
-			get { return make; }
-			set { make = value; }
-		}
+        {
+            get { return make; }
+            set { make = value; }
+        }
 
         public string CC
         {
@@ -41,9 +41,9 @@
             set { price = value; }
         }
 
-        public string Link 
+        public string Link
         {
-        
+
             get { return link; }
             set { link = value; }
         }

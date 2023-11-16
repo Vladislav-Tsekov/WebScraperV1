@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using BaseScraper.Models;
+using HtmlAgilityPack;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -177,7 +178,8 @@ namespace BaseScraper
                                             .ThenBy(m => m.Price)
                                             .ToList();
 
-            using StreamWriter mxWriter = new(@"../../../MotoData.csv");
+            string outputFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Output");
+            using StreamWriter mxWriter = new(Path.Combine(outputFolderPath, "MotoData.csv"));
 
             mxWriter.Write($"Make, CC, Year, Price{Environment.NewLine}");
 
@@ -203,14 +205,13 @@ namespace BaseScraper
                 .ThenBy(m => m.Year)
                 .ThenBy(m => m.AveragePrice);
 
-            using StreamWriter avgPriceWriter = new(@"../../../AvgPriceModelYear.csv");
+
+            using StreamWriter avgPriceWriter = new(Path.Combine(outputFolderPath, "AvgPriceModelYear.csv"));
 
             avgPriceWriter.Write($"Make, Year, Average Price{Environment.NewLine}");
 
             foreach (var moto in averagePrices)
-            {
                 avgPriceWriter.Write($"{moto.Make}, {moto.Year}, {moto.AveragePrice:f2}{Environment.NewLine}");
-            }
 
             avgPriceWriter.Dispose();
         }
