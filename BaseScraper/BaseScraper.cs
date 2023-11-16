@@ -33,7 +33,7 @@ namespace BaseScraper
                 string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=ug45d2&f1=";
 
                 //Change the number according to the pages count
-                int maxPages = 1;
+                int maxPages = 21;
 
                 for (int i = 1; i <= maxPages; i++)
                 {
@@ -199,7 +199,7 @@ namespace BaseScraper
 
             mxWriter.Dispose();
 
-            var trimPercentage = 0.05; 
+            var trimPercentage = 0.15; 
             var deviationThreshold = 1;
 
             var averagePrices = filteredMoto
@@ -209,22 +209,23 @@ namespace BaseScraper
                     group.Key.Make,
                     group.Key.Year,
                     AveragePrice = group.Average(m => m.Price),
-                    AveragePriceTrim = MeanValues.Mean(group.Select(m => m.Price), trimPercentage),
-                    AveragePriceDev = MeanValues.Dev(group.Select(m => m.Price), deviationThreshold)
+                    MeanPrice = MeanValues.Mean(group.Select(m => m.Price), trimPercentage),
+                    DevPrice = MeanValues.Dev(group.Select(m => m.Price), deviationThreshold),
+                    MotorcycleCount = group.Count()
                 })
                 .OrderBy(m => m.Make)
                 .ThenBy(m => m.Year)
                 .ThenBy(m => m.AveragePrice);
 
 
-            using StreamWriter avgPriceWriter = new(Path.Combine(outputFolderPath, "AvgPriceModelYear.csv"));
+            using StreamWriter priceWriter = new(Path.Combine(outputFolderPath, "AvgPriceModelYear.csv"));
 
-            avgPriceWriter.Write($"Make, Year, Average Price{Environment.NewLine}");
+            priceWriter.Write($"Make, Year, Average Price, Mean Price, StdDev Price, Count{Environment.NewLine}");
 
             foreach (var moto in averagePrices)
-                avgPriceWriter.Write($"{moto.Make}, {moto.Year}, {moto.AveragePrice:f2}{Environment.NewLine}");
+                priceWriter.Write($"{moto.Make}, {moto.Year}, {moto.AveragePrice:f2}, {moto.MeanPrice:f2}, {moto.DevPrice:f2}, {moto.MotorcycleCount}{Environment.NewLine}");
 
-            avgPriceWriter.Dispose();
+            priceWriter.Dispose();
         }
     }
 }
