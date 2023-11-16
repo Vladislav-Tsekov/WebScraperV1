@@ -15,3 +15,4 @@ C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\Base
 C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\obj\Debug\net6.0\BaseScraper.pdb
 C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\obj\Debug\net6.0\BaseScraper.genruntimeconfig.cache
 C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\obj\Debug\net6.0\ref\BaseScraper.dll
+C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\BaseScraper\obj\Debug\net6.0\BaseScraper.sourcelink.json

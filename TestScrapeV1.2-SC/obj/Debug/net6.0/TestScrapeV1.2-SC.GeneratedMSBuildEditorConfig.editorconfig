@@ -9,3 +9,5 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TestScrapeV1._2_SC
 build_property.ProjectDir = C:\Users\tseko\OneDrive\Documents\SoftUni\C# Personal Projects\WebScraperV1\TestScrapeV1.2-SC\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

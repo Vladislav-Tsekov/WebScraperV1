@@ -21,7 +21,7 @@ class Scraper
             string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=ug45d2&f1=";
 
             // Change the number according to the pages count
-            int maxPages = 21; 
+            int maxPages = 1; 
 
             for (int i = 1; i <= maxPages; i++)
             {
@@ -191,13 +191,18 @@ class Scraper
 
         mxWriter.Dispose();
 
+        var trimPercentage = 0.05; //TRY OUT DIFFERENT SCENARIOS
+        var trimPercentage2 = 0.15; //TRY OUT DIFFERENT SCENARIOS
+
         var averagePrices = filteredMoto
-            .GroupBy(m => new { m.Make, m.Year }) // Group by year and make
+            .GroupBy(m => new { m.Make, m.Year })
             .Select(group => new
             {
                 group.Key.Make,
                 group.Key.Year,
-                AveragePrice = group.Average(m => m.Price)
+                AveragePrice = group.Average(m => m.Price),
+                AveragePrice005 = CalculateTrimmedMean(group.Select(m => m.Price), trimPercentage),
+                AveragePrice015 = CalculateTrimmedMean(group.Select(m => m.Price), trimPercentage2)
             })
             .OrderBy(m => m.Make)
             .ThenBy(m => m.Year)
@@ -213,5 +218,18 @@ class Scraper
         }
 
         avgPriceWriter.Dispose();
+    }
+
+    double CalculateTrimmedMean(IEnumerable<double> data, double trimPercentage)
+    {
+        double[] dataArray = data.ToArray();
+        double[] sortedData = dataArray.OrderBy(x => x).ToArray();
+
+        int trimCount = (int)(dataArray.Length * trimPercentage);
+
+        double[] trimmedData = sortedData.Skip(trimCount).Take(dataArray.Length - 2 * trimCount).ToArray();
+        double trimmedMean = trimmedData.Average();
+
+        return trimmedMean;
     }
 }
