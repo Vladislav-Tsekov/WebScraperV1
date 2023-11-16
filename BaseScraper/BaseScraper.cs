@@ -6,7 +6,7 @@ namespace BaseScraper
 {
     public class Scraper
     {
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
@@ -139,13 +139,9 @@ namespace BaseScraper
                                 string link = href.GetAttributeValue("href", "");
 
                                 if (link.Length < 50)
-                                {
-                                    announcementLink.Add("Missing or broken link => Double check.");
-                                }
+                                    continue;
                                 else
-                                {
                                     announcementLink.Add(link);
-                                }
                             }
                         }
                         else
@@ -192,7 +188,7 @@ namespace BaseScraper
 
             mxWriter.Dispose();
 
-            var trimPercentage = 0.05; //TRY OUT DIFFERENT SCENARIOS
+            var trimPercentage = 0.05; //TRY OUT DIFFERENT VALUES
 
             var averagePrices = filteredMoto
                 .GroupBy(m => new { m.Make, m.Year })
@@ -201,7 +197,7 @@ namespace BaseScraper
                     group.Key.Make,
                     group.Key.Year,
                     AveragePrice = group.Average(m => m.Price),
-                    AveragePriceTrim = CalculateTrim(group.Select(m => m.Price), trimPercentage)
+                    //AveragePriceTrim = CalculateTrim(group.Select(m => m.Price), trimPercentage)
                 })
                 .OrderBy(m => m.Make)
                 .ThenBy(m => m.Year)
