@@ -1,9 +1,9 @@
 ﻿using BaseScraper.Models;
+using BaseScraper.Calculations;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.Text.RegularExpressions;
-using BaseScraper.Calculations;
 
 namespace BaseScraper
 {
@@ -199,8 +199,8 @@ namespace BaseScraper
 
             mxWriter.Dispose();
 
-            var trimPercentage = 0.20; 
-            var deviationThreshold = 1;
+            double trimPercentage = 0.20; 
+            double deviationThreshold = 1;
 
             var averagePrices = filteredMoto
                 .GroupBy(m => new { m.Make, m.Year })
@@ -216,7 +216,6 @@ namespace BaseScraper
                 .OrderBy(m => m.Make)
                 .ThenBy(m => m.Year)
                 .ThenBy(m => m.AveragePrice);
-
 
             using StreamWriter priceWriter = new(Path.Combine(outputFolderPath, "AvgPriceModelYear.csv"));
 
