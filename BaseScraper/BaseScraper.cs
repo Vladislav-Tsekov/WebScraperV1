@@ -199,7 +199,7 @@ namespace BaseScraper
 
             mxWriter.Dispose();
 
-            var trimPercentage = 0.15; 
+            var trimPercentage = 0.20; 
             var deviationThreshold = 1;
 
             var averagePrices = filteredMoto
