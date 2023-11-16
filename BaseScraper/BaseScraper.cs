@@ -1,5 +1,6 @@
 ﻿using BaseScraper.Models;
 using HtmlAgilityPack;
+using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -10,6 +11,14 @@ namespace BaseScraper
         public static async Task Main()
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            string appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+
+            IConfiguration configuration = new ConfigurationBuilder()
+                .AddJsonFile(appSettingsPath)
+                .Build();
+
+            string? outputFolderPath = configuration["OutputFolderPath"];
 
             List<string> motorcycleMake = new();
             List<string> motorcycleCC = new();
@@ -178,7 +187,6 @@ namespace BaseScraper
                                             .ThenBy(m => m.Price)
                                             .ToList();
 
-            string outputFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Output");
             using StreamWriter mxWriter = new(Path.Combine(outputFolderPath, "MotoData.csv"));
 
             mxWriter.Write($"Make, CC, Year, Price{Environment.NewLine}");
