@@ -221,7 +221,7 @@ namespace BaseScraper
             foreach (var moto in averagePrices)
             {
                 double combinedPrice = (moto.AveragePrice + moto.DevPrice + moto.MeanPrice) / 3;
-                priceWriter.Write($"{moto.Make}, {moto.Year}, {moto.AveragePrice:f2}, {moto.MeanPrice:f2}, {combinedPrice:f2} {moto.MotorcycleCount}{Environment.NewLine}");
+                priceWriter.Write($"{moto.Make}, {moto.Year}, {moto.AveragePrice:f2}, {moto.MeanPrice:f2}, {moto.DevPrice:f2}, {combinedPrice:f2}, {moto.MotorcycleCount}{Environment.NewLine}");
             }
 
             priceWriter.Dispose();
