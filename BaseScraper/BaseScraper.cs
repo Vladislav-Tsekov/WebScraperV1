@@ -32,6 +32,22 @@ namespace BaseScraper
             {
                 string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=ug45d2&f1=";
 
+                string html = baseURL + "1";
+
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(html);
+
+                HtmlNode h1Node = doc.DocumentNode.SelectSingleNode("//h1");
+                if (h1Node != null)
+                {
+                    string h1Text = h1Node.InnerText.Trim();
+                    Console.WriteLine("Text content of <h1>: " + h1Text);
+                }
+                else
+                {
+                    Console.WriteLine("<h1> element not found");
+                }
+
                 //Change the number according to the pages count
                 int maxPages = 21;
 
