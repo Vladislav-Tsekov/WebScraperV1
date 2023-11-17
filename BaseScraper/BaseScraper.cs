@@ -37,17 +37,40 @@ namespace BaseScraper
                 HtmlDocument pageCnt = new();
                 pageCnt.LoadHtml(html);
 
-                HtmlNode h1Node = pageCnt.DocumentNode.SelectSingleNode("//div[@style='padding-bottom:5px;");
 
-                if (h1Node != null)
+                HtmlNode higherLevelNode = pageCnt.DocumentNode.SelectSingleNode("//div[@id='defaultMainContent']");
+
+                if (higherLevelNode != null)
                 {
-                    string h1Text = h1Node.InnerText.Trim();
-                    Console.WriteLine("Pages: " + h1Text);
+                    HtmlNode targetNode = higherLevelNode.SelectSingleNode(".//table[2]/tr[1]/td[1]/form[3]/div[1]");
+
+                    if (targetNode != null)
+                    {
+                        string targetText = targetNode.InnerText.Trim();
+                        Console.WriteLine("Text content of target element: " + targetText);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Target element not found within the higher-level node.");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Page info not found.");
+                    Console.WriteLine("Higher-level node not found.");
                 }
+
+
+                //HtmlNode h1Node = pageCnt.DocumentNode.SelectSingleNode("//div[@id='defaultMainContent']//table[2]/tr[1]/td[1]/form[3]/div[1]");
+
+                //if (h1Node != null)
+                //{
+                //    string h1Text = h1Node.InnerText.Trim();
+                //    Console.WriteLine("Pages: " + h1Text);
+                //}
+                //else
+                //{
+                //    Console.WriteLine("Page info not found.");
+                //}
 
                 //Change the number according to the pages count
                 int maxPages = 21;
