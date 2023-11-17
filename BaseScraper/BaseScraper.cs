@@ -37,42 +37,36 @@ namespace BaseScraper
                 HtmlDocument pageCnt = new();
                 pageCnt.LoadHtml(html);
 
+                var additionalRowNode = pageCnt.DocumentNode.SelectSingleNode("//tbody/tr");
 
-                HtmlNode higherLevelNode = pageCnt.DocumentNode.SelectSingleNode("//div[@id='defaultMainContent']");
-
-                if (higherLevelNode != null)
+                if (additionalRowNode != null)
                 {
-                    HtmlNode targetNode = higherLevelNode.SelectSingleNode(".//table[2]/tr[1]/td[1]/form[3]/div[1]");
+                    var additionalTdNode = additionalRowNode.SelectSingleNode("./td");
 
-                    if (targetNode != null)
+                    if (additionalTdNode != null)
                     {
-                        string targetText = targetNode.InnerText.Trim();
-                        Console.WriteLine("Text content of target element: " + targetText);
+                        var additionalDivNode = additionalTdNode.SelectSingleNode("./div[contains(@style,'padding-bottom:5px; font-weight:bold; font-size:14px; width:660px;border-bottom:#09F 3px solid;')]");
+
+                        if (additionalDivNode != null)
+                        {
+                            string additionalDivText = additionalDivNode.InnerText.Trim();
+                            Console.WriteLine("Text content of additional <div>: " + additionalDivText);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Additional <div> element not found");
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("Target element not found within the higher-level node.");
+                        Console.WriteLine("Additional <td> element not found");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Higher-level node not found.");
+                    Console.WriteLine("Additional <tr> element not found");
                 }
 
-
-                //HtmlNode h1Node = pageCnt.DocumentNode.SelectSingleNode("//div[@id='defaultMainContent']//table[2]/tr[1]/td[1]/form[3]/div[1]");
-
-                //if (h1Node != null)
-                //{
-                //    string h1Text = h1Node.InnerText.Trim();
-                //    Console.WriteLine("Pages: " + h1Text);
-                //}
-                //else
-                //{
-                //    Console.WriteLine("Page info not found.");
-                //}
-
-                //Change the number according to the pages count
                 int maxPages = 21;
 
                 for (int i = 1; i <= maxPages; i++)
