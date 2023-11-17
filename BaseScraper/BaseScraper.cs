@@ -34,18 +34,19 @@ namespace BaseScraper
 
                 string html = baseURL + "1";
 
-                HtmlDocument doc = new HtmlDocument();
-                doc.LoadHtml(html);
+                HtmlDocument pageCnt = new();
+                pageCnt.LoadHtml(html);
 
-                HtmlNode h1Node = doc.DocumentNode.SelectSingleNode("//h1");
+                HtmlNode h1Node = pageCnt.DocumentNode.SelectSingleNode("//div[@style='padding-bottom:5px;");
+
                 if (h1Node != null)
                 {
                     string h1Text = h1Node.InnerText.Trim();
-                    Console.WriteLine("Text content of <h1>: " + h1Text);
+                    Console.WriteLine("Pages: " + h1Text);
                 }
                 else
                 {
-                    Console.WriteLine("<h1> element not found");
+                    Console.WriteLine("Page info not found.");
                 }
 
                 //Change the number according to the pages count
