@@ -37,37 +37,7 @@ namespace BaseScraper
                 HtmlDocument pageCnt = new();
                 pageCnt.LoadHtml(html);
 
-                var additionalRowNode = pageCnt.DocumentNode.SelectSingleNode("//tbody/tr");
-
-                if (additionalRowNode != null)
-                {
-                    var additionalTdNode = additionalRowNode.SelectSingleNode("./td");
-
-                    if (additionalTdNode != null)
-                    {
-                        var additionalDivNode = additionalTdNode.SelectSingleNode("./div[contains(@style,'padding-bottom:5px; font-weight:bold; font-size:14px; width:660px;border-bottom:#09F 3px solid;')]");
-
-                        if (additionalDivNode != null)
-                        {
-                            string additionalDivText = additionalDivNode.InnerText.Trim();
-                            Console.WriteLine("Text content of additional <div>: " + additionalDivText);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Additional <div> element not found");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Additional <td> element not found");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Additional <tr> element not found");
-                }
-
-                int maxPages = 21;
+                int maxPages = 1;
 
                 for (int i = 1; i <= maxPages; i++)
                 {
@@ -83,6 +53,43 @@ namespace BaseScraper
                         string htmlContent = await reader.ReadToEndAsync();
                         HtmlDocument doc = new();
                         doc.LoadHtml(htmlContent);
+
+                        // TEST PURPOSES
+
+                        var additionalRowNode = doc.DocumentNode.SelectSingleNode("//tbody/tr");
+
+                        if (additionalRowNode != null)
+                        {
+                            var additionalTdNode = additionalRowNode.SelectSingleNode("./td");
+
+                            if (additionalTdNode != null)
+                            {
+                                var additionalDivNode = additionalTdNode.SelectSingleNode("./div[contains(@style,'padding-bottom:5px; font-weight:bold; font-size:14px; width:660px;border-bottom:#09F 3px solid;')]");
+
+                                if (additionalDivNode != null)
+                                {
+                                    string additionalDivText = additionalDivNode.InnerText.Trim();
+                                    Console.WriteLine("Text content of additional <div>: " + additionalDivText);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Additional <div> element not found");
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Additional <td> element not found");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Additional <tr> element not found");
+                            return;
+                        }
+
+                        // TEST PURPOSES
 
                         var titleNodes = doc.DocumentNode.SelectNodes("//a[@class='mmm']");
                         var priceNodes = doc.DocumentNode.SelectNodes("//span[@class='price']");
