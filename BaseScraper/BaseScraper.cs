@@ -84,7 +84,6 @@ namespace BaseScraper
                                             motorcycleCC.Add(cc);
                                         }
                                     }
-
                                     if (cc == "N/A")
                                     {
                                         motorcycleCC.Add(cc);
@@ -188,7 +187,7 @@ namespace BaseScraper
                                             .ThenBy(m => m.Price)
                                             .ToList();
 
-            using StreamWriter mxWriter = new(Path.Combine(outputFolderPath, "MotocrossData.csv"));
+            using StreamWriter mxWriter = new(Path.Combine(outputFolderPath!, "MotocrossData.csv"));
 
             mxWriter.Write($"Make, CC, Year, Price{Environment.NewLine}");
 
@@ -214,7 +213,7 @@ namespace BaseScraper
                 .ThenBy(m => m.Year)
                 .ThenBy(m => m.AveragePrice);
 
-            using StreamWriter priceWriter = new(Path.Combine(outputFolderPath, "AvgPriceMotocross.csv"));
+            using StreamWriter priceWriter = new(Path.Combine(outputFolderPath!, "AvgPriceMotocross.csv"));
 
             priceWriter.Write($"Make, Year, Average Price, Mean Price, StdDev Price, Combined Price, Count{Environment.NewLine}");
 
