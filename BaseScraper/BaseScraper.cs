@@ -1,4 +1,5 @@
 ﻿using BaseScraper.Calculations;
+using BaseScraper.Config;
 using BaseScraper.Models;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
@@ -14,12 +15,20 @@ public class Scraper
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
         string appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+        ScraperSettings settings = new();
 
         IConfiguration configuration = new ConfigurationBuilder()
             .AddJsonFile(appSettingsPath)
             .Build();
 
-        string? outputFolderPath = configuration["OutputFolderPath"];
+        configuration.GetSection("ScraperSettings")
+                     .Get<ScraperSettings>();
+
+        //MAKE SURE IT'S READ CORRECTLY
+        string jsonContent = File.ReadAllText(appSettingsPath);
+        Console.WriteLine(jsonContent);
+
+        string? outputFolderPath = settings.OutputFolderPath;
 
         List<string> motorcycleMake = new();
         List<string> motorcycleCC = new();
@@ -33,7 +42,7 @@ public class Scraper
         {
             string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=um925w&f1=";
 
-            int maxPages = 4;
+            int maxPages = ScraperSettings.MaxPages;
 
             for (int i = 1; i <= maxPages; i++)
             {
