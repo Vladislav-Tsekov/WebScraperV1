@@ -31,9 +31,9 @@ public class Scraper
 
         try
         {
-            string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=um3ay6&f1=";
+            string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=um925w&f1=";
 
-            int maxPages = 21;
+            int maxPages = 4;
 
             for (int i = 1; i <= maxPages; i++)
             {

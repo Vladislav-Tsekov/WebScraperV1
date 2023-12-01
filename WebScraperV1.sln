@@ -5,13 +5,11 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebScraper", "WebScraper\WebScraper.csproj", "{7C5C0C98-57D8-4005-8152-7F15424E1FCD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MXScraper", "MXScraper\MXScraper.csproj", "{CA1BE803-C97B-41B4-9E67-AD6E77017C8D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestScrapeV1.1", "TestScrapeV1.1\TestScrapeV1.1.csproj", "{120CA3EC-F32D-4260-BDD3-F98FDB012F56}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseScraper", "BaseScraper\BaseScraper.csproj", "{13A19197-6635-4B0B-B036-4F2E4ABC461A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestScrapeV1.2-SC", "TestScrapeV1.2-SC\TestScrapeV1.2-SC.csproj", "{B0E7B710-4B2F-4142-B1A1-9986B88C0AFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestScrapeV1.2-SC", "TestScrapeV1.2-SC\TestScrapeV1.2-SC.csproj", "{B0E7B710-4B2F-4142-B1A1-9986B88C0AFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{7C5C0C98-57D8-4005-8152-7F15424E1FCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C5C0C98-57D8-4005-8152-7F15424E1FCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C5C0C98-57D8-4005-8152-7F15424E1FCD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CA1BE803-C97B-41B4-9E67-AD6E77017C8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CA1BE803-C97B-41B4-9E67-AD6E77017C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CA1BE803-C97B-41B4-9E67-AD6E77017C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CA1BE803-C97B-41B4-9E67-AD6E77017C8D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{120CA3EC-F32D-4260-BDD3-F98FDB012F56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{120CA3EC-F32D-4260-BDD3-F98FDB012F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{120CA3EC-F32D-4260-BDD3-F98FDB012F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
