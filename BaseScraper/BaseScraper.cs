@@ -1,5 +1,5 @@
-﻿using BaseScraper.Models;
-using BaseScraper.Calculations;
+﻿using BaseScraper.Calculations;
+using BaseScraper.Models;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
 using System.Text;
@@ -28,16 +28,12 @@ namespace BaseScraper
             List<string> announcementLink = new();
 
             using HttpClient client = new();
+
             try
             {
-                string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=ug45d2&f1=";
+                string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=um3ay6&f1=";
 
-                string html = baseURL + "1";
-
-                HtmlDocument pageCnt = new();
-                pageCnt.LoadHtml(html);
-
-                int maxPages = 1;
+                int maxPages = 21;
 
                 for (int i = 1; i <= maxPages; i++)
                 {
@@ -53,43 +49,6 @@ namespace BaseScraper
                         string htmlContent = await reader.ReadToEndAsync();
                         HtmlDocument doc = new();
                         doc.LoadHtml(htmlContent);
-
-                        // TEST PURPOSES
-
-                        var additionalRowNode = doc.DocumentNode.SelectSingleNode("//tbody/tr");
-
-                        if (additionalRowNode != null)
-                        {
-                            var additionalTdNode = additionalRowNode.SelectSingleNode("./td");
-
-                            if (additionalTdNode != null)
-                            {
-                                var additionalDivNode = additionalTdNode.SelectSingleNode("./div[contains(@style,'padding-bottom:5px; font-weight:bold; font-size:14px; width:660px;border-bottom:#09F 3px solid;')]");
-
-                                if (additionalDivNode != null)
-                                {
-                                    string additionalDivText = additionalDivNode.InnerText.Trim();
-                                    Console.WriteLine("Text content of additional <div>: " + additionalDivText);
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Additional <div> element not found");
-                                    return;
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Additional <td> element not found");
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Additional <tr> element not found");
-                            return;
-                        }
-
-                        // TEST PURPOSES
 
                         var titleNodes = doc.DocumentNode.SelectNodes("//a[@class='mmm']");
                         var priceNodes = doc.DocumentNode.SelectNodes("//span[@class='price']");
