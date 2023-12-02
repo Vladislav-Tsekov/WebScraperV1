@@ -15,20 +15,15 @@ public class Scraper
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
         string appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
-        ScraperSettings settings = new();
+        ScraperSettings? settings = new();
 
         IConfiguration configuration = new ConfigurationBuilder()
             .AddJsonFile(appSettingsPath)
             .Build();
 
-        configuration.GetSection("ScraperSettings")
-                     .Get<ScraperSettings>();
+        settings = configuration.GetSection("ScraperSettings").Get<ScraperSettings>();
 
-        //MAKE SURE IT'S READ CORRECTLY
-        string jsonContent = File.ReadAllText(appSettingsPath);
-        Console.WriteLine(jsonContent);
-
-        string? outputFolderPath = settings.OutputFolderPath;
+        string outputFolderPath = settings!.OutputFolderPath;
 
         List<string> motorcycleMake = new();
         List<string> motorcycleCC = new();

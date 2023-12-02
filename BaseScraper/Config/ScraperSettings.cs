@@ -1,4 +1,6 @@
-﻿namespace BaseScraper.Config
+﻿using Microsoft.Extensions.Configuration;
+
+namespace BaseScraper.Config
 {
     public class ScraperSettings
     {
