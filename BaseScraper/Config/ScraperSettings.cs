@@ -6,5 +6,19 @@ namespace BaseScraper.Config
     {
         public const int MaxPages = 1;
         public string OutputFolderPath { get; set; }
+
+        public void OutputConfig() 
+        {
+            string appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+            ScraperSettings? settings = new();
+
+            IConfiguration configuration = new ConfigurationBuilder()
+                .AddJsonFile(appSettingsPath)
+                .Build();
+
+            settings = configuration.GetSection("ScraperSettings").Get<ScraperSettings>();
+
+            string outputFolderPath = settings!.OutputFolderPath;
+        }
     }
 }

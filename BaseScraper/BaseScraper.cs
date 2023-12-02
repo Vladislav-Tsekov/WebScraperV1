@@ -10,20 +10,15 @@ namespace BaseScraper;
 
 public class Scraper
 {
+
+
     public static async Task Main()
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-        string appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
-        ScraperSettings? settings = new();
+        ScraperSettings Settings = new();
 
-        IConfiguration configuration = new ConfigurationBuilder()
-            .AddJsonFile(appSettingsPath)
-            .Build();
 
-        settings = configuration.GetSection("ScraperSettings").Get<ScraperSettings>();
-
-        string outputFolderPath = settings!.OutputFolderPath;
 
         List<string> motorcycleMake = new();
         List<string> motorcycleCC = new();
