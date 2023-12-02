@@ -15,7 +15,7 @@ public class Scraper
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
         string appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
-
+                                            
         IConfiguration configuration = new ConfigurationBuilder()
             .AddJsonFile(appSettingsPath)
             .Build();
@@ -116,7 +116,7 @@ public class Scraper
                     }
                     else
                     {
-                        Console.WriteLine("No motorcycle prices found on the page.");
+                        Console.WriteLine("No prices found on the page.");
                     }
 
                     if (descriptionNodes != null)
@@ -140,7 +140,7 @@ public class Scraper
                     }
                     else
                     {
-                        Console.WriteLine("No motorcycle years found on the page.");
+                        Console.WriteLine("No years found on the page.");
                     }
 
                     if (linkNodes != null)
