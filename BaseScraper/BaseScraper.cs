@@ -39,9 +39,9 @@ public class Scraper
 
             for (int i = 1; i <= maxPages; i++)
             {
-                if (doomCounter > 3)
+                if (doomCounter > 2)
                 {
-                    return;
+                    i = ScraperSettings.MaxPages + 1;
                 }
 
                 string currentPageURL = baseUrl + i;
