@@ -4,7 +4,7 @@ namespace BaseScraper.Config
 {
     public class ScraperSettings
     {
-        public const int MaxPages = 100;
+        public const int MaxPages = 150;
         public static string OutputFolderPath { get; private set; } = null!;
 
         public ScraperSettings(IConfiguration? configuration)
