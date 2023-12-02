@@ -186,7 +186,7 @@ public class Scraper
                                         .ThenBy(m => m.Price)
                                         .ToList();
 
-        using StreamWriter mxWriter = new(Path.Combine(outputFolderPath!, "MotocrossData.csv"));
+        using StreamWriter mxWriter = new(Path.Combine(ScraperSettings.!, "MotocrossData.csv"));
 
         mxWriter.Write($"Make, CC, Year, Price{Environment.NewLine}");
 
