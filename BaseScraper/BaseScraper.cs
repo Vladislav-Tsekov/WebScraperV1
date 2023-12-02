@@ -10,15 +10,17 @@ namespace BaseScraper;
 
 public class Scraper
 {
-
-
     public static async Task Main()
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-        ScraperSettings Settings = new();
+        string appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
 
+        IConfiguration configuration = new ConfigurationBuilder()
+            .AddJsonFile(appSettingsPath)
+            .Build();
 
+        ScraperSettings settings = new(configuration);
 
         List<string> motorcycleMake = new();
         List<string> motorcycleCC = new();
@@ -186,7 +188,7 @@ public class Scraper
                                         .ThenBy(m => m.Price)
                                         .ToList();
 
-        using StreamWriter mxWriter = new(Path.Combine(ScraperSettings.!, "MotocrossData.csv"));
+        using StreamWriter mxWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MotocrossData.csv"));
 
         mxWriter.Write($"Make, CC, Year, Price{Environment.NewLine}");
 
@@ -212,7 +214,7 @@ public class Scraper
             .ThenBy(m => m.Year)
             .ThenBy(m => m.AveragePrice);
 
-        using StreamWriter priceWriter = new(Path.Combine(outputFolderPath!, "AvgPriceMotocross.csv"));
+        using StreamWriter priceWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "AvgPriceMotocross.csv"));
 
         priceWriter.Write($"Make, Year, Average Price, Mean Price, StdDev Price, Combined Price, Count{Environment.NewLine}");
 
