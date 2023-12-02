@@ -35,9 +35,14 @@ public class Scraper
             string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=um925w&f1=";
 
             int maxPages = ScraperSettings.MaxPages;
+            int doomCounter = 0;
 
             for (int i = 1; i <= maxPages; i++)
             {
+                if (doomCounter > 3)
+                {
+                    return;
+                }
                 string currentPageURL = baseURL + i;
 
                 HttpResponseMessage response = await client.GetAsync(currentPageURL);
@@ -116,6 +121,7 @@ public class Scraper
                     }
                     else
                     {
+                        doomCounter++;
                         Console.WriteLine("No prices found on the page.");
                     }
 
@@ -140,6 +146,7 @@ public class Scraper
                     }
                     else
                     {
+                        doomCounter++;
                         Console.WriteLine("No years found on the page.");
                     }
 
