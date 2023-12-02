@@ -14,7 +14,7 @@ public class Scraper
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-        string appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+        string appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), StringsConstants.AppSettingsPath);
                                             
         IConfiguration configuration = new ConfigurationBuilder()
             .AddJsonFile(appSettingsPath)
@@ -32,7 +32,7 @@ public class Scraper
 
         try
         {
-            string baseURL = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=um925w&f1=";
+            string baseUrl = StringsConstants.MxBaseUrl;
 
             int maxPages = ScraperSettings.MaxPages;
             int doomCounter = 0;
@@ -43,7 +43,8 @@ public class Scraper
                 {
                     return;
                 }
-                string currentPageURL = baseURL + i;
+
+                string currentPageURL = baseUrl + i;
 
                 HttpResponseMessage response = await client.GetAsync(currentPageURL);
 
@@ -51,15 +52,15 @@ public class Scraper
                 {
                     Stream contentStream = await response.Content.ReadAsStreamAsync();
 
-                    using StreamReader reader = new(contentStream, Encoding.GetEncoding("windows-1251"));
+                    using StreamReader reader = new(contentStream, Encoding.GetEncoding(StringsConstants.Encoding));
                     string htmlContent = await reader.ReadToEndAsync();
                     HtmlDocument doc = new();
                     doc.LoadHtml(htmlContent);
 
-                    var titleNodes = doc.DocumentNode.SelectNodes("//a[@class='mmm']");
-                    var priceNodes = doc.DocumentNode.SelectNodes("//span[@class='price']");
-                    var descriptionNodes = doc.DocumentNode.SelectNodes("//td[(contains(@colspan,'3') or contains(@colspan,'4')) and contains(@style,'padding-left:')]");
-                    var linkNodes = doc.DocumentNode.SelectNodes("//a[@class='mmm']");
+                    var titleNodes = doc.DocumentNode.SelectNodes(StringsConstants.TitleNodes);
+                    var priceNodes = doc.DocumentNode.SelectNodes(StringsConstants.PriceNodes);
+                    var descriptionNodes = doc.DocumentNode.SelectNodes(StringsConstants.DescriptionNodes);
+                    var linkNodes = doc.DocumentNode.SelectNodes(StringsConstants.LinkNodes);
 
                     if (titleNodes != null)
                     {
@@ -78,11 +79,11 @@ public class Scraper
                                 string make = titleTokens[0];
                                 motorcycleMake.Add(make);
 
-                                string cc = "N/A";
+                                string cc = StringsConstants.NotAvailable;
 
                                 foreach (string cubicCent in titleTokens)
                                 {
-                                    Match ccMatch = Regex.Match(cubicCent, @"\d{3}");
+                                    Match ccMatch = Regex.Match(cubicCent, StringsConstants.CcPattern);
                                     if (ccMatch.Success)
                                     {
                                         string ccValue = ccMatch.Value;
@@ -90,7 +91,7 @@ public class Scraper
                                         motorcycleCC.Add(cc);
                                     }
                                 }
-                                if (cc == "N/A")
+                                if (cc == StringsConstants.NotAvailable)
                                 {
                                     motorcycleCC.Add(cc);
                                 }
@@ -99,7 +100,7 @@ public class Scraper
                     }
                     else
                     {
-                        Console.WriteLine("No motorcycle titles found on the page.");
+                        Console.WriteLine(StringsConstants.NoTitlesFound);
                     }
 
                     if (priceNodes != null)
@@ -107,7 +108,7 @@ public class Scraper
                         foreach (var priceNode in priceNodes)
                         {
                             string priceInnerText = priceNode.InnerText;
-                            string price = Regex.Replace(priceInnerText, @"[^\d]", "");
+                            string price = Regex.Replace(priceInnerText, StringsConstants.PriceIdentify, StringsConstants.PriceReplace);
 
                             if (double.TryParse(price, out double priceValue))
                             {
@@ -122,7 +123,7 @@ public class Scraper
                     else
                     {
                         doomCounter++;
-                        Console.WriteLine("No prices found on the page.");
+                        Console.WriteLine(StringsConstants.NoPricesFound);
                     }
 
                     if (descriptionNodes != null)
@@ -130,8 +131,7 @@ public class Scraper
                         foreach (var infoNode in descriptionNodes)
                         {
                             string infoText = infoNode.InnerText;
-                            string yearPattern = @"\d{4}";
-                            Match yearMatch = Regex.Match(infoText, yearPattern);
+                            Match yearMatch = Regex.Match(infoText, StringsConstants.YearPattern);
 
                             if (yearMatch.Success)
                             {
@@ -140,21 +140,21 @@ public class Scraper
                             }
                             else
                             {
-                                motorcycleYear.Add("N/A");
+                                motorcycleYear.Add(StringsConstants.NotAvailable);
                             }
                         }
                     }
                     else
                     {
                         doomCounter++;
-                        Console.WriteLine("No years found on the page.");
+                        Console.WriteLine(StringsConstants.NoYearsFound);
                     }
 
                     if (linkNodes != null)
                     {
                         foreach (var href in linkNodes)
                         {
-                            string link = href.GetAttributeValue("href", "");
+                            string link = href.GetAttributeValue(StringsConstants.HrefAttribute, StringsConstants.HrefDefault);
 
                             if (link.Length < 50)
                                 continue;
@@ -164,19 +164,19 @@ public class Scraper
                     }
                     else
                     {
-                        Console.WriteLine("No matching links found.");
+                        Console.WriteLine(StringsConstants.NoLinksFound);
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Failed to retrieve the web page.");
+                    Console.WriteLine(StringsConstants.FailedToRetreivePage);
                     return;
                 }
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"An error occurred: {ex.Message}");
+            Console.WriteLine(ex.Message);
         }
 
         List<Motorcycle> motorcycles = new();
