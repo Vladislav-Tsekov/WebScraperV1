@@ -6,7 +6,7 @@
         public const string AppSettingsPath = "appsettings.json";
 
         //Base URLs
-        public static string MxBaseUrl = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=umq0fu&f1=";
+        public const string MxBaseUrl = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=umq0fu&f1=";
         public const string EnduroBaseUrl = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=umpnpb&f1=";
 
         //Encoding
