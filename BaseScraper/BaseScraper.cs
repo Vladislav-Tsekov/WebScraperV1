@@ -44,13 +44,13 @@ public class Scraper
                     i = ScraperSettings.MaxPages + 1;
                 }
 
-                string currentPageURL = baseUrl + i;
+                string currentPage = baseUrl + i;
 
-                HttpResponseMessage response = await client.GetAsync(currentPageURL);
+                HttpResponseMessage httpResponse = await client.GetAsync(currentPage);
 
-                if (response.IsSuccessStatusCode)
+                if (httpResponse.IsSuccessStatusCode)
                 {
-                    Stream contentStream = await response.Content.ReadAsStreamAsync();
+                    Stream contentStream = await httpResponse.Content.ReadAsStreamAsync();
 
                     using StreamReader reader = new(contentStream, Encoding.GetEncoding(StringsConstants.Encoding));
                     string htmlContent = await reader.ReadToEndAsync();

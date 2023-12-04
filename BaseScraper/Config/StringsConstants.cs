@@ -33,6 +33,5 @@
         public const string PriceIdentify = @"[^\d]";
         public const string PriceReplace = "";
         public const string YearPattern = @"\d{4}";
-
     }
 }
