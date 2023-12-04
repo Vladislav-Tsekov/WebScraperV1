@@ -1,5 +1,6 @@
 ﻿using BaseScraper.Calculations;
 using BaseScraper.Config;
+using BaseScraper.Data;
 using BaseScraper.Models;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +21,8 @@ public class Scraper
             .AddJsonFile(appSettingsPath)
             .Build();
 
-        ScraperSettings settings = new(configuration);
+        ScraperSettings scraperSettings = new(configuration);
+        DatabaseSettings dbSettings = new(configuration);
 
         List<string> motorcycleMake = new();
         List<string> motorcycleCC = new();

@@ -2,11 +2,11 @@
 
 namespace BaseScraper.Data
 {
-    public class Configuration
+    public class DatabaseSettings
     {
         public static string ConnectionString { get; private set; }
 
-        public Configuration(IConfiguration configuration)
+        public DatabaseSettings(IConfiguration configuration)
         {
             ConnectionString = configuration.GetSection("ScraperSettings:ConnectionString").Value;
         }
