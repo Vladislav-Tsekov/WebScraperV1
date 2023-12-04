@@ -1,5 +1,6 @@
 ﻿using BaseScraper.Calculations;
 using BaseScraper.Config;
+using BaseScraper.Data.Models;
 using BaseScraper.Models;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +22,6 @@ public class Scraper
             .AddJsonFile(appSettingsPath)
             .Build();
 
-        var context = new MotoContext();
         ScraperSettings scraperSettings = new(configuration);
 
         //DatabaseSettings dbSettings = new(configuration);
@@ -226,6 +226,7 @@ public class Scraper
             .ThenBy(m => m.AveragePrice);
 
         using StreamWriter priceWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "AvgPriceMotocross.csv"));
+        using MotoContext db = new();
 
         priceWriter.Write($"Make, Year, Average Price, Mean Price, StdDev Price, Combined Price, Count{Environment.NewLine}");
 
@@ -234,8 +235,48 @@ public class Scraper
             double finalPrice = (m.AveragePrice + m.DevPrice + m.MeanPrice) / 3;
 
             priceWriter.Write($"{m.Make}, {m.Year}, {m.AveragePrice:f2}, {m.MeanPrice:f2}, {m.DevPrice:f2}, {finalPrice:f2}, {m.MotorcycleCount}{Environment.NewLine}");
+
+            var entity = new MotocrossMarketPrice
+            {
+                AvgPrice = m.AveragePrice,
+                MeanTrimPrice = m.MeanPrice,
+                StdDevPrice = m.DevPrice,
+                MotoCount = m.MotorcycleCount,
+                FinalPrice = finalPrice,
+            };
+
+            MotoMake make = db.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
+
+            if (int.TryParse(m.Year, out int parsedYear))
+            {
+                MotoYear year = db.Years.FirstOrDefault(yExists => yExists.Year == parsedYear);
+
+                if (make == null)
+                {
+                    make = new MotoMake { Make = m.Make };
+                    db.Makes.Add(make);
+                }
+                if (year == null)
+                {
+                    year = new MotoYear { Year = parsedYear };
+                    db.Years.Add(year);
+                }
+
+                entity.Make = make;
+                entity.Year = year;
+
+                await db.MotocrossMarketPrices.AddAsync(entity);
+                await db.SaveChangesAsync();
+
+                Console.WriteLine($"{entity.GetType().Name} motorcycle added successfully to the database.");
+            }
+            else
+            {
+                Console.WriteLine($"Error: Unable to parse year '{m.Year}' to an integer for motorcycle {m.Make}.");
+            }
         }
 
+        db.Dispose();
         priceWriter.Dispose();
     }
 }
