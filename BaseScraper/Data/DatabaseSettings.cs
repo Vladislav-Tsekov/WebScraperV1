@@ -4,12 +4,13 @@ namespace BaseScraper.Data
 {
     public class DatabaseSettings
     {
-        public static string ConnectionString { get; private set; }
+        public const string ConnectionString = "@\"Server=(localdb)\\MSSQLLocalDB;Database=MotoMarketPrices;Integrated Security=True\";";
 
-        public DatabaseSettings(IConfiguration configuration)
-        {
-            ConnectionString = configuration.GetSection("ScraperSettings:ConnectionString").Value;
-        }
+        //public static string TestConnectionString { get; private set; }
 
+        //public DatabaseSettings(IConfiguration configuration)
+        //{
+        //    TestConnectionString = configuration.GetSection("ScraperSettings:ConnectionString").Value;
+        //}
     }
 }
