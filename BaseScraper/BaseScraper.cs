@@ -215,7 +215,7 @@ public class Scraper
                 group.Key.Make,
                 group.Key.Year,
                 AveragePrice = group.Average(m => m.Price),
-                MeanPrice = MeanValues.Mean(group.Select(m => m.Price), MeanValues.trimPercentage),
+                MeanPrice = MeanValues.MeanTrim(group.Select(m => m.Price), MeanValues.trimPercentage),
                 DevPrice = MeanValues.Dev(group.Select(m => m.Price), MeanValues.deviationThreshold),
                 MotorcycleCount = group.Count(),
             })

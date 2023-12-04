@@ -19,7 +19,7 @@
             return trimmedMean;
         }
 
-        public static double Mean(IEnumerable<double> prices, double trimPercentage)
+        public static double MeanTrim(IEnumerable<double> prices, double trimPercentage)
         {
             double[] pricesArray = prices.ToArray();
             double[] sortedPrices = pricesArray.OrderBy(x => x).ToArray();
