@@ -7,7 +7,7 @@ namespace BaseScraper.Config
         public const int MaxPages = 150;
         public static string OutputFolderPath { get; private set; } = null!;
 
-        public ScraperSettings(IConfiguration? configuration)
+        public ScraperSettings(IConfiguration configuration)
         {
             OutputFolderPath = configuration.GetSection("ScraperSettings:OutputFolderPath").Value;
         }
