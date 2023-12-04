@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore;
 namespace WebScraperV1.Data
 {
 
-    public class MotorcycleContext : DbContext
+    public class MotoContext : DbContext
     {
-        public MotorcycleContext(DbContextOptions options) : base(options) {}
+        public MotoContext(DbContextOptions options) : base(options) {}
 
-        public DbSet<MotorcycleMake> Makes { get; set; }
-        public DbSet<MotorcycleYear> Years { get; set; }
+        public DbSet<MotoMake> Makes { get; set; }
+        public DbSet<MotoYear> Years { get; set; }
         public DbSet<MotocrossMarketPrice> ListOfPrices { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

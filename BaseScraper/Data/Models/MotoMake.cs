@@ -2,12 +2,13 @@
 
 namespace BaseScraper.Data.Models
 {
-    public class MotorcycleYear
+    public class MotoMake
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public int Year { get; set; }
+        [MaxLength(100)]
+        public string Make { get; set; }
     }
 }
