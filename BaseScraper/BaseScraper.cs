@@ -26,11 +26,11 @@ public class Scraper
 
         //DatabaseSettings dbSettings = new(configuration);
 
-        List<string> motorcycleMake = new();
-        List<string> motorcycleCC = new();
-        List<double> motorcyclePrice = new();
-        List<string> motorcycleYear = new();
-        List<string> announcementLink = new();
+        List<string> motoMake = new();
+        List<string> motoCc = new();
+        List<double> motoPrice = new();
+        List<string> motoYear = new();
+        List<string> motoLink = new();
 
         using HttpClient client = new();
 
@@ -81,7 +81,7 @@ public class Scraper
                                 string[] titleTokens = title.Split();
 
                                 string make = titleTokens[0];
-                                motorcycleMake.Add(make);
+                                motoMake.Add(make);
 
                                 string cc = StringsConstants.NotAvailable;
 
@@ -92,12 +92,12 @@ public class Scraper
                                     {
                                         string ccValue = ccMatch.Value;
                                         cc = ccValue;
-                                        motorcycleCC.Add(cc);
+                                        motoCc.Add(cc);
                                     }
                                 }
                                 if (cc == StringsConstants.NotAvailable)
                                 {
-                                    motorcycleCC.Add(cc);
+                                    motoCc.Add(cc);
                                 }
                             }
                         }
@@ -116,11 +116,11 @@ public class Scraper
 
                             if (double.TryParse(price, out double priceValue))
                             {
-                                motorcyclePrice.Add(priceValue);
+                                motoPrice.Add(priceValue);
                             }
                             else
                             {
-                                motorcyclePrice.Add(0);
+                                motoPrice.Add(0);
                             }
                         }
                     }
@@ -140,11 +140,11 @@ public class Scraper
                             if (yearMatch.Success)
                             {
                                 string year = yearMatch.Value;
-                                motorcycleYear.Add(year);
+                                motoYear.Add(year);
                             }
                             else
                             {
-                                motorcycleYear.Add(StringsConstants.NotAvailable);
+                                motoYear.Add(StringsConstants.NotAvailable);
                             }
                         }
                     }
@@ -163,7 +163,7 @@ public class Scraper
                             if (link.Length < 50)
                                 continue;
                             else
-                                announcementLink.Add(link);
+                                motoLink.Add(link);
                         }
                     }
                     else
@@ -183,12 +183,12 @@ public class Scraper
             Console.WriteLine(ex.Message);
         }
 
-        List<Motorcycle> motorcycles = new();
+        HashSet<Motorcycle> motorcycles = new();
 
-        for (int i = 0; i < motorcycleMake.Count; i++)
+        for (int i = 0; i < motoMake.Count; i++)
         {
             Motorcycle motorcycle =
-                new(motorcycleMake[i], motorcycleCC[i], motorcycleYear[i], motorcyclePrice[i], announcementLink[i]);
+                new(motoMake[i], motoCc[i], motoYear[i], motoPrice[i], motoLink[i]);
             motorcycles.Add(motorcycle);
         }
 
@@ -199,16 +199,16 @@ public class Scraper
                                         .ThenBy(m => m.Price)
                                         .ToList();
 
-        using StreamWriter mxWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MotocrossData.csv"));
+        using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MotocrossData.csv"));
 
-        mxWriter.Write($"Make, CC, Year, Price{Environment.NewLine}");
+        motoWriter.Write($"Make, CC, Year, Price{Environment.NewLine}");
 
-        foreach (var motorcycle in filteredMoto)
+        foreach (var m in filteredMoto)
         {
-            mxWriter.Write($"{motorcycle.Make}, {motorcycle.CC}, {motorcycle.Year}, {motorcycle.Price}, {motorcycle.Link}{Environment.NewLine}");
+            motoWriter.Write($"{m.Make}, {m.CC}, {m.Year}, {m.Price}, {m.Link}{Environment.NewLine}");
         }
 
-        mxWriter.Dispose();
+        motoWriter.Dispose();
 
         var averagePrices = filteredMoto
             .GroupBy(m => new { m.Make, m.Year })
@@ -229,10 +229,11 @@ public class Scraper
 
         priceWriter.Write($"Make, Year, Average Price, Mean Price, StdDev Price, Combined Price, Count{Environment.NewLine}");
 
-        foreach (var moto in averagePrices)
+        foreach (var m in averagePrices)
         {
-            double combinedPrice = (moto.AveragePrice + moto.DevPrice + moto.MeanPrice) / 3;
-            priceWriter.Write($"{moto.Make}, {moto.Year}, {moto.AveragePrice:f2}, {moto.MeanPrice:f2}, {moto.DevPrice:f2}, {combinedPrice:f2}, {moto.MotorcycleCount}{Environment.NewLine}");
+            double finalPrice = (m.AveragePrice + m.DevPrice + m.MeanPrice) / 3;
+
+            priceWriter.Write($"{m.Make}, {m.Year}, {m.AveragePrice:f2}, {m.MeanPrice:f2}, {m.DevPrice:f2}, {finalPrice:f2}, {m.MotorcycleCount}{Environment.NewLine}");
         }
 
         priceWriter.Dispose();

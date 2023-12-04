@@ -11,7 +11,7 @@ using WebScraperV1.Data;
 namespace BaseScraper.Migrations
 {
     [DbContext(typeof(MotoContext))]
-    [Migration("20231204200212_Initial")]
+    [Migration("20231204200747_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
