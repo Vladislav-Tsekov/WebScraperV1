@@ -212,16 +212,6 @@ public class Scraper
                 Link = m.Link,
             };
 
-            MotoMake make = entryTableData.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
-
-            if (make == null)
-            {
-                make = new MotoMake { Make = m.Make };
-                entryTableData.Makes.Add(make);
-            }
-
-            entry.Make = make;
-
             if (int.TryParse(m.Year, out int parsedYear))
             {
                 MotoYear year = entryTableData.Years.FirstOrDefault(yExists => yExists.Year == parsedYear);
@@ -236,24 +226,32 @@ public class Scraper
             }
             else
             {
-                entry.Year = null;
+                continue;
             }
+
+            MotoMake make = entryTableData.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
+
+            if (make == null)
+            {
+                make = new MotoMake { Make = m.Make };
+                entryTableData.Makes.Add(make);
+            }
+
+            entry.Make = make;
 
             if (m.CC == "N/A")
                 entry.Cc = null;
             else
                 entry.Cc = m.CC;
 
-            //entriesCollection.Add(entry);
-            entryTableData.MotocrossEntries.Add(entry);
+            entriesCollection.Add(entry);
             motoWriter.Write($"{m.Make}, {m.CC}, {m.Year}, {m.Price}, {m.Link}{Environment.NewLine}");
         }
 
         motoWriter.Dispose();
 
-        //await entryTableData.MotocrossEntries.AddRangeAsync(entriesCollection);
-        //await entryTableData.SaveChangesAsync();
-        entryTableData.SaveChanges();
+        await entryTableData.MotocrossEntries.AddRangeAsync(entriesCollection);
+        await entryTableData.SaveChangesAsync();
         await entryTableData.DisposeAsync();
 
         var averagePrices = filteredMoto
