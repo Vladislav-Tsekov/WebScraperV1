@@ -6,7 +6,6 @@
     public class MotoContext : DbContext
     {
         public MotoContext() { }
-
         public MotoContext(DbContextOptions options) : base(options) { }
 
         public DbSet<MotoMake> Makes { get; set; }

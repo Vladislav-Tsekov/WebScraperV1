@@ -187,28 +187,66 @@ public class Scraper
 
         for (int i = 0; i < motoMake.Count; i++)
         {
-            Motorcycle motorcycle =
-                new(motoMake[i], motoCc[i], motoYear[i], motoPrice[i], motoLink[i]);
+            Motorcycle motorcycle = new(motoMake[i], motoCc[i], motoYear[i], motoPrice[i], motoLink[i]);
             motorcycles.Add(motorcycle);
         }
 
         List<Motorcycle> filteredMoto = motorcycles
-                                        .Where(m => m.Price > 3000)
-                                        .OrderBy(m => m.Make)
-                                        .ThenBy(m => m.Year)
-                                        .ThenBy(m => m.Price)
-                                        .ToList();
+                            .Where(m => m.Price > 3000)
+                            .OrderBy(m => m.Make)
+                            .ThenBy(m => m.Year)
+                            .ThenBy(m => m.Price)
+                            .ToList();
 
         using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MotocrossData.csv"));
+        motoWriter.Write($"Make, CC, Year, Price, Link{Environment.NewLine}");
 
-        motoWriter.Write($"Make, CC, Year, Price{Environment.NewLine}");
+        using MotoContext db = new();
+        HashSet<MotocrossEntry> entriesCollection = new();
 
         foreach (var m in filteredMoto)
         {
+            var entry = new MotocrossEntry() 
+            {
+                Price = m.Price,
+                Link = m.Link,
+            };
+
+            MotoMake make = db.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
+
+            if (make == null)
+            {
+                make = new MotoMake { Make = m.Make };
+                db.Makes.Add(make);
+            }
+
+            entry.Make = make;
+
+            if (int.TryParse(m.Year, out int parsedYear))
+            {
+                MotoYear year = db.Years.FirstOrDefault(yExists => yExists.Year == parsedYear);
+
+                if (year == null)
+                {
+                    year = new MotoYear { Year = parsedYear };
+                    db.Years.Add(year);
+                }
+
+                entry.Year = year;
+            }
+
+            if (m.CC == "N/A")
+                entry.Cc = null;
+            else
+                entry.Cc = m.CC;
+
+            entriesCollection.Add(entry);
             motoWriter.Write($"{m.Make}, {m.CC}, {m.Year}, {m.Price}, {m.Link}{Environment.NewLine}");
         }
 
         motoWriter.Dispose();
+
+        await db.AddRangeAsync(entriesCollection);
 
         var averagePrices = filteredMoto
             .GroupBy(m => new { m.Make, m.Year })
@@ -226,8 +264,6 @@ public class Scraper
             .ThenBy(m => m.AveragePrice);
 
         using StreamWriter priceWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "AvgPriceMotocross.csv"));
-        using MotoContext db = new();
-
         priceWriter.Write($"Make, Year, Average Price, Mean Price, StdDev Price, Combined Price, Count{Environment.NewLine}");
 
         foreach (var m in averagePrices)
