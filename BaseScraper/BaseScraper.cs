@@ -234,20 +234,26 @@ public class Scraper
 
                 entry.Year = year;
             }
+            else
+            {
+                entry.Year = null;
+            }
 
             if (m.CC == "N/A")
                 entry.Cc = null;
             else
                 entry.Cc = m.CC;
 
-            entriesCollection.Add(entry);
+            //entriesCollection.Add(entry);
+            entryTableData.MotocrossEntries.Add(entry);
             motoWriter.Write($"{m.Make}, {m.CC}, {m.Year}, {m.Price}, {m.Link}{Environment.NewLine}");
         }
 
         motoWriter.Dispose();
 
-        await entryTableData.MotocrossEntries.AddRangeAsync(entriesCollection);
-        await entryTableData.SaveChangesAsync();
+        //await entryTableData.MotocrossEntries.AddRangeAsync(entriesCollection);
+        //await entryTableData.SaveChangesAsync();
+        entryTableData.SaveChanges();
         await entryTableData.DisposeAsync();
 
         var averagePrices = filteredMoto

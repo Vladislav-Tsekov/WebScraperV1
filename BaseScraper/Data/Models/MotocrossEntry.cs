@@ -5,12 +5,12 @@ namespace BaseScraper.Data.Models
 {
     public class MotocrossEntry
     {
-        [Required]
-        [ForeignKey(nameof(MotoMake))]
+        [ForeignKey(nameof(MakeId))]
+        public MotoMake Make { get; set; }
         public int MakeId { get; set; }
 
-        [Required]
-        [ForeignKey(nameof(MotoYear))]
+        [ForeignKey(nameof(YearId))]
+        public MotoYear Year { get; set; }
         public int YearId { get; set; }
 
         public string Cc { get; set; }
@@ -20,8 +20,5 @@ namespace BaseScraper.Data.Models
 
         [Key]
         public string Link { get; set; }
-
-        public virtual MotoMake Make { get; set; }
-        public virtual MotoYear Year { get; set; }
     }
 }

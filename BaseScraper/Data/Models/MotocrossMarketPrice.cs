@@ -8,10 +8,12 @@ namespace BaseScraper.Data.Models
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey(nameof(MotoMake))]
+        [ForeignKey(nameof(MakeId))]
+        public MotoMake Make { get; set; }
         public int MakeId { get; set; }
 
-        [ForeignKey(nameof(MotoYear))]
+        [ForeignKey(nameof(YearId))]
+        public MotoYear Year { get; set; }
         public int YearId { get; set; }
 
         [Required]
@@ -27,9 +29,5 @@ namespace BaseScraper.Data.Models
         public double FinalPrice { get; set; }
 
         public int MotoCount { get; set; }
-
-        public virtual MotoMake Make { get; set; }
-
-        public virtual MotoYear Year { get; set; }
     }
 }
