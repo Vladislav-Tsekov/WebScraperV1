@@ -1,14 +1,13 @@
-﻿namespace WebScraperV1.Data
+﻿namespace BaseScraper.Data
 {
-    using BaseScraper.Data;
     using BaseScraper.Data.Models;
     using Microsoft.EntityFrameworkCore;
 
     public class MotoContext : DbContext
     {
-        public MotoContext() {}
+        public MotoContext() { }
 
-        public MotoContext(DbContextOptions options) : base(options) {}
+        public MotoContext(DbContextOptions options) : base(options) { }
 
         public DbSet<MotoMake> Makes { get; set; }
         public DbSet<MotoYear> Years { get; set; }

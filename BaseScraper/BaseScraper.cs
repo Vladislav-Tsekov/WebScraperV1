@@ -1,12 +1,12 @@
 ﻿using BaseScraper.Calculations;
 using BaseScraper.Config;
+using BaseScraper.Data;
 using BaseScraper.Data.Models;
 using BaseScraper.Models;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.Text.RegularExpressions;
-using WebScraperV1.Data;
 
 namespace BaseScraper;
 

@@ -3,33 +3,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BaseScraper.Data.Models
 {
-    public class MotocrossMarketPrice
+    public class MotocrossEntries
     {
-        [Key]
-        public int Id { get; set; }
-
+        [Required]
         [ForeignKey(nameof(MotoMake))]
         public int MakeId { get; set; }
 
+        [Required]
         [ForeignKey(nameof(MotoYear))]
         public int YearId { get; set; }
 
-        [Required]
-        public double AvgPrice { get; set; }
+        public string Cc { get; set; }
 
         [Required]
-        public double MeanTrimPrice { get; set; }
+        public double Price { get; set; }
 
-        [Required]
-        public double StdDevPrice { get; set; }
-
-        [Required]
-        public double FinalPrice { get; set; }
-
-        public int MotoCount { get; set; }
+        [Key]
+        public string Link { get; set; }
 
         public virtual MotoMake Make { get; set; }
-
         public virtual MotoYear Year { get; set; }
     }
 }
