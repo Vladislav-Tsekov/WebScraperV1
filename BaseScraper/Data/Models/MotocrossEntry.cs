@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BaseScraper.Data.Models
 {
-    public class MotocrossEntries
+    public class MotocrossEntry
     {
         [Required]
         [ForeignKey(nameof(MotoMake))]
