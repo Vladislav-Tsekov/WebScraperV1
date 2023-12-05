@@ -201,7 +201,7 @@ public class Scraper
         using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MotocrossData.csv"));
         motoWriter.Write($"Make, CC, Year, Price, Link{Environment.NewLine}");
 
-        using MotoContext db = new();
+        using MotoContext entryTableData = new();
         HashSet<MotocrossEntry> entriesCollection = new();
 
         foreach (var m in filteredMoto)
@@ -212,24 +212,24 @@ public class Scraper
                 Link = m.Link,
             };
 
-            MotoMake make = db.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
+            MotoMake make = entryTableData.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
 
             if (make == null)
             {
                 make = new MotoMake { Make = m.Make };
-                db.Makes.Add(make);
+                entryTableData.Makes.Add(make);
             }
 
             entry.Make = make;
 
             if (int.TryParse(m.Year, out int parsedYear))
             {
-                MotoYear year = db.Years.FirstOrDefault(yExists => yExists.Year == parsedYear);
+                MotoYear year = entryTableData.Years.FirstOrDefault(yExists => yExists.Year == parsedYear);
 
                 if (year == null)
                 {
                     year = new MotoYear { Year = parsedYear };
-                    db.Years.Add(year);
+                    entryTableData.Years.Add(year);
                 }
 
                 entry.Year = year;
@@ -246,7 +246,9 @@ public class Scraper
 
         motoWriter.Dispose();
 
-        await db.AddRangeAsync(entriesCollection);
+        await entryTableData.MotocrossEntries.AddRangeAsync(entriesCollection);
+        await entryTableData.SaveChangesAsync();
+        await entryTableData.DisposeAsync();
 
         var averagePrices = filteredMoto
             .GroupBy(m => new { m.Make, m.Year })
@@ -266,6 +268,9 @@ public class Scraper
         using StreamWriter priceWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "AvgPriceMotocross.csv"));
         priceWriter.Write($"Make, Year, Average Price, Mean Price, StdDev Price, Combined Price, Count{Environment.NewLine}");
 
+        using MotoContext pricesTableData = new();
+        HashSet<MotocrossMarketPrice> pricesCollection = new();
+
         foreach (var m in averagePrices)
         {
             double finalPrice = (m.AveragePrice + m.DevPrice + m.MeanPrice) / 3;
@@ -281,28 +286,27 @@ public class Scraper
                 FinalPrice = finalPrice,
             };
 
-            MotoMake make = db.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
+            MotoMake make = pricesTableData.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
 
             if (int.TryParse(m.Year, out int parsedYear))
             {
-                MotoYear year = db.Years.FirstOrDefault(yExists => yExists.Year == parsedYear);
+                MotoYear year = pricesTableData.Years.FirstOrDefault(yExists => yExists.Year == parsedYear);
 
                 if (make == null)
                 {
                     make = new MotoMake { Make = m.Make };
-                    db.Makes.Add(make);
+                    pricesTableData.Makes.Add(make);
                 }
                 if (year == null)
                 {
                     year = new MotoYear { Year = parsedYear };
-                    db.Years.Add(year);
+                    pricesTableData.Years.Add(year);
                 }
 
                 entity.Make = make;
                 entity.Year = year;
 
-                await db.MotocrossMarketPrices.AddAsync(entity);
-                await db.SaveChangesAsync();
+                pricesTableData.Add(entity);
 
                 Console.WriteLine($"{entity.GetType().Name} motorcycle added successfully to the database.");
             }
@@ -312,7 +316,10 @@ public class Scraper
             }
         }
 
-        db.Dispose();
         priceWriter.Dispose();
+
+        await pricesTableData.MotocrossMarketPrices.AddRangeAsync(pricesCollection);
+        await pricesTableData.SaveChangesAsync();
+        await pricesTableData.DisposeAsync();
     }
 }
