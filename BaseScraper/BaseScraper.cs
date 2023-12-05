@@ -250,6 +250,10 @@ public class Scraper
 
         motoWriter.Dispose();
 
+        // TODO - ADD HASHSET TO COMPARE EXISTING DATA AND NEW ONE
+        // PERHAPS A TRACKER - WHEN WAS THE VEHICLE SOLD / PUBLISHED / ETC.
+        // .INTERSECT(); / .UNIONWITH();
+
         await entryTableData.MotocrossEntries.AddRangeAsync(entriesCollection);
         await entryTableData.SaveChangesAsync();
         await entryTableData.DisposeAsync();
