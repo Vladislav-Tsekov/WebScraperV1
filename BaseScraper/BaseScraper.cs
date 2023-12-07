@@ -287,11 +287,11 @@ public class Scraper
 
             var entity = new MotocrossMarketPrice
             {
-                AvgPrice = m.AveragePrice,
-                MeanTrimPrice = m.MeanPrice,
-                StdDevPrice = m.DevPrice,
+                AvgPrice = (decimal)m.AveragePrice,
+                MeanTrimPrice = (decimal)m.MeanPrice,
+                StdDevPrice = (decimal)m.DevPrice,
+                FinalPrice = (decimal)finalPrice,
                 MotoCount = m.MotorcycleCount,
-                FinalPrice = finalPrice,
             };
 
             MotoMake make = pricesTableData.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);

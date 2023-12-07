@@ -17,16 +17,16 @@ namespace BaseScraper.Data.Models
         public int YearId { get; set; }
 
         [Required]
-        public double AvgPrice { get; set; }
+        public decimal AvgPrice { get; set; }
 
         [Required]
-        public double MeanTrimPrice { get; set; }
+        public decimal MeanTrimPrice { get; set; }
 
         [Required]
-        public double StdDevPrice { get; set; }
+        public decimal StdDevPrice { get; set; }
 
         [Required]
-        public double FinalPrice { get; set; }
+        public decimal FinalPrice { get; set; }
 
         public int MotoCount { get; set; }
     }
