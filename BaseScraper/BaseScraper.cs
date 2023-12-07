@@ -43,7 +43,7 @@ public class Scraper
 
             for (int i = 1; i <= maxPages; i++)
             {
-                if (doomCounter > 2)
+                if (doomCounter > 1)
                 {
                     i = ScraperSettings.MaxPages + 1;
                 }
