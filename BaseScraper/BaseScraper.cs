@@ -198,6 +198,13 @@ public class Scraper
                             .ThenBy(m => m.Price)
                             .ToList();
 
+        Scraper baseScraper = new();
+
+        await baseScraper.AddMotorcycleEntries(filteredMoto);
+    }
+
+    public async Task AddMotorcycleEntries(ICollection<Motorcycle> filteredMoto) 
+    {
         using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MotocrossData.csv"));
         motoWriter.Write($"Make, CC, Year, Price, Link{Environment.NewLine}");
 
@@ -206,7 +213,7 @@ public class Scraper
 
         foreach (var m in filteredMoto)
         {
-            var entry = new MotocrossEntry() 
+            var entry = new MotocrossEntry()
             {
                 Price = m.Price,
                 Link = m.Link,
@@ -257,77 +264,7 @@ public class Scraper
         await entryTableData.MotocrossEntries.AddRangeAsync(entriesCollection);
         await entryTableData.SaveChangesAsync();
         await entryTableData.DisposeAsync();
-
-        var averagePrices = filteredMoto
-            .GroupBy(m => new { m.Make, m.Year })
-            .Select(group => new
-            {
-                group.Key.Make,
-                group.Key.Year,
-                AveragePrice = group.Average(m => m.Price),
-                MeanPrice = MeanValues.MeanTrim(group.Select(m => m.Price), MeanValues.trimPercentage),
-                DevPrice = MeanValues.Dev(group.Select(m => m.Price), MeanValues.deviationThreshold),
-                MotorcycleCount = group.Count(),
-            })
-            .OrderBy(m => m.Make)
-            .ThenBy(m => m.Year)
-            .ThenBy(m => m.AveragePrice);
-
-        using StreamWriter priceWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "AvgPriceMotocross.csv"));
-        priceWriter.Write($"Make, Year, Average Price, Mean Price, StdDev Price, Combined Price, Count{Environment.NewLine}");
-
-        using MotoContext pricesTableData = new();
-        HashSet<MotocrossMarketPrice> pricesCollection = new();
-
-        foreach (var m in averagePrices)
-        {
-            double finalPrice = (m.AveragePrice + m.DevPrice + m.MeanPrice) / 3;
-
-            priceWriter.Write($"{m.Make}, {m.Year}, {m.AveragePrice:f2}, {m.MeanPrice:f2}, {m.DevPrice:f2}, {finalPrice:f2}, {m.MotorcycleCount}{Environment.NewLine}");
-
-            var entity = new MotocrossMarketPrice
-            {
-                AvgPrice = (decimal)m.AveragePrice,
-                MeanTrimPrice = (decimal)m.MeanPrice,
-                StdDevPrice = (decimal)m.DevPrice,
-                FinalPrice = (decimal)finalPrice,
-                MotoCount = m.MotorcycleCount,
-            };
-
-            MotoMake make = pricesTableData.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
-
-            if (int.TryParse(m.Year, out int parsedYear))
-            {
-                MotoYear year = pricesTableData.Years.FirstOrDefault(yExists => yExists.Year == parsedYear);
-
-                if (make == null)
-                {
-                    make = new MotoMake { Make = m.Make };
-                    pricesTableData.Makes.Add(make);
-                }
-                if (year == null)
-                {
-                    year = new MotoYear { Year = parsedYear };
-                    pricesTableData.Years.Add(year);
-                }
-
-                entity.Make = make;
-                entity.Year = year;
-
-                pricesTableData.Add(entity);
-
-                Console.WriteLine($"{entity.GetType().Name} motorcycle added successfully to the database.");
-            }
-            else
-            {
-                Console.WriteLine($"Error: Unable to parse year '{m.Year}' to an integer for motorcycle {m.Make}.");
-            }
-        }
-
-        priceWriter.Dispose();
-
-        await pricesTableData.MotocrossMarketPrices.AddRangeAsync(pricesCollection);
-        await pricesTableData.SaveChangesAsync();
-        await pricesTableData.DisposeAsync();
     }
+
+
 }
