@@ -42,13 +42,22 @@
             {
                 int middleIndex1 = pricesArray.Length / 2 - 1;
                 int middleIndex2 = pricesArray.Length / 2;
-                return (pricesArray[middleIndex1] + pricesArray[middleIndex2]) / 2.0;
+                return (pricesArray[middleIndex1] + pricesArray[middleIndex2]) / 2.0; //type upon exit?
             }
             else
             {
                 int middleIndex = pricesArray.Length / 2;
                 return pricesArray[middleIndex];
             }
+        }
+
+        //TODO - TEST, POLISH THEN IMPLEMENT - Most frequent value, if such exists.
+        public static double Mode(IEnumerable<double> prices)
+        {
+            var groupedPrices = prices.GroupBy(x => x); //debug method
+            var frequency = groupedPrices.Max(g => g.Count());
+            var mode = groupedPrices.First(g => g.Count() == frequency).Key; //v?
+            return mode;
         }
     }
 }
