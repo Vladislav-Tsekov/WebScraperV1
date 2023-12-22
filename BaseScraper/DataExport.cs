@@ -30,6 +30,7 @@ namespace BaseScraper
 
                     if (year == null)
                     {
+                        //TODO - Troubleshoot or find another way to populate table
                         year = new MotoYear { Year = parsedYear };
                         entryTableData.Years.Add(year);
                     }
@@ -45,6 +46,7 @@ namespace BaseScraper
 
                 if (make == null)
                 {
+                    //TODO - Troubleshoot or find another way to populate table
                     make = new MotoMake { Make = m.Make };
                     entryTableData.Makes.Add(make);
                 }
@@ -127,11 +129,13 @@ namespace BaseScraper
 
                     if (make == null)
                     {
+                        //TODO - Troubleshoot or find another way to populate table
                         make = new MotoMake { Make = m.Make };
                         pricesTableData.Makes.Add(make);
                     }
                     if (year == null)
                     {
+                        //TODO - Troubleshoot or find another way to populate table
                         year = new MotoYear { Year = parsedYear };
                         pricesTableData.Years.Add(year);
                     }
