@@ -42,11 +42,13 @@
             {
                 int middleIndex1 = pricesArray.Length / 2 - 1;
                 int middleIndex2 = pricesArray.Length / 2;
+
                 return (pricesArray[middleIndex1] + pricesArray[middleIndex2]) / 2.0; //type upon exit?
             }
             else
             {
                 int middleIndex = pricesArray.Length / 2;
+
                 return pricesArray[middleIndex];
             }
         }
@@ -57,6 +59,7 @@
             var groupedPrices = prices.GroupBy(x => x); //debug method
             var frequency = groupedPrices.Max(g => g.Count());
             var mode = groupedPrices.First(g => g.Count() == frequency).Key; //v?
+
             return mode;
         }
 
@@ -64,7 +67,19 @@
         public static double Range(IEnumerable<double> prices)
         {
             double[] pricesArray = prices.ToArray();
+
             return pricesArray.Max() - pricesArray.Min();
+        }
+
+        //TODO - TEST, POLISH THEN IMPLEMENT - Deviation from the mean avg, analyzing data spread.
+        public static double Variance(IEnumerable<double> prices)
+        {
+            double[] pricesArray = prices.ToArray();
+            double mean = pricesArray.Average();
+
+            double variance = pricesArray.Select(x => Math.Pow(x - mean, 2)).Average();
+
+            return variance;
         }
     }
 }
