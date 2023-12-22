@@ -59,5 +59,12 @@
             var mode = groupedPrices.First(g => g.Count() == frequency).Key; //v?
             return mode;
         }
+
+        //TODO - TEST, POLISH THEN IMPLEMENT - Value range, meaning the difference between the highest/lowest value.
+        public static double Range(IEnumerable<double> prices)
+        {
+            double[] pricesArray = prices.ToArray();
+            return pricesArray.Max() - pricesArray.Min();
+        }
     }
 }
