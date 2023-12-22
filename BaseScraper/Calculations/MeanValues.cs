@@ -32,7 +32,6 @@
             return trimmedMean;
         }
 
-        //TODO - TEST, POLISH THEN IMPLEMENT - Middle or median value. Case handling - single motorcycle.
         public static double Median(IEnumerable<double> prices)
         {
             double[] pricesArray = prices.ToArray();
@@ -53,7 +52,6 @@
             }
         }
 
-        //TODO - TEST, POLISH THEN IMPLEMENT - Most frequent value, if such exists.
         public static double Mode(IEnumerable<double> prices)
         {
             var groupedPrices = prices.GroupBy(x => x); //debug method
@@ -63,7 +61,6 @@
             return mode;
         }
 
-        //TODO - TEST, POLISH THEN IMPLEMENT - Value range, meaning the difference between the highest/lowest value.
         public static double Range(IEnumerable<double> prices)
         {
             double[] pricesArray = prices.ToArray();
@@ -71,7 +68,6 @@
             return pricesArray.Max() - pricesArray.Min();
         }
 
-        //TODO - TEST, POLISH THEN IMPLEMENT - Deviation from the mean avg, analyzing data spread.
         public static double Variance(IEnumerable<double> prices)
         {
             double[] pricesArray = prices.ToArray();
@@ -79,7 +75,13 @@
 
             double variance = pricesArray.Select(x => Math.Pow(x - mean, 2)).Average();
 
-            return variance;
+            //return variance;
+            //Variance is sensitive to outliers and extreme values. Trying to use a coefficient of variation that can still interpret the variance, but also make it easier to read.
+
+            double standardDeviation = Math.Sqrt(variance);
+            double coefficientOfVariation = standardDeviation / mean;
+
+            return coefficientOfVariation;
         }
     }
 }

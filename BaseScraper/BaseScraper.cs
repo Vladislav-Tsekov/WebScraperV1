@@ -278,6 +278,10 @@ public class Scraper
             AveragePrice = group.Average(m => m.Price),
             MeanPrice = MeanValues.MeanTrim(group.Select(m => m.Price), MeanValues.trimPercentage),
             DevPrice = MeanValues.Dev(group.Select(m => m.Price), MeanValues.deviationThreshold),
+            MedianPrice = MeanValues.Median(group.Select(m => m.Price)),
+            ModePrice = MeanValues.Mode(group.Select(m => m.Price)),
+            PriceVariance = MeanValues.Variance(group.Select(m => m.Price)),
+            PriceRange = MeanValues.Range(group.Select(m => m.Price)),
             MotorcycleCount = group.Count(),
         })
         .OrderBy(m => m.Make)
@@ -294,16 +298,20 @@ public class Scraper
 
         foreach (var m in averagePrices)
         {
-            double finalPrice = (m.AveragePrice + m.DevPrice + m.MeanPrice) / 3;
+            double customPrice = (m.AveragePrice + m.DevPrice + m.MeanPrice + m.ModePrice + m.MedianPrice) / 5;
 
-            priceWriter.Write($"{m.Make}, {m.Year}, {m.AveragePrice:f2}, {m.MeanPrice:f2}, {m.DevPrice:f2}, {finalPrice:f2}, {m.MotorcycleCount}{Environment.NewLine}");
+            priceWriter.Write($"{m.Make}, {m.Year}, {m.AveragePrice:f2}, {m.MeanPrice:f2}, {m.DevPrice:f2}, {customPrice:f2}, {m.MotorcycleCount}{Environment.NewLine}");
 
             var entity = new MotocrossMarketPrice
             {
                 AvgPrice = (decimal)m.AveragePrice,
                 MeanTrimPrice = (decimal)m.MeanPrice,
                 StdDevPrice = (decimal)m.DevPrice,
-                FinalPrice = (decimal)finalPrice,
+                MedianPrice = (decimal)m.MedianPrice,
+                ModePrice = (decimal)m.ModePrice,
+                PriceVariance = (decimal)m.PriceVariance,
+                PriceRange = (decimal)m.PriceRange,
+                FinalPrice = (decimal)customPrice,
                 MotoCount = m.MotorcycleCount,
             };
 
