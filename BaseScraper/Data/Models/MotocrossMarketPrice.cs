@@ -26,6 +26,18 @@ namespace BaseScraper.Data.Models
         public decimal StdDevPrice { get; set; }
 
         [Required]
+        public decimal MedianPrice { get; set; }
+
+        [Required]
+        public decimal ModePrice { get; set; }
+
+        [Required]
+        public decimal PriceVariance { get; set; }
+
+        [Required]
+        public decimal PriceRange { get; set; }
+
+        [Required]
         public decimal FinalPrice { get; set; }
 
         public int MotoCount { get; set; }
