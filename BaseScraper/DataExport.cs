@@ -39,6 +39,7 @@ namespace BaseScraper
                 }
                 else
                 {
+                    Console.WriteLine($"Invalid year format: {m.Year}");
                     continue;
                 }
 
