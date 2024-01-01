@@ -13,8 +13,11 @@ namespace BaseScraper
             using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MotocrossData.csv"));
             motoWriter.Write($"Make, CC, Year, Price, Link{Environment.NewLine}");
 
-            using MotoContext entryTableData = new();
+            using MotoContext context = new();
+
             HashSet<MotocrossEntry> entriesCollection = new();
+            HashSet<MotoMake> makes = new();
+            HashSet<MotoYear> years = new();
 
             foreach (var m in filteredMoto)
             {
@@ -24,35 +27,34 @@ namespace BaseScraper
                     Link = m.Link,
                 };
 
+                MotoMake make = context.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
+
+                if (make == null)
+                {
+                    make = new MotoMake { Make = m.Make };
+                    makes.Add(make);
+                }
+
+                entry.Make = make;
+
                 if (int.TryParse(m.Year, out int parsedYear))
                 {
-                    MotoYear year = entryTableData.Years.FirstOrDefault(yExists => yExists.Year == parsedYear);
+                    MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == parsedYear);
 
                     if (year == null)
                     {
-                        //TODO - Troubleshoot or find another way to populate table
                         year = new MotoYear { Year = parsedYear };
-                        entryTableData.Years.Add(year);
+                        years.Add(year);
                     }
 
                     entry.Year = year;
                 }
                 else
                 {
-                    Console.WriteLine($"Invalid year format: {m.Year}");
-                    continue;
+                    Console.WriteLine($"Error: Unable to parse year '{m.Year}' to an integer for motorcycle {m.Make}.");
                 }
 
-                MotoMake make = entryTableData.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
-
-                if (make == null)
-                {
-                    //TODO - Troubleshoot or find another way to populate table
-                    make = new MotoMake { Make = m.Make };
-                    entryTableData.Makes.Add(make);
-                }
-
-                entry.Make = make;
+                entriesCollection.Add(entry);
 
                 if (m.CC == "N/A")
                     entry.Cc = null;
@@ -69,9 +71,13 @@ namespace BaseScraper
             // PERHAPS A TRACKER - WHEN WAS THE VEHICLE SOLD / PUBLISHED / ETC.
             // .INTERSECT(); / .UNIONWITH();
 
-            await entryTableData.MotocrossEntries.AddRangeAsync(entriesCollection);
-            await entryTableData.SaveChangesAsync();
-            await entryTableData.DisposeAsync();
+            await context.Makes.AddRangeAsync(makes);
+            await context.Years.AddRangeAsync(years);
+            await context.SaveChangesAsync();
+
+            await context.MotocrossEntries.AddRangeAsync(entriesCollection);
+            await context.SaveChangesAsync();
+            await context.DisposeAsync();
         }
 
         public async Task CalculateMarketPrices(ICollection<Motorcycle> filteredMoto)
@@ -93,14 +99,14 @@ namespace BaseScraper
             })
             .OrderBy(m => m.Make)
             .ThenBy(m => m.Year)
-            .ThenBy(m => m.AveragePrice);
-
-
+            .ThenBy(m => m.AveragePrice)
+            .ToList();
 
             using StreamWriter priceWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "AvgPriceMotocross.csv"));
             priceWriter.Write($"Make, Year, Average Price, Mean Price, StdDev Price, Combined Price, Count{Environment.NewLine}");
 
-            using MotoContext pricesTableData = new();
+            using MotoContext context = new();
+
             HashSet<MotocrossMarketPrice> pricesCollection = new();
 
             foreach (var m in averagePrices)
@@ -122,43 +128,45 @@ namespace BaseScraper
                     MotoCount = m.MotorcycleCount,
                 };
 
-                MotoMake make = pricesTableData.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
+                MotoMake make = context.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
+
+                if (make == null)
+                {
+                    //TODO - Troubleshoot or find another way to populate table
+                    make = new MotoMake { Make = m.Make };
+                    context.Makes.Add(make);
+                }
+
+                entity.Make = make;
 
                 if (int.TryParse(m.Year, out int parsedYear))
                 {
-                    MotoYear year = pricesTableData.Years.FirstOrDefault(yExists => yExists.Year == parsedYear);
+                    MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == parsedYear);
 
-                    if (make == null)
-                    {
-                        //TODO - Troubleshoot or find another way to populate table
-                        make = new MotoMake { Make = m.Make };
-                        pricesTableData.Makes.Add(make);
-                    }
                     if (year == null)
                     {
                         //TODO - Troubleshoot or find another way to populate table
                         year = new MotoYear { Year = parsedYear };
-                        pricesTableData.Years.Add(year);
+                        context.Years.Add(year);
                     }
 
-                    entity.Make = make;
                     entity.Year = year;
-
-                    pricesTableData.Add(entity);
-
-                    Console.WriteLine($"{entity.GetType().Name} motorcycle added successfully to the database.");
                 }
                 else
                 {
                     Console.WriteLine($"Error: Unable to parse year '{m.Year}' to an integer for motorcycle {m.Make}.");
                 }
+
+                pricesCollection.Add(entity);
+
+                Console.WriteLine($"{entity.GetType().Name} motorcycle added successfully to the database.");
             }
 
             priceWriter.Dispose();
 
-            await pricesTableData.MotocrossMarketPrices.AddRangeAsync(pricesCollection);
-            await pricesTableData.SaveChangesAsync();
-            await pricesTableData.DisposeAsync();
+            await context.MotocrossMarketPrices.AddRangeAsync(pricesCollection);
+            await context.SaveChangesAsync();
+            await context.DisposeAsync();
         }
     }
 }
