@@ -9,5 +9,8 @@ namespace BaseScraper.Data.Models
 
         [Required]
         public int Year { get; set; }
+
+        public virtual ICollection<MotocrossMarketPrice> MotocrossMarketPrices { get; set; } = new List<MotocrossMarketPrice>();
+        public virtual ICollection<MotocrossEntry> MotocrossEntries { get; set; } = new List<MotocrossEntry>();
     }
 }
