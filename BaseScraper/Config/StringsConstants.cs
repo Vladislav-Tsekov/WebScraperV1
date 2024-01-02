@@ -22,6 +22,7 @@ public static class StringsConstants
 
     //Output
     public const string YearIsNull = "0";
+    public const string NotAvailable = "N/A";
     public const string NoTitlesFound = "No titles found on the page.";
     public const string NoPricesFound = "No prices found on the page.";
     public const string NoYearsFound = "No years found on the page.";
