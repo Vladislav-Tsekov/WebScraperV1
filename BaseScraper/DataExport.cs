@@ -46,45 +46,19 @@ namespace BaseScraper
             using MotoContext context = new();
 
             HashSet<MotocrossEntry> entriesCollection = new();
-            List<MotoMake> makes = new();
-            List<MotoYear> years = new();
 
             foreach (var m in filteredMoto)
             {
+                MotoMake make = context.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
+                MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == int.Parse(m.Year));
+
                 var entry = new MotocrossEntry()
                 {
                     Price = m.Price,
                     Link = m.Link,
+                    Make = make,
+                    Year = year
                 };
-
-                MotoMake make = context.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
-
-                if (make == null)
-                {
-                    make = new MotoMake { Make = m.Make };
-                    makes.Add(make);
-                }
-
-                entry.Make = make;
-
-                if (int.TryParse(m.Year, out int parsedYear))
-                {
-                    MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == parsedYear);
-
-                    if (year == null)
-                    {
-                        year = new MotoYear { Year = parsedYear };
-                        years.Add(year);
-                    }
-
-                    entry.Year = year;
-                }
-                else
-                {
-                    Console.WriteLine($"Error: Unable to parse year '{m.Year}' to an integer for motorcycle {m.Make}.");
-                }
-
-                entriesCollection.Add(entry);
 
                 if (m.CC == "N/A")
                     entry.Cc = null;
@@ -100,13 +74,6 @@ namespace BaseScraper
             // TODO - ADD HASHSET TO COMPARE EXISTING DATA AND NEW ONE
             // PERHAPS A TRACKER - WHEN WAS THE VEHICLE SOLD / PUBLISHED / ETC.
             // .INTERSECT(); / .UNIONWITH();
-
-            makes = makes.Distinct().ToList();
-            years = years.Distinct().ToList();
-
-            await context.Makes.AddRangeAsync(makes);
-            await context.Years.AddRangeAsync(years);
-            await context.SaveChangesAsync();
 
             await context.MotocrossEntries.AddRangeAsync(entriesCollection);
             await context.SaveChangesAsync();
@@ -148,8 +115,13 @@ namespace BaseScraper
 
                 priceWriter.Write($"{m.Make}, {m.Year}, {m.AveragePrice:f2}, {m.MeanPrice:f2}, {m.DevPrice:f2}, {customPrice:f2}, {m.MotorcycleCount}{Environment.NewLine}");
 
+                MotoMake make = context.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
+                MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == int.Parse(m.Year));
+
                 var entity = new MotocrossMarketPrice
                 {
+                    Make = make,
+                    Year = year,
                     AvgPrice = (decimal)m.AveragePrice,
                     MeanTrimPrice = (decimal)m.MeanPrice,
                     StdDevPrice = (decimal)m.DevPrice,
@@ -161,38 +133,7 @@ namespace BaseScraper
                     MotoCount = m.MotorcycleCount,
                 };
 
-                MotoMake make = context.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
-
-                if (make == null)
-                {
-                    //TODO - Troubleshoot or find another way to populate table
-                    make = new MotoMake { Make = m.Make };
-                    context.Makes.Add(make);
-                }
-
-                entity.Make = make;
-
-                if (int.TryParse(m.Year, out int parsedYear))
-                {
-                    MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == parsedYear);
-
-                    if (year == null)
-                    {
-                        //TODO - Troubleshoot or find another way to populate table
-                        year = new MotoYear { Year = parsedYear };
-                        context.Years.Add(year);
-                    }
-
-                    entity.Year = year;
-                }
-                else
-                {
-                    Console.WriteLine($"Error: Unable to parse year '{m.Year}' to an integer for motorcycle {m.Make}.");
-                }
-
                 pricesCollection.Add(entity);
-
-                Console.WriteLine($"{entity.GetType().Name} motorcycle added successfully to the database.");
             }
 
             priceWriter.Dispose();
