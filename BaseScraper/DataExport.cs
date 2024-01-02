@@ -23,6 +23,21 @@ namespace BaseScraper
             await context.SaveChangesAsync();
         }
 
+        public async Task PopulateYearsTable(List<string> distinctYears)
+        {
+            HashSet<MotoYear> years = new();
+
+            foreach (var year in distinctYears)
+            {
+                MotoYear currentYear = new MotoYear { Year = int.Parse(year) };
+                years.Add(currentYear);
+            }
+
+            using MotoContext context = new();
+            await context.Years.AddRangeAsync(years);
+            await context.SaveChangesAsync();
+        }
+
         public async Task AddMotorcycleEntries(ICollection<Motorcycle> filteredMoto)
         {
             using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MotocrossData.csv"));
