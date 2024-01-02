@@ -201,7 +201,7 @@ public class Scraper
         List<int> distinctYears = motoYear.Select(s => int.Parse(s)).Distinct().OrderBy(x => x).ToList();
 
         await dataExport.PopulateMakesTable(distinctMakes);
-
+        await dataExport.PopulateYearsTable(distinctYears);
         await dataExport.AddMotorcycleEntries(filteredMoto);
         await dataExport.CalculateMarketPrices(filteredMoto);
     }

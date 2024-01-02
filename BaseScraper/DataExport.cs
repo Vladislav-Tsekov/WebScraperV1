@@ -23,13 +23,13 @@ namespace BaseScraper
             await context.SaveChangesAsync();
         }
 
-        public async Task PopulateYearsTable(List<string> distinctYears)
+        public async Task PopulateYearsTable(List<int> distinctYears)
         {
             HashSet<MotoYear> years = new();
 
             foreach (var year in distinctYears)
             {
-                MotoYear currentYear = new MotoYear { Year = int.Parse(year) };
+                MotoYear currentYear = new MotoYear { Year = (year) };
                 years.Add(currentYear);
             }
 
