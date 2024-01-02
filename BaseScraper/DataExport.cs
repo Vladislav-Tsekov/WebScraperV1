@@ -8,6 +8,21 @@ namespace BaseScraper
 {
     public class DataExport
     {
+        public async Task PopulateMakesTable(List<string> distinctMakes)
+        {
+            HashSet<MotoMake> makes = new();
+
+            foreach (var make in distinctMakes)
+            {
+                MotoMake currentMake = new MotoMake { Make = make};
+                makes.Add(currentMake);
+            }
+
+            using MotoContext context = new();
+            await context.Makes.AddRangeAsync(makes);
+            await context.SaveChangesAsync();
+        }
+
         public async Task AddMotorcycleEntries(ICollection<Motorcycle> filteredMoto)
         {
             using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MotocrossData.csv"));
@@ -16,8 +31,8 @@ namespace BaseScraper
             using MotoContext context = new();
 
             HashSet<MotocrossEntry> entriesCollection = new();
-            HashSet<MotoMake> makes = new();
-            HashSet<MotoYear> years = new();
+            List<MotoMake> makes = new();
+            List<MotoYear> years = new();
 
             foreach (var m in filteredMoto)
             {
@@ -70,6 +85,9 @@ namespace BaseScraper
             // TODO - ADD HASHSET TO COMPARE EXISTING DATA AND NEW ONE
             // PERHAPS A TRACKER - WHEN WAS THE VEHICLE SOLD / PUBLISHED / ETC.
             // .INTERSECT(); / .UNIONWITH();
+
+            makes = makes.Distinct().ToList();
+            years = years.Distinct().ToList();
 
             await context.Makes.AddRangeAsync(makes);
             await context.Years.AddRangeAsync(years);

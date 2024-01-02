@@ -197,6 +197,11 @@ public class Scraper
 
         DataExport dataExport = new();
 
+        List<string> distinctMakes = motoMake.Distinct().OrderBy(x => x).ToList();
+        List<int> distinctYears = motoYear.Where(y => y != "N/A").Select(s => int.Parse(s)).Distinct().OrderBy(x => x).ToList();
+
+        await dataExport.PopulateMakesTable(distinctMakes);
+
         await dataExport.AddMotorcycleEntries(filteredMoto);
         await dataExport.CalculateMarketPrices(filteredMoto);
     }
