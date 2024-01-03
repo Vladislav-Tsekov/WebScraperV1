@@ -1,4 +1,5 @@
 ﻿using BaseScraper.Config;
+using BaseScraper.Data;
 using BaseScraper.Models;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
@@ -196,12 +197,13 @@ public class Scraper
                             .ToList();
 
         DataExport dataExport = new();
+        MotoContext context = new();
 
         List<string> distinctMakes = motoMake.Distinct().OrderBy(x => x).ToList();
         List<int> distinctYears = motoYear.Select(s => int.Parse(s)).Distinct().OrderBy(x => x).ToList();
 
-        await dataExport.PopulateMakesTable(distinctMakes);
-        await dataExport.PopulateYearsTable(distinctYears);
+        await dataExport.PopulateMakesTable(distinctMakes, context);
+        await dataExport.PopulateYearsTable(distinctYears, context);
         await dataExport.AddMotorcycleEntries(filteredMoto);
         await dataExport.CalculateMarketPrices(filteredMoto);
     }

@@ -8,9 +8,8 @@ namespace BaseScraper
 {
     public class DataExport
     {
-        public async Task PopulateMakesTable(List<string> distinctMakes)
+        public async Task PopulateMakesTable(List<string> distinctMakes, MotoContext context)
         {
-            using MotoContext context = new();
             var dbMakes = context.Makes.ToList();
 
             HashSet<MotoMake> makes = new();
@@ -31,9 +30,8 @@ namespace BaseScraper
             }
         }
 
-        public async Task PopulateYearsTable(List<int> distinctYears)
+        public async Task PopulateYearsTable(List<int> distinctYears, MotoContext context)
         {
-            using MotoContext context = new();
             var dbYears = context.Years.ToList();
 
             HashSet<MotoYear> years = new();
