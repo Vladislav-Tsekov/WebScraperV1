@@ -10,15 +10,20 @@ namespace BaseScraper
     {
         public async Task PopulateMakesTable(List<string> distinctMakes)
         {
+            using MotoContext context = new();
+            var dbMakes = context.Makes.ToList();
+
             HashSet<MotoMake> makes = new();
+            HashSet<MotoMake> existingMakes = new(dbMakes);
+
+            makes.IntersectWith(existingMakes);
 
             foreach (var make in distinctMakes)
             {
-                MotoMake currentMake = new MotoMake { Make = make};
+                var currentMake = new MotoMake { Make = make};
                 makes.Add(currentMake);
             }
 
-            using MotoContext context = new();
             await context.Makes.AddRangeAsync(makes);
             await context.SaveChangesAsync();
         }
