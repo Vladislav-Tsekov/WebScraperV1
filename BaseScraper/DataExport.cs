@@ -18,14 +18,17 @@ namespace BaseScraper
 
             makes.IntersectWith(existingMakes);
 
-            foreach (var make in distinctMakes)
+            if (makes.Count > 0)
             {
-                var currentMake = new MotoMake { Make = make};
-                makes.Add(currentMake);
-            }
+                foreach (var make in distinctMakes)
+                {
+                    var currentMake = new MotoMake { Make = make };
+                    makes.Add(currentMake);
+                }
 
-            await context.Makes.AddRangeAsync(makes);
-            await context.SaveChangesAsync();
+                await context.Makes.AddRangeAsync(makes);
+                await context.SaveChangesAsync();
+            }
         }
 
         public async Task PopulateYearsTable(List<int> distinctYears)
@@ -38,14 +41,17 @@ namespace BaseScraper
 
             years.IntersectWith(existingYears);
 
-            foreach (var year in distinctYears)
+            if (years.Count > 0)
             {
-                MotoYear currentYear = new MotoYear { Year = (year) };
-                years.Add(currentYear);
-            }
+                foreach (var year in distinctYears)
+                {
+                    var currentYear = new MotoYear { Year = (year) };
+                    years.Add(currentYear);
+                }
 
-            await context.Years.AddRangeAsync(years);
-            await context.SaveChangesAsync();
+                await context.Years.AddRangeAsync(years);
+                await context.SaveChangesAsync();
+            } 
         }
 
         public async Task AddMotorcycleEntries(ICollection<Motorcycle> filteredMoto)
