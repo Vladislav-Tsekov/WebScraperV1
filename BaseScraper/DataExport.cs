@@ -30,7 +30,13 @@ namespace BaseScraper
 
         public async Task PopulateYearsTable(List<int> distinctYears)
         {
+            using MotoContext context = new();
+            var dbYears = context.Years.ToList();
+
             HashSet<MotoYear> years = new();
+            HashSet<MotoYear> existingYears = new(dbYears);
+
+            years.IntersectWith(existingYears);
 
             foreach (var year in distinctYears)
             {
@@ -38,7 +44,6 @@ namespace BaseScraper
                 years.Add(currentYear);
             }
 
-            using MotoContext context = new();
             await context.Years.AddRangeAsync(years);
             await context.SaveChangesAsync();
         }
