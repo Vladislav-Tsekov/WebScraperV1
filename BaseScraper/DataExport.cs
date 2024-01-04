@@ -52,12 +52,10 @@ namespace BaseScraper
             } 
         }
 
-        public async Task AddMotorcycleEntries(ICollection<Motorcycle> filteredMoto)
+        public async Task AddMotorcycleEntries(ICollection<Motorcycle> filteredMoto, MotoContext context)
         {
             using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MotocrossData.csv"));
             motoWriter.Write($"Make, CC, Year, Price, Link{Environment.NewLine}");
-
-            using MotoContext context = new();
 
             HashSet<MotocrossEntry> entriesCollection = new();
 
@@ -94,7 +92,7 @@ namespace BaseScraper
             await context.DisposeAsync();
         }
 
-        public async Task CalculateMarketPrices(ICollection<Motorcycle> filteredMoto)
+        public async Task CalculateMarketPrices(ICollection<Motorcycle> filteredMoto, MotoContext context)
         {
             var averagePrices = filteredMoto
             .GroupBy(m => new { m.Make, m.Year })
@@ -118,8 +116,6 @@ namespace BaseScraper
 
             using StreamWriter priceWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "AvgPriceMotocross.csv"));
             priceWriter.Write($"Make, Year, Average Price, Mean Price, StdDev Price, Combined Price, Count{Environment.NewLine}");
-
-            using MotoContext context = new();
 
             HashSet<MotocrossMarketPrice> pricesCollection = new();
 

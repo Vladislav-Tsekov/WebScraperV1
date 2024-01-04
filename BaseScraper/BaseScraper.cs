@@ -204,7 +204,7 @@ public class Scraper
 
         await dataExport.PopulateMakesTable(distinctMakes, context);
         await dataExport.PopulateYearsTable(distinctYears, context);
-        await dataExport.AddMotorcycleEntries(filteredMoto);
-        await dataExport.CalculateMarketPrices(filteredMoto);
+        await dataExport.AddMotorcycleEntries(filteredMoto, context);
+        await dataExport.CalculateMarketPrices(filteredMoto, context);
     }
 }
