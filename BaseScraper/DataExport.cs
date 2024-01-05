@@ -3,6 +3,7 @@ using BaseScraper.Config;
 using BaseScraper.Data;
 using BaseScraper.Data.Models;
 using BaseScraper.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BaseScraper
 {
@@ -57,33 +58,38 @@ namespace BaseScraper
             using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MotocrossData.csv"));
             motoWriter.Write($"Make, CC, Year, Price, Link{Environment.NewLine}");
 
-            var dbEntries = context.MotocrossEntries.ToList();
+            var dbEntries = context.MotocrossEntries.AsNoTracking().ToList();
 
             HashSet<MotocrossEntry> entries = new();
             HashSet<MotocrossEntry> existingEntries = new(dbEntries);
-
-            entries.IntersectWith(existingEntries);
 
             foreach (var m in filteredMoto)
             {
                 MotoMake make = context.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
                 MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == int.Parse(m.Year));
 
-                var entry = new MotocrossEntry()
+                if (!dbEntries.Any(dbEntry => dbEntry.Link == m.Link))
                 {
-                    Price = m.Price,
-                    Link = m.Link,
-                    Make = make,
-                    Year = year
-                };
+                    var entry = new MotocrossEntry()
+                    {
+                        Price = m.Price,
+                        Link = m.Link,
+                        Make = make,
+                        Year = year
+                    };
 
-                if (m.CC == "N/A")
-                    entry.Cc = null;
+                    if (m.CC == "N/A")
+                        entry.Cc = null;
+                    else
+                        entry.Cc = m.CC;
+
+                    entries.Add(entry);
+                    motoWriter.Write($"{m.Make}, {m.CC}, {m.Year}, {m.Price}, {m.Link}{Environment.NewLine}");
+                }
                 else
-                    entry.Cc = m.CC;
-
-                entries.Add(entry);
-                motoWriter.Write($"{m.Make}, {m.CC}, {m.Year}, {m.Price}, {m.Link}{Environment.NewLine}");
+                {
+                    Console.WriteLine($"Entry with link {m.Link} already exists.");
+                }
             }
 
             motoWriter.Dispose();
