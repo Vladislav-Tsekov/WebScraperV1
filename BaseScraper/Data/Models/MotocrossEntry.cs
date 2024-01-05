@@ -5,6 +5,9 @@ namespace BaseScraper.Data.Models
 {
     public class MotocrossEntry
     {
+        [Key]
+        public string Link { get; set; }
+
         [ForeignKey(nameof(MakeId))]
         public MotoMake Make { get; set; }
         public int MakeId { get; set; }
@@ -18,7 +21,7 @@ namespace BaseScraper.Data.Models
         [Required]
         public double Price { get; set; }
 
-        [Key]
-        public string Link { get; set; }
+        [Required]
+        public bool IsSold { get; set; }
     }
 }
