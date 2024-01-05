@@ -94,6 +94,14 @@ namespace BaseScraper
 
             motoWriter.Dispose();
 
+            foreach (var existingEntry in dbEntries)
+            {
+                if (!filteredMoto.Any(m => m.Link == existingEntry.Link))
+                {
+                    existingEntry.IsSold = true;
+                }
+            }
+
             await context.MotocrossEntries.AddRangeAsync(entries);
             await context.SaveChangesAsync();
             await context.DisposeAsync();
