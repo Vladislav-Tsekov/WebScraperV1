@@ -57,7 +57,12 @@ namespace BaseScraper
             using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MotocrossData.csv"));
             motoWriter.Write($"Make, CC, Year, Price, Link{Environment.NewLine}");
 
-            HashSet<MotocrossEntry> entriesCollection = new();
+            var dbEntries = context.MotocrossEntries.ToList();
+
+            HashSet<MotocrossEntry> entries = new();
+            HashSet<MotocrossEntry> existingEntries = new(dbEntries);
+
+            entries.IntersectWith(existingEntries);
 
             foreach (var m in filteredMoto)
             {
@@ -77,17 +82,13 @@ namespace BaseScraper
                 else
                     entry.Cc = m.CC;
 
-                entriesCollection.Add(entry);
+                entries.Add(entry);
                 motoWriter.Write($"{m.Make}, {m.CC}, {m.Year}, {m.Price}, {m.Link}{Environment.NewLine}");
             }
 
             motoWriter.Dispose();
 
-            // TODO - ADD HASHSET TO COMPARE EXISTING DATA AND NEW ONE
-            // PERHAPS A TRACKER - WHEN WAS THE VEHICLE SOLD / PUBLISHED / ETC.
-            // .INTERSECT(); / .UNIONWITH();
-
-            await context.MotocrossEntries.AddRangeAsync(entriesCollection);
+            await context.MotocrossEntries.AddRangeAsync(entries);
             await context.SaveChangesAsync();
             await context.DisposeAsync();
         }
