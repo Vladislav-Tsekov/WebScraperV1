@@ -22,8 +22,6 @@ public class Scraper
 
         ScraperSettings scraperSettings = new(configuration);
 
-        //DatabaseSettings dbSettings = new(configuration);
-
         List<string> motoMake = new();
         List<string> motoCc = new();
         List<double> motoPrice = new();

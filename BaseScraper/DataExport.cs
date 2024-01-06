@@ -104,6 +104,9 @@ namespace BaseScraper
                 }
             }
 
+            //TODO - MOVE SOLD MOTORCYCLES TO A DIFFERENT TABLE AND REMOVE THEM FROM PREVIOUS ONE!?
+            //OR FIND A WAY TO TRACK SALES AND OTHER DATA
+
             await context.MotocrossEntries.AddRangeAsync(entries);
             await context.SaveChangesAsync();
         }
