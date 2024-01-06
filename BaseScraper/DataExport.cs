@@ -104,7 +104,6 @@ namespace BaseScraper
 
             await context.MotocrossEntries.AddRangeAsync(entries);
             await context.SaveChangesAsync();
-            await context.DisposeAsync();
         }
 
         public async Task CalculateMarketPrices(ICollection<Motorcycle> filteredMoto, MotoContext context)
@@ -165,7 +164,6 @@ namespace BaseScraper
 
             await context.MotocrossMarketPrices.AddRangeAsync(pricesCollection);
             await context.SaveChangesAsync();
-            await context.DisposeAsync();
         }
     }
 }
