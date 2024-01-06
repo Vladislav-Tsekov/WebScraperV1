@@ -23,5 +23,7 @@ namespace BaseScraper.Data.Models
 
         [Required]
         public bool IsSold { get; set; }
+
+        public DateTime DateAdded { get; set; }
     }
 }

@@ -75,7 +75,8 @@ namespace BaseScraper
                         Price = m.Price,
                         Link = m.Link,
                         Make = make,
-                        Year = year
+                        Year = year,
+                        DateAdded = DateTime.Now
                     };
 
                     if (m.CC == "N/A")
