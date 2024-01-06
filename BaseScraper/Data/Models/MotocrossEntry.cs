@@ -24,6 +24,9 @@ namespace BaseScraper.Data.Models
         [Required]
         public bool IsSold { get; set; }
 
+        [Required]
         public DateTime DateAdded { get; set; }
+
+        public DateTime DateSold { get; set; }
     }
 }

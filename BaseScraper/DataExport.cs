@@ -100,6 +100,7 @@ namespace BaseScraper
                 if (!filteredMoto.Any(m => m.Link == existingEntry.Link))
                 {
                     existingEntry.IsSold = true;
+                    existingEntry.DateSold = DateTime.Now;
                 }
             }
 
