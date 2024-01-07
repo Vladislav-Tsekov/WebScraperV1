@@ -209,5 +209,6 @@ public class Scraper
         DataAnalysis dataAnalysis = new();
 
         await dataAnalysis.TotalMotorcyclesCountByMake(context);
+        await dataAnalysis.TotalMotorcyclesCountByYear(context);
     }
 }
