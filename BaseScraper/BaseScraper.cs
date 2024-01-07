@@ -1,5 +1,6 @@
 ﻿using BaseScraper.Config;
 using BaseScraper.Data;
+using BaseScraper.Data.Models;
 using BaseScraper.Models;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
@@ -204,5 +205,9 @@ public class Scraper
         await dataExport.PopulateYearsTable(distinctYears, context);
         await dataExport.AddMotorcycleEntries(filteredMoto, context);
         await dataExport.CalculateMarketPrices(filteredMoto, context);
+
+        DataAnalysis dataAnalysis = new();
+
+        await dataAnalysis.TotalMotorcyclesCountByMake(context);
     }
 }
