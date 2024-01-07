@@ -6,6 +6,8 @@ namespace BaseScraper
 {
     public class DataAnalysis
     {
+        //TODO - MUST FIND A WAY TO INDENTIFY TRENDS
+
         public async Task TotalMotorcyclesCountByMake(MotoContext context)
         {
             List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.ToList();

@@ -54,11 +54,24 @@
 
         public static double Mode(IEnumerable<double> prices)
         {
-            var groupedPrices = prices.GroupBy(x => x); //debug method
-            var frequency = groupedPrices.Max(g => g.Count());
-            var mode = groupedPrices.First(g => g.Count() == frequency).Key; //v?
+            //var groupedPrices = prices.GroupBy(x => x); //debug method
+            //var frequency = groupedPrices.Max(g => g.Count());
+            //var mode = groupedPrices.First(g => g.Count() == frequency).Key; //v?
 
+            //return mode;
+
+            var groupedPrices = prices.GroupBy(x => x);
+            var maxFrequency = groupedPrices.Max(g => g.Count());
+
+            if (groupedPrices.Count(g => g.Count() == maxFrequency) > 1)
+            {
+                return 0;
+            }
+
+            var mode = groupedPrices.First(g => g.Count() == maxFrequency).Key;
             return mode;
+
+            //TODO - TEST OUTPUT WITH FRESH DATA, ONCE THE WEBSITE IS UPDATED
         }
 
         public static double Range(IEnumerable<double> prices)
