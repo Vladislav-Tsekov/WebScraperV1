@@ -21,6 +21,9 @@
             }
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder){}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<MotocrossMarketPrice>(e => e.HasKey(mp => new { mp.MakeId, mp.YearId }));
+        }
     }
 }

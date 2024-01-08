@@ -74,5 +74,7 @@ namespace BaseScraper
 
             Console.WriteLine(output.ToString().TrimEnd());
         }
+
+
     }
 }
