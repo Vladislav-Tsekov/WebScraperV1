@@ -6,7 +6,7 @@ public static class StringsConstants
     public const string AppSettingsPath = "appsettings.json";
 
     //Base URLs
-    public const string MxBaseUrl = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=uy15oi&f1=";
+    public const string MxBaseUrl = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=v1fahs&f1=";
     public const string EnduroBaseUrl = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=umpnpb&f1=";
 
     //Encoding
@@ -28,6 +28,8 @@ public static class StringsConstants
     public const string NoYearsFound = "No years found on the page.";
     public const string NoLinksFound = "No matching links found.";
     public const string FailedToRetreivePage = "Failed to retrieve the web page.";
+    public const string ListingsByMake = "Used motorcycles listing's count sorted by make:";
+    public const string ListingsByYear = "Used motorcycles listing's count sorted by year of manufacture:";
 
     //RegEx
     public const string CcPattern = @"\d{3}";

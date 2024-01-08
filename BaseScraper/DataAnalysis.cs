@@ -1,4 +1,5 @@
-﻿using BaseScraper.Data;
+﻿using BaseScraper.Config;
+using BaseScraper.Data;
 using BaseScraper.Data.Models;
 using System.Text;
 
@@ -28,7 +29,7 @@ namespace BaseScraper
             }
 
             StringBuilder output = new();
-            output.AppendLine($"Used motorcycles listing's count sorted by manufacturer:");
+            output.AppendLine(StringsConstants.ListingsByMake);
 
             foreach (var kvp in makeCountPairs)
             {
@@ -61,7 +62,7 @@ namespace BaseScraper
             }
 
             StringBuilder output = new();
-            output.AppendLine($"Used motorcycles listing's count sorted by year of manufacture:");
+            output.AppendLine(StringsConstants.ListingsByYear);
 
             foreach (var kvp in yearCountPairs)
             {
