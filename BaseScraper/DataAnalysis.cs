@@ -12,7 +12,7 @@ namespace BaseScraper
 
         public async Task TotalMotorcyclesCountByMake(MotoContext context)
         {
-            List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.AsNoTracking().ToList();
+            List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.ToList();
 
             Dictionary<string, int> makeCountPairs = new();
 
@@ -48,7 +48,8 @@ namespace BaseScraper
 
         public async Task TotalMotorcyclesCountByYear(MotoContext context) 
         {
-            List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.AsNoTracking().ToList();
+            List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.ToList();
+            //TODO - LEARN WHY .ASNOTRACKING() CAUSES PROBLEMS HERE
 
             SortedDictionary<int, int> yearCountPairs = new();
 
@@ -96,7 +97,6 @@ namespace BaseScraper
 
         public async Task SoldMotorcycles(MotoContext context)
         {
-            //TODO - LIST, USED TO ANALYZE SOLD MOTORCYCLES AND THE DATA INTEGRITY
             throw new NotImplementedException();
         }
     }
