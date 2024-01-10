@@ -1,6 +1,7 @@
 ﻿using BaseScraper.Config;
 using BaseScraper.Data;
 using BaseScraper.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Text;
 
 namespace BaseScraper
@@ -11,7 +12,7 @@ namespace BaseScraper
 
         public async Task TotalMotorcyclesCountByMake(MotoContext context)
         {
-            List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.ToList();
+            List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.AsNoTracking().ToList();
 
             Dictionary<string, int> makeCountPairs = new();
 
@@ -47,9 +48,9 @@ namespace BaseScraper
 
         public async Task TotalMotorcyclesCountByYear(MotoContext context) 
         {
-            List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.ToList();
+            List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.AsNoTracking().ToList();
 
-            Dictionary<int, int> yearCountPairs = new();
+            SortedDictionary<int, int> yearCountPairs = new();
 
             foreach (var motorcycle in pricesList)
             {
