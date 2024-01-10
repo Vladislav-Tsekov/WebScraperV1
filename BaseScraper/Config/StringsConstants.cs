@@ -10,7 +10,7 @@ public static class StringsConstants
     public const string EnduroBaseUrl = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=umpnpb&f1=";
 
     //Encoding
-    public const string Encoding = "windows-1251";
+    public const string Encode = "windows-1251";
 
     //Nodes
     public const string TitleNodes = "//a[@class='mmm']";

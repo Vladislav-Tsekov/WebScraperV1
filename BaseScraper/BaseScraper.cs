@@ -1,11 +1,11 @@
 ﻿using BaseScraper.Config;
 using BaseScraper.Data;
-using BaseScraper.Data.Models;
 using BaseScraper.Models;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.Text.RegularExpressions;
+using static BaseScraper.Config.StringsConstants;
 
 namespace BaseScraper;
 
@@ -15,7 +15,7 @@ public class Scraper
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-        string appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), StringsConstants.AppSettingsPath);
+        string appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), AppSettingsPath);
                                             
         IConfiguration configuration = new ConfigurationBuilder()
             .AddJsonFile(appSettingsPath)
@@ -53,15 +53,15 @@ public class Scraper
                 {
                     Stream contentStream = await httpResponse.Content.ReadAsStreamAsync();
 
-                    using StreamReader reader = new(contentStream, Encoding.GetEncoding(StringsConstants.Encoding));
+                    using StreamReader reader = new(contentStream, Encoding.GetEncoding(Encode));
                     string htmlContent = await reader.ReadToEndAsync();
                     HtmlDocument doc = new();
                     doc.LoadHtml(htmlContent);
 
-                    var titleNodes = doc.DocumentNode.SelectNodes(StringsConstants.TitleNodes);
-                    var priceNodes = doc.DocumentNode.SelectNodes(StringsConstants.PriceNodes);
-                    var descriptionNodes = doc.DocumentNode.SelectNodes(StringsConstants.DescriptionNodes);
-                    var linkNodes = doc.DocumentNode.SelectNodes(StringsConstants.LinkNodes);
+                    var titleNodes = doc.DocumentNode.SelectNodes(TitleNodes);
+                    var priceNodes = doc.DocumentNode.SelectNodes(PriceNodes);
+                    var descriptionNodes = doc.DocumentNode.SelectNodes(DescriptionNodes);
+                    var linkNodes = doc.DocumentNode.SelectNodes(LinkNodes);
 
                     if (titleNodes != null)
                     {
@@ -84,7 +84,7 @@ public class Scraper
 
                                 foreach (string cubicCent in titleTokens)
                                 {
-                                    Match ccMatch = Regex.Match(cubicCent, StringsConstants.CcPattern);
+                                    Match ccMatch = Regex.Match(cubicCent, CcPattern);
                                     if (ccMatch.Success)
                                     {
                                         string ccValue = ccMatch.Value;
@@ -101,7 +101,7 @@ public class Scraper
                     }
                     else
                     {
-                        Console.WriteLine(StringsConstants.NoTitlesFound);
+                        Console.WriteLine(NoTitlesFound);
                     }
 
                     if (priceNodes != null)
@@ -109,7 +109,7 @@ public class Scraper
                         foreach (var priceNode in priceNodes)
                         {
                             string priceInnerText = priceNode.InnerText;
-                            string price = Regex.Replace(priceInnerText, StringsConstants.PriceIdentify, StringsConstants.PriceReplace);
+                            string price = Regex.Replace(priceInnerText, PriceIdentify, PriceReplace);
 
                             if (double.TryParse(price, out double priceValue))
                             {
@@ -124,7 +124,7 @@ public class Scraper
                     else
                     {
                         doomCounter++;
-                        Console.WriteLine(StringsConstants.NoPricesFound);
+                        Console.WriteLine(NoPricesFound);
                     }
 
                     if (descriptionNodes != null)
@@ -132,7 +132,7 @@ public class Scraper
                         foreach (var infoNode in descriptionNodes)
                         {
                             string infoText = infoNode.InnerText;
-                            Match yearMatch = Regex.Match(infoText, StringsConstants.YearPattern);
+                            Match yearMatch = Regex.Match(infoText, YearPattern);
 
                             if (yearMatch.Success)
                             {
@@ -141,21 +141,21 @@ public class Scraper
                             }
                             else
                             {
-                                motoYear.Add(StringsConstants.YearIsNull);
+                                motoYear.Add(YearIsNull);
                             }
                         }
                     }
                     else
                     {
                         doomCounter++;
-                        Console.WriteLine(StringsConstants.NoYearsFound);
+                        Console.WriteLine(NoYearsFound);
                     }
 
                     if (linkNodes != null)
                     {
                         foreach (var href in linkNodes)
                         {
-                            string link = href.GetAttributeValue(StringsConstants.HrefAttribute, StringsConstants.HrefDefault);
+                            string link = href.GetAttributeValue(HrefAttribute, HrefDefault);
 
                             if (link.Length < 50)
                                 continue;
@@ -174,12 +174,12 @@ public class Scraper
                     }
                     else
                     {
-                        Console.WriteLine(StringsConstants.NoLinksFound);
+                        Console.WriteLine(NoLinksFound);
                     }
                 }
                 else
                 {
-                    Console.WriteLine(StringsConstants.FailedToRetreivePage);
+                    Console.WriteLine(FailedToRetreivePage);
                     return;
                 }
             }
