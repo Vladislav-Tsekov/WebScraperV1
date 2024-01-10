@@ -65,15 +65,18 @@ namespace BaseScraper
             }
 
             StringBuilder output = new();
+            StreamWriter yearCountWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "CountByYear.csv"));
+            
             output.AppendLine(StringsConstants.ListingsByYear);
+            yearCountWriter.WriteLine(DateTime.Now);
 
             foreach (var kvp in yearCountPairs)
             {
                 output.AppendLine($"{kvp.Key} -> {kvp.Value}");
+                yearCountWriter.WriteLine($"{kvp.Key}, {kvp.Value}");
             }
 
-            //TODO - OUTPUT MUST BE EXPORTED TO A CSV FILE
-            //TODO - MUST ALSO ADD DATE IN ORDER TO KNOW WHEN WAS THE REPORT GENERATED
+            yearCountWriter.Dispose();
 
             Console.WriteLine(output.ToString().TrimEnd());
         }
