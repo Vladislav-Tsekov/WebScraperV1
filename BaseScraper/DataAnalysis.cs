@@ -29,15 +29,18 @@ namespace BaseScraper
             }
 
             StringBuilder output = new();
+            StreamWriter makeCountWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "CountByMake.csv"));
+
             output.AppendLine(StringsConstants.ListingsByMake);
+            makeCountWriter.WriteLine(DateTime.Now);
 
             foreach (var kvp in makeCountPairs)
             {
                 output.AppendLine($"{kvp.Key.ToUpper()} -> {kvp.Value}");
+                makeCountWriter.WriteLine($"{kvp.Key.ToUpper()}, {kvp.Value}");
             }
 
-            //TODO - OUTPUT MUST BE EXPORTED TO A CSV FILE
-            //TODO - MUST ALSO ADD DATE IN ORDER TO KNOW WHEN WAS THE REPORT GENERATED
+            makeCountWriter.Dispose();
 
             Console.WriteLine(output.ToString().TrimEnd());
         }
