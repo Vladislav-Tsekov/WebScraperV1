@@ -160,7 +160,16 @@ public class Scraper
                             if (link.Length < 50)
                                 continue;
                             else
-                                motoLink.Add(link);
+                            {
+                                //Links must be saved like this:
+                                //https://www.mobile.bg/pcgi/mobile.cgi?act=4&amp;adv=51523296516703158
+                                //Links are now saved like this, which is the same page, accessed by different search options:
+                                //https://www.mobile.bg/pcgi/mobile.cgi?act=4&amp;adv=51523296516703158&amp;slink=uy15oi
+                                //https://www.mobile.bg/pcgi/mobile.cgi?act=4&amp;adv=51523296516703158&amp;slink=v1fahs
+
+                                string modifiedLink = link[2..63];
+                                motoLink.Add(modifiedLink);
+                            }
                         }
                     }
                     else

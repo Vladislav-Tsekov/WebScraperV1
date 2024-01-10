@@ -101,6 +101,8 @@ namespace BaseScraper
                 {
                     existingEntry.IsSold = true;
                     existingEntry.DateSold = DateTime.Now;
+
+                    //TODO - CASE NOT TESTED, MUST COLLECT NEW DATA TO TEST FUNCTIONALITY
                 }
             }
 

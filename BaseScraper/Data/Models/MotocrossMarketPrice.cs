@@ -5,9 +5,6 @@ namespace BaseScraper.Data.Models
 {
     public class MotocrossMarketPrice
     {
-        //[Key]
-        //public int Id { get; set; }
-
         [ForeignKey(nameof(MakeId))]
         public MotoMake Make { get; set; }
         public int MakeId { get; set; }
