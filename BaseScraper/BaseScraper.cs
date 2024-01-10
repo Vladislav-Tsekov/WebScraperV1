@@ -197,7 +197,7 @@ public class Scraper
             motorcycles.Add(motorcycle);
         }
 
-        List<Motorcycle> filteredMoto = motorcycles
+        List<Motorcycle> scrapedMoto = motorcycles
                             .Where(m => m.Price > 3000)
                             .OrderBy(m => m.Make)
                             .ThenBy(m => m.Year)
@@ -212,8 +212,8 @@ public class Scraper
 
         await dataExport.PopulateMakesTable(distinctMakes, context);
         await dataExport.PopulateYearsTable(distinctYears, context);
-        await dataExport.AddMotorcycleEntries(filteredMoto, context);
-        await dataExport.CalculateMarketPrices(filteredMoto, context);
+        await dataExport.AddMotorcycleEntries(scrapedMoto, context);
+        await dataExport.CalculateMarketPrices(scrapedMoto, context);
 
         DataAnalysis dataAnalysis = new();
 

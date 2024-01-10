@@ -53,17 +53,17 @@ namespace BaseScraper
             } 
         }
 
-        public async Task AddMotorcycleEntries(ICollection<Motorcycle> filteredMoto, MotoContext context)
+        public async Task AddMotorcycleEntries(ICollection<Motorcycle> scrapedMoto, MotoContext context)
         {
             using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MotocrossData.csv"));
             motoWriter.Write($"Make, CC, Year, Price, Link{Environment.NewLine}");
 
-            var dbEntries = context.MotocrossEntries.AsNoTracking().ToList();
+            var dbEntries = context.MotocrossEntries.ToList();
 
             HashSet<MotocrossEntry> entries = new();
             HashSet<MotocrossEntry> existingEntries = new(dbEntries);
 
-            foreach (var m in filteredMoto)
+            foreach (var m in scrapedMoto)
             {
                 MotoMake make = context.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
                 MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == int.Parse(m.Year));
@@ -79,7 +79,7 @@ namespace BaseScraper
                         DateAdded = DateTime.Now
                     };
 
-                    if (m.CC == "N/A")
+                    if (m.CC == StringsConstants.NotAvailable)
                         entry.Cc = null;
                     else
                         entry.Cc = m.CC;
@@ -97,7 +97,7 @@ namespace BaseScraper
 
             foreach (var existingEntry in dbEntries)
             {
-                if (!filteredMoto.Any(m => m.Link == existingEntry.Link))
+                if (!scrapedMoto.Any(m => m.Link == existingEntry.Link))
                 {
                     existingEntry.IsSold = true;
                     existingEntry.DateSold = DateTime.Now;
@@ -107,7 +107,7 @@ namespace BaseScraper
             }
 
             //TODO - MOVE SOLD MOTORCYCLES TO A DIFFERENT TABLE AND REMOVE THEM FROM PREVIOUS ONE!?
-            //OR FIND A WAY TO TRACK SALES AND OTHER DATA
+            //OR FIND A WAY TO TRACK SALES AND OTHER TRENDS
 
             await context.MotocrossEntries.AddRangeAsync(entries);
             await context.SaveChangesAsync();
