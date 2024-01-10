@@ -75,6 +75,22 @@ namespace BaseScraper
             Console.WriteLine(output.ToString().TrimEnd());
         }
 
+        public async Task MotorcyclesWithUnusualVariance(MotoContext context) 
+        {
+            //TODO - TAKE ALL MOTORCYCLES WITH VARIANCE IN BOTH EXTREMES, CHECK WHETHER THE DATA CALCULATIONS ARE CORRECT
+            throw new NotImplementedException();
+        }
 
+        public async Task MotorcyclesWithUnusualPriceRange(MotoContext context)
+        {
+            //TODO - TAKE ALL MOTORCYCLES WITH SUSPICIOUS RANGE VALUES, CHECK WHETHER THE DATA CALCULATIONS ARE CORRECT
+            throw new NotImplementedException();
+        }
+
+        public async Task SoldMotorcycles(MotoContext context)
+        {
+            //TODO - LIST, USED TO ANALYZE SOLD MOTORCYCLES AND THE DATA INTEGRITY
+            throw new NotImplementedException();
+        }
     }
 }

@@ -3,7 +3,6 @@ using BaseScraper.Config;
 using BaseScraper.Data;
 using BaseScraper.Data.Models;
 using BaseScraper.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace BaseScraper
 {
