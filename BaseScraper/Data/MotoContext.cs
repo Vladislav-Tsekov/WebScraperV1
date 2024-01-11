@@ -12,6 +12,7 @@
         public DbSet<MotoYear> Years { get; set; }
         public DbSet<MotocrossMarketPrice> MotocrossMarketPrices { get; set; }
         public DbSet<MotocrossEntry> MotocrossEntries { get; set; }
+        public DbSet<MotocrossSoldEntry> MotocrossSoldEntries { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
