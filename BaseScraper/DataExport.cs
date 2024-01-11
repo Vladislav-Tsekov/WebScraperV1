@@ -88,6 +88,7 @@ namespace BaseScraper
                 }
                 else
                 {
+                    //TODO - COMPARE PRICES OF EXISTING MOTORCYCLES AND MAKE SURE IT'S UPDATED
                     Console.WriteLine($"Entry with link {m.Link} already exists.");
                 }
             }
@@ -100,8 +101,6 @@ namespace BaseScraper
                 {
                     existingEntry.IsSold = true;
                     existingEntry.DateSold = DateTime.Now;
-
-                    //TODO - CASE NOT TESTED, MUST COLLECT NEW DATA TO TEST FUNCTIONALITY
                 }
             }
 
