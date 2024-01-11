@@ -213,7 +213,8 @@ public class Scraper
         await dataExport.PopulateMakesTable(distinctMakes, context);
         await dataExport.PopulateYearsTable(distinctYears, context);
         await dataExport.AddMotorcycleEntries(scrapedMoto, context);
-        await dataExport.CalculateMarketPrices(scrapedMoto, context);
+        await dataExport.AddMarketPrices(scrapedMoto, context);
+        await dataExport.TransferSoldEntries(context);
 
         DataAnalysis dataAnalysis = new();
 

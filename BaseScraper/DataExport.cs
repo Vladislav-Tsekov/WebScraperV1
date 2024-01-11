@@ -104,14 +104,11 @@ namespace BaseScraper
                 }
             }
 
-            //TODO - MOVE SOLD MOTORCYCLES TO A DIFFERENT TABLE AND REMOVE THEM FROM PREVIOUS ONE!?
-            //OR FIND ANOTHER WAY TO TRACK SALES AND OTHER TRENDS
-
             await context.MotocrossEntries.AddRangeAsync(entries);
             await context.SaveChangesAsync();
         }
 
-        public async Task CalculateMarketPrices(ICollection<Motorcycle> filteredMoto, MotoContext context)
+        public async Task AddMarketPrices(ICollection<Motorcycle> filteredMoto, MotoContext context)
         {
             var averagePrices = filteredMoto
             .GroupBy(m => new { m.Make, m.Year })
@@ -186,6 +183,34 @@ namespace BaseScraper
             priceWriter.Dispose();
 
             await context.MotocrossMarketPrices.AddRangeAsync(pricesCollection);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task TransferSoldEntries(MotoContext context) 
+        {
+            var dbEntries = context.MotocrossEntries.Where(e => e.IsSold == true).ToList();
+
+            HashSet<MotocrossEntry> soldEntries = new(dbEntries);
+            HashSet<MotocrossSoldEntry> transferEntries = new();
+
+            foreach (var entry in soldEntries)
+            {
+                MotocrossSoldEntry newSoldEntry = new() 
+                {
+                    Make = entry.Make,
+                    Year = entry.Year,
+                    Cc = entry.Cc,
+                    Price = entry.Price,
+                    DateAdded = entry.DateAdded,
+                    DateSold = entry.DateSold
+                };
+
+                transferEntries.Add(newSoldEntry);
+            }
+
+            context.MotocrossEntries.RemoveRange(soldEntries);
+
+            await context.MotocrossSoldEntries.AddRangeAsync(transferEntries);
             await context.SaveChangesAsync();
         }
     }
