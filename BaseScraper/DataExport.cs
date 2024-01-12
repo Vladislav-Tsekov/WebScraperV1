@@ -69,7 +69,7 @@ namespace BaseScraper
 
                 motoWriter.WriteLine($"{moto.Make},{moto.CC},{moto.Year},{moto.Price},{moto.Link}");
 
-                if (!dbEntries.Any(dbEntry => dbEntry.Link == moto.Link))
+                if (!dbEntries.Any(e => e.Link == moto.Link))
                 {
                     var entry = new MotocrossEntry()
                     {
@@ -90,8 +90,24 @@ namespace BaseScraper
                 }
                 else
                 {
-                    //TODO - COMPARE PRICES OF EXISTING MOTORCYCLES AND MAKE SURE IT'S UPDATED
-                    Console.WriteLine($"Entry with link {moto.Link} already exists.");
+                    var currentEntry = existingEntries.FirstOrDefault(e => e.Link == moto.Link);
+
+                    if (currentEntry != null)
+                    {
+                        if (currentEntry.Price != moto.Price)
+                        {
+                            Console.WriteLine($"Updating entry with link {moto.Link}. Old Price: {currentEntry.Price}, New Price: {moto.Price}");
+
+                            currentEntry.Price = moto.Price;
+
+                            //TODO - ADD AN OPTION TO TRACK PRICE CHANGES? COUNTER MAYBE? 
+                            //currentEntry.DateAdded = DateTime.Now;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Entry with link {moto.Link} already exists, and prices match.");
+                        }
+                    }
                 }
             }
 
