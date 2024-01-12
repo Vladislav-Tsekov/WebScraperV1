@@ -98,10 +98,20 @@ namespace BaseScraper
             varianceWriter.Dispose();
         }
 
-        public async Task MotorcyclesWithUnusualPriceRange(MotoContext context)
+        public async Task MotorcyclesWithHighPriceRange(MotoContext context)
         {
-            //TODO - TAKE ALL MOTORCYCLES WITH SUSPICIOUS RANGE VALUES, CHECK WHETHER THE DATA CALCULATIONS ARE CORRECT
-            throw new NotImplementedException();
+            List<MotocrossMarketPrice> extremeRange = context.MotocrossMarketPrices.Where(m => m.PriceVariance > 0.19m).ToList();
+
+            StreamWriter rangeWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "ExtremeRange.csv"));
+            rangeWriter.WriteLine(DateTime.Now);
+            rangeWriter.WriteLine("Make,Year,Count,Range");
+
+            foreach (var entity in extremeRange)
+            {
+                rangeWriter.WriteLine($"{entity.Make.Make},{entity.Year.Year},{entity.MotoCount},{entity.PriceRange:f0}");
+            }
+
+            rangeWriter.Dispose();
         }
 
         public async Task SoldMotorcycles(MotoContext context)
