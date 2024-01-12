@@ -1,7 +1,6 @@
 ﻿using BaseScraper.Config;
 using BaseScraper.Data;
 using BaseScraper.Data.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Text;
 
 namespace BaseScraper
@@ -83,10 +82,18 @@ namespace BaseScraper
             Console.WriteLine(output.ToString().TrimEnd());
         }
 
-        public async Task MotorcyclesWithUnusualVariance(MotoContext context) 
+        public async Task MotorcyclesWithHighVariance(MotoContext context) 
         {
-            //TODO - TAKE ALL MOTORCYCLES WITH VARIANCE IN BOTH EXTREMES, CHECK WHETHER THE DATA CALCULATIONS ARE CORRECT
-            throw new NotImplementedException();
+            List<MotocrossMarketPrice> highVariance = context.MotocrossMarketPrices.Where(m => m.PriceVariance > 0.19m).ToList();
+
+            StreamWriter varianceWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "HighVariance.csv"));
+            varianceWriter.WriteLine(DateTime.Now);
+            varianceWriter.WriteLine("Make,Year,Count,Variance");
+
+            foreach (var entity in highVariance)
+            {
+                varianceWriter.WriteLine($"{entity.Make.Make},{entity.Year.Year},{entity.MotoCount},{entity.PriceVariance:f3}");
+            }
         }
 
         public async Task MotorcyclesWithUnusualPriceRange(MotoContext context)
