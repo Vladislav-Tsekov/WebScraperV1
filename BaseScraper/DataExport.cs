@@ -55,41 +55,43 @@ namespace BaseScraper
         public async Task AddMotorcycleEntries(ICollection<Motorcycle> scrapedMoto, MotoContext context)
         {
             using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MotocrossData.csv"));
-            motoWriter.Write($"Make, CC, Year, Price, Link{Environment.NewLine}");
+            motoWriter.WriteLine($"Make, CC, Year, Price, Link");
 
             var dbEntries = context.MotocrossEntries.ToList();
 
             HashSet<MotocrossEntry> entries = new();
             HashSet<MotocrossEntry> existingEntries = new(dbEntries);
 
-            foreach (var m in scrapedMoto)
+            foreach (var moto in scrapedMoto)
             {
-                MotoMake make = context.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
-                MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == int.Parse(m.Year));
+                MotoMake make = context.Makes.FirstOrDefault(mExists => mExists.Make == moto.Make);
+                MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == int.Parse(moto.Year));
 
-                if (!dbEntries.Any(dbEntry => dbEntry.Link == m.Link))
+                motoWriter.WriteLine($"{moto.Make},{moto.CC},{moto.Year},{moto.Price},{moto.Link}");
+
+                if (!dbEntries.Any(dbEntry => dbEntry.Link == moto.Link))
                 {
                     var entry = new MotocrossEntry()
                     {
-                        Price = m.Price,
-                        Link = m.Link,
+                        Price = moto.Price,
+                        Link = moto.Link,
                         Make = make,
                         Year = year,
                         DateAdded = DateTime.Now
                     };
 
-                    if (m.CC == StringsConstants.NotAvailable)
+                    if (moto.CC == StringsConstants.NotAvailable)
                         entry.Cc = null;
                     else
-                        entry.Cc = m.CC;
+                        entry.Cc = moto.CC;
 
                     entries.Add(entry);
-                    motoWriter.Write($"{m.Make}, {m.CC}, {m.Year}, {m.Price}, {m.Link}{Environment.NewLine}");
+
                 }
                 else
                 {
                     //TODO - COMPARE PRICES OF EXISTING MOTORCYCLES AND MAKE SURE IT'S UPDATED
-                    Console.WriteLine($"Entry with link {m.Link} already exists.");
+                    Console.WriteLine($"Entry with link {moto.Link} already exists.");
                 }
             }
 

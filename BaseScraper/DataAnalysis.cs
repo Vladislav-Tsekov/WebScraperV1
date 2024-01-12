@@ -94,6 +94,8 @@ namespace BaseScraper
             {
                 varianceWriter.WriteLine($"{entity.Make.Make},{entity.Year.Year},{entity.MotoCount},{entity.PriceVariance:f3}");
             }
+
+            varianceWriter.Dispose();
         }
 
         public async Task MotorcyclesWithUnusualPriceRange(MotoContext context)
