@@ -28,21 +28,16 @@ namespace BaseScraper
                 makeCountPairs[motorcycle.Make.Make.ToString()] += motorcycle.MotoCount;
             }
 
-            StringBuilder output = new();
             StreamWriter makeCountWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "CountByMake.csv"));
 
-            output.AppendLine(StringsConstants.ListingsByMake);
             makeCountWriter.WriteLine(DateTime.Now);
 
             foreach (var kvp in makeCountPairs)
             {
-                output.AppendLine($"{kvp.Key.ToUpper()} -> {kvp.Value}");
                 makeCountWriter.WriteLine($"{kvp.Key.ToUpper()}, {kvp.Value}");
             }
 
             makeCountWriter.Dispose();
-
-            Console.WriteLine(output.ToString().TrimEnd());
         }
 
         public async Task TotalMotorcyclesCountByYear(MotoContext context) 
@@ -65,21 +60,16 @@ namespace BaseScraper
                 yearCountPairs[motorcycle.Year.Year] += motorcycle.MotoCount;
             }
 
-            StringBuilder output = new();
             StreamWriter yearCountWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "CountByYear.csv"));
             
-            output.AppendLine(StringsConstants.ListingsByYear);
             yearCountWriter.WriteLine(DateTime.Now);
 
             foreach (var kvp in yearCountPairs)
             {
-                output.AppendLine($"{kvp.Key} -> {kvp.Value}");
                 yearCountWriter.WriteLine($"{kvp.Key}, {kvp.Value}");
             }
 
             yearCountWriter.Dispose();
-
-            Console.WriteLine(output.ToString().TrimEnd());
         }
 
         public async Task MotorcyclesWithHighVariance(MotoContext context) 
@@ -116,7 +106,15 @@ namespace BaseScraper
 
         public async Task SoldMotorcycles(MotoContext context)
         {
-            throw new NotImplementedException();
+            //TODO - IDEAS FOR DATA INTERPRETATION OF SOLD ENTRIES
+
+            //Average money spent on motorcycles?
+
+            //Average motorcycle's years?
+
+            //How to correctly calculate announcement's uptime period, more data?
+
+            //Do people prefer 250 cc over 450 cc?
         }
     }
 }

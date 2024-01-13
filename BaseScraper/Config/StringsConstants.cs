@@ -28,8 +28,6 @@ public static class StringsConstants
     public const string NoYearsFound = "No years found on the page.";
     public const string NoLinksFound = "No matching links found.";
     public const string FailedToRetreivePage = "Failed to retrieve the web page.";
-    public const string ListingsByMake = "Used motorcycles listing's count sorted by make:";
-    public const string ListingsByYear = "Used motorcycles listing's count sorted by year of manufacture:";
 
     //RegEx
     public const string CcPattern = @"\d{3}";
