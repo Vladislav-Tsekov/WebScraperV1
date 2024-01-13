@@ -26,8 +26,5 @@ namespace BaseScraper.Data.Models
 
         [Required]
         public DateTime DateAdded { get; set; }
-
-        //TODO - MIGHT BE A GOOD IDEA TO DELETE IT FROM THIS TABLE AND ONLY APPLY IF MOTO IS SOLD
-        public DateTime DateSold { get; set; }
     }
 }

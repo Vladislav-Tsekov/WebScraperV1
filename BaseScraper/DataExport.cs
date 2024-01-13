@@ -118,7 +118,6 @@ namespace BaseScraper
                 if (!scrapedMoto.Any(m => m.Link == existingEntry.Link))
                 {
                     existingEntry.IsSold = true;
-                    existingEntry.DateSold = DateTime.Now;
                 }
             }
 
@@ -216,7 +215,7 @@ namespace BaseScraper
                     Cc = entry.Cc,
                     Price = entry.Price,
                     DateAdded = entry.DateAdded,
-                    DateSold = entry.DateSold
+                    DateSold = DateTime.Now
                 };
 
                 transferEntries.Add(newSoldEntry);
