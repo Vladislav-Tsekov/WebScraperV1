@@ -34,9 +34,6 @@ namespace BaseScraper.Data.Models
         [Required]
         public decimal PriceRange { get; set; }
 
-        [Required]
-        public decimal FinalPrice { get; set; }
-
         public int MotoCount { get; set; }
     }
 }
