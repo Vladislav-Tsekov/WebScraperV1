@@ -158,8 +158,6 @@ namespace BaseScraper
                 MotocrossMarketPrice motoExists = context.MotocrossMarketPrices
                     .FirstOrDefault(record => record.Make.Make == m.Make && record.Year.Year == int.Parse(m.Year));
 
-                double customPrice = (m.AveragePrice + m.DevPrice + m.MeanPrice + m.ModePrice + m.MedianPrice) / 5;
-
                 if (motoExists != null)
                 {
                     motoExists.AvgPrice = (decimal)m.AveragePrice;
@@ -169,7 +167,6 @@ namespace BaseScraper
                     motoExists.ModePrice = (decimal)m.ModePrice;
                     motoExists.PriceVariance = (decimal)m.PriceVariance;
                     motoExists.PriceRange = (decimal)m.PriceRange;
-                    motoExists.FinalPrice = (decimal)customPrice;
                     motoExists.MotoCount = m.MotorcycleCount;
                 }
                 else
@@ -188,14 +185,13 @@ namespace BaseScraper
                         ModePrice = (decimal)m.ModePrice,
                         PriceVariance = (decimal)m.PriceVariance,
                         PriceRange = (decimal)m.PriceRange,
-                        FinalPrice = (decimal)customPrice,
                         MotoCount = m.MotorcycleCount,
                     };
 
                     pricesCollection.Add(entity);
                 }
 
-                priceWriter.Write($"{m.Make}, {m.Year}, {m.AveragePrice:f2}, {m.MeanPrice:f2}, {m.DevPrice:f2}, {customPrice:f2}, {m.MotorcycleCount}{Environment.NewLine}");
+                priceWriter.WriteLine($"{m.Make}, {m.Year}, {m.AveragePrice:f2}, {m.MeanPrice:f2}, {m.DevPrice:f2}, {m.MotorcycleCount}");
             }
 
             priceWriter.Dispose();
