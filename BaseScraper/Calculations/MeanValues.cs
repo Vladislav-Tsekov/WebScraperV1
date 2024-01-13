@@ -79,10 +79,6 @@
             double mean = pricesArray.Average();
 
             double variance = pricesArray.Select(x => Math.Pow(x - mean, 2)).Average();
-
-            //return variance;
-            //Variance is sensitive to outliers and extreme values. Trying to use a coefficient of variation that can still interpret the variance, but also make it easier to read.
-
             double standardDeviation = Math.Sqrt(variance);
             double coefficientOfVariation = standardDeviation / mean;
 
