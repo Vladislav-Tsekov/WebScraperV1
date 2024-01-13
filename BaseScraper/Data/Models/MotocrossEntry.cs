@@ -22,9 +22,9 @@ namespace BaseScraper.Data.Models
         public double Price { get; set; }
 
         [Required]
-        public bool IsSold { get; set; }
+        public DateTime DateAdded { get; set; }
 
         [Required]
-        public DateTime DateAdded { get; set; }
+        public bool IsSold { get; set; }
     }
 }

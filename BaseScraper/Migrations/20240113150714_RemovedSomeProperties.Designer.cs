@@ -4,6 +4,7 @@ using BaseScraper.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BaseScraper.Migrations
 {
     [DbContext(typeof(MotoContext))]
-    partial class MotoContextModelSnapshot : ModelSnapshot
+    [Migration("20240113150714_RemovedSomeProperties")]
+    partial class RemovedSomeProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,13 +206,13 @@ namespace BaseScraper.Migrations
             modelBuilder.Entity("BaseScraper.Data.Models.MotocrossSoldEntry", b =>
                 {
                     b.HasOne("BaseScraper.Data.Models.MotoMake", "Make")
-                        .WithMany("MotocrossSoldEntries")
+                        .WithMany()
                         .HasForeignKey("MakeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BaseScraper.Data.Models.MotoYear", "Year")
-                        .WithMany("MotocrossSoldEntries")
+                        .WithMany()
                         .HasForeignKey("YearId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -224,8 +227,6 @@ namespace BaseScraper.Migrations
                     b.Navigation("MotocrossEntries");
 
                     b.Navigation("MotocrossMarketPrices");
-
-                    b.Navigation("MotocrossSoldEntries");
                 });
 
             modelBuilder.Entity("BaseScraper.Data.Models.MotoYear", b =>
@@ -233,8 +234,6 @@ namespace BaseScraper.Migrations
                     b.Navigation("MotocrossEntries");
 
                     b.Navigation("MotocrossMarketPrices");
-
-                    b.Navigation("MotocrossSoldEntries");
                 });
 #pragma warning restore 612, 618
         }

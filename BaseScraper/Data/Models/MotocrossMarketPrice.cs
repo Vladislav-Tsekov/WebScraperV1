@@ -13,6 +13,8 @@ namespace BaseScraper.Data.Models
         public MotoYear Year { get; set; }
         public int YearId { get; set; }
 
+        public int MotoCount { get; set; }
+
         [Required]
         public decimal AvgPrice { get; set; }
 
@@ -29,11 +31,9 @@ namespace BaseScraper.Data.Models
         public decimal ModePrice { get; set; }
 
         [Required]
-        public decimal PriceVariance { get; set; }
-
-        [Required]
         public decimal PriceRange { get; set; }
 
-        public int MotoCount { get; set; }
+        [Required]
+        public decimal PriceVariance { get; set; }
     }
 }

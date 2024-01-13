@@ -13,5 +13,6 @@ namespace BaseScraper.Data.Models
 
         public virtual ICollection<MotocrossMarketPrice> MotocrossMarketPrices { get; set; } = new List<MotocrossMarketPrice>();
         public virtual ICollection<MotocrossEntry> MotocrossEntries { get; set; } = new List<MotocrossEntry>();
+        public virtual ICollection<MotocrossSoldEntry> MotocrossSoldEntries { get; set; } = new List<MotocrossSoldEntry>();
     }
 }
