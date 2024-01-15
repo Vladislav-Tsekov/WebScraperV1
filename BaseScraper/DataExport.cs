@@ -148,9 +148,9 @@ namespace BaseScraper
             .ToList();
 
             using StreamWriter priceWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "AvgPriceMotocross.csv"));
-            priceWriter.Write($"Make, Year, Average Price, Mean Price, StdDev Price, Combined Price, Count{Environment.NewLine}");
+            priceWriter.WriteLine($"Make, Year, Count, Average Price, Mean Price, StdDev Price, Median Price, Price Variance");
 
-            HashSet<MotocrossMarketPrice> pricesCollection = new();
+            HashSet<MotocrossMarketPrice> marketPrices = new();
 
             foreach (var m in averagePrices)
             {
@@ -187,15 +187,15 @@ namespace BaseScraper
                         MotoCount = m.MotorcycleCount,
                     };
 
-                    pricesCollection.Add(entity);
+                    marketPrices.Add(entity);
                 }
 
-                priceWriter.WriteLine($"{m.Make}, {m.Year}, {m.AveragePrice:f2}, {m.MeanPrice:f2}, {m.DevPrice:f2}, {m.MotorcycleCount}");
+                priceWriter.WriteLine($"{m.Make}, {m.Year}, {m.MotorcycleCount}, {m.AveragePrice:f0}, {m.MeanPrice:f0}, {m.DevPrice:f0}, {m.MedianPrice:f0}, {m.PriceVariance:f3}");
             }
 
             priceWriter.Dispose();
 
-            await context.MotocrossMarketPrices.AddRangeAsync(pricesCollection);
+            await context.MotocrossMarketPrices.AddRangeAsync(marketPrices);
             await context.SaveChangesAsync();
         }
 
