@@ -119,8 +119,11 @@ namespace BaseScraper
                 saleReportWriter.WriteLine($"{entry.Make.Make}, {entry.Year.Year}, {entry.Cc}, {entry.DateAdded}, {entry.DateSold}");
             }
 
-            soldEntries.Average(m => m.Price);
-            soldEntries.Average(m => m.Year.Year);
+            var averagePrice = soldEntries.Average(m => m.Price);
+            var averageYear = soldEntries.Average(m => m.Year.Year);
+
+            saleReportWriter.WriteLine($"The average price for all sold entries is: {averagePrice:f2}");
+            saleReportWriter.WriteLine($"The average year for all sold entries is: {averageYear:f2}");
 
             //TODO - SALE REPORT - LIST BELOW:
             //How to correctly calculate announcement's uptime period, more data?
