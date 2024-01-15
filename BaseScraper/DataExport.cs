@@ -54,7 +54,7 @@ namespace BaseScraper
 
         public async Task AddMotorcycleEntries(ICollection<Motorcycle> scrapedMoto, MotoContext context)
         {
-            using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MotocrossData.csv"));
+            using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "AllMotocrossLinks.csv"));
             motoWriter.WriteLine($"Make, CC, Year, Price, Link");
 
             var dbEntries = context.MotocrossEntries.ToList();

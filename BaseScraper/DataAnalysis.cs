@@ -1,13 +1,13 @@
 ﻿using BaseScraper.Config;
 using BaseScraper.Data;
 using BaseScraper.Data.Models;
-using System.Text;
 
 namespace BaseScraper
 {
     public class DataAnalysis
     {
         //TODO - MUST FIND A WAY TO INDENTIFY TRENDS
+        //TODO - IDEAS FOR DATA INTERPRETATION OF SOLD ENTRIES
 
         public async Task TotalMotorcyclesCountByMake(MotoContext context)
         {
@@ -104,16 +104,27 @@ namespace BaseScraper
             rangeWriter.Dispose();
         }
 
-        public async Task SoldMotorcycles(MotoContext context)
+        public async Task SoldMotorcyclesAnalysis(MotoContext context)
         {
-            //TODO - IDEAS FOR DATA INTERPRETATION OF SOLD ENTRIES
+            List<MotocrossSoldEntry> soldEntries = context.MotocrossSoldEntries.ToList();
+            HashSet<MotocrossSoldEntry> soldEntriesSet = new(soldEntries);
 
-            //Average money spent on motorcycles?
+            StreamWriter saleReportWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "SaleReport.csv"));
+            saleReportWriter.WriteLine(DateTime.Now);
 
-            //Average motorcycle's years?
+            //saleReportWriter.WriteLine("fill or delete this!?!");
 
+            foreach (var entry in soldEntriesSet)
+            {
+                saleReportWriter.WriteLine($"{entry.Make.Make}, {entry.Year.Year}, {entry.Cc}, {entry.DateAdded}, {entry.DateSold}");
+            }
+
+            soldEntries.Average(m => m.Price);
+            soldEntries.Average(m => m.Year.Year);
+
+            //TODO - SALE REPORT - LIST BELOW:
             //How to correctly calculate announcement's uptime period, more data?
-
+            //Check whether the price is more or less than the market price
             //Do people prefer 250 cc over 450 cc?
         }
     }
