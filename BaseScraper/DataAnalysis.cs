@@ -130,6 +130,27 @@ namespace BaseScraper
             saleReportWriter.WriteLine($"350cc: {countOf350} out of {soldEntriesSet.Count}. Ratio of {(countOf350/soldEntriesSet.Count) * 100:f2}%");
             saleReportWriter.WriteLine($"450cc: {countOf450} out of {soldEntriesSet.Count}. Ratio of {(countOf450/soldEntriesSet.Count) * 100:f2}%");
 
+            Dictionary<string, int> makeCountPairs = new();
+
+            foreach (var motorcycle in soldEntriesSet)
+            {
+                if (!makeCountPairs.ContainsKey(motorcycle.Make.Make.ToString()))
+                {
+                    makeCountPairs.Add(motorcycle.Make.Make, 0);
+                }
+            }
+
+            foreach (var motorcycle in soldEntriesSet)
+            {
+                makeCountPairs[motorcycle.Make.Make.ToString()] += 1;
+            }
+
+            //TODO - BREAK DOWN AND ANALYZE FURTHER?
+            foreach (var kvp in makeCountPairs)
+            {
+                saleReportWriter.WriteLine($"A total of {kvp.Value} {kvp.Key} sold!");
+            }
+
             saleReportWriter.Dispose();
 
             //TODO - SALE REPORT - LIST BELOW:
