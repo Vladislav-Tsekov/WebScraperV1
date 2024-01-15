@@ -112,8 +112,6 @@ namespace BaseScraper
             StreamWriter saleReportWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "SaleReport.csv"));
             saleReportWriter.WriteLine(DateTime.Now);
 
-            //saleReportWriter.WriteLine("fill or delete this!?!");
-
             foreach (var entry in soldEntriesSet)
             {
                 saleReportWriter.WriteLine($"{entry.Make.Make}, {entry.Year.Year}, {entry.Cc}, {entry.DateAdded}, {entry.DateSold}");
@@ -122,13 +120,21 @@ namespace BaseScraper
             var averagePrice = soldEntries.Average(m => m.Price);
             var averageYear = soldEntries.Average(m => m.Year.Year);
 
-            saleReportWriter.WriteLine($"The average price for all sold entries is: {averagePrice:f2}");
-            saleReportWriter.WriteLine($"The average year for all sold entries is: {averageYear:f2}");
+            int countOf250 = soldEntriesSet.Where(m => m.Cc == "250").Count();
+            int countOf350 = soldEntriesSet.Where(m => m.Cc == "350").Count();
+            int countOf450 = soldEntriesSet.Where(m => m.Cc == "450").Count();
 
+            saleReportWriter.WriteLine($"The average price for all sold entries is: {averagePrice:f2}");
+            saleReportWriter.WriteLine($"The average year for all sold entries is: {averageYear:f2}"); //Math.Round?
+            saleReportWriter.WriteLine($"250cc: {countOf250} out of {soldEntriesSet.Count}. Ratio of {countOf250/soldEntriesSet.Count * 100:f2}%");
+            saleReportWriter.WriteLine($"350cc: {countOf350} out of {soldEntriesSet.Count}. Ratio of {countOf350/soldEntriesSet.Count * 100:f2}%");
+            saleReportWriter.WriteLine($"450cc: {countOf450} out of {soldEntriesSet.Count}. Ratio of {countOf450/soldEntriesSet.Count * 100:f2}%");
+
+
+            saleReportWriter.Dispose();
             //TODO - SALE REPORT - LIST BELOW:
             //How to correctly calculate announcement's uptime period, more data?
             //Check whether the price is more or less than the market price
-            //Do people prefer 250 cc over 450 cc?
         }
     }
 }

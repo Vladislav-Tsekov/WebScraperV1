@@ -222,5 +222,6 @@ public class Scraper
         await dataAnalysis.TotalMotorcyclesCountByYear(context);
         await dataAnalysis.MotorcyclesWithHighVariance(context);
         await dataAnalysis.MotorcyclesWithHighPriceRange(context);
+        await dataAnalysis.SoldMotorcyclesAnalysis(context);
     }
 }
