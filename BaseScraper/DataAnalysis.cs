@@ -124,11 +124,13 @@ namespace BaseScraper
             double countOf350 = soldEntriesSet.Where(m => m.Cc == "350").Count();
             double countOf450 = soldEntriesSet.Where(m => m.Cc == "450").Count();
 
+            double totalCount = soldEntriesSet.Where(m => m.Cc == "250" || m.Cc == "350" || m.Cc == "450").Count();
+
             saleReportWriter.WriteLine($"The average price for all sold entries is: {averagePrice:f2}");
             saleReportWriter.WriteLine($"The average year for all sold entries is: {Math.Round(averageYear)}");
-            saleReportWriter.WriteLine($"250cc: {countOf250} out of {soldEntriesSet.Count}. Ratio of {(countOf250/soldEntriesSet.Count) * 100:f2}%");
-            saleReportWriter.WriteLine($"350cc: {countOf350} out of {soldEntriesSet.Count}. Ratio of {(countOf350/soldEntriesSet.Count) * 100:f2}%");
-            saleReportWriter.WriteLine($"450cc: {countOf450} out of {soldEntriesSet.Count}. Ratio of {(countOf450/soldEntriesSet.Count) * 100:f2}%");
+            saleReportWriter.WriteLine($"250cc: {countOf250} out of {totalCount}. Ratio of {totalCount * 100:f2}%");
+            saleReportWriter.WriteLine($"350cc: {countOf350} out of {totalCount}. Ratio of {totalCount * 100:f2}%");
+            saleReportWriter.WriteLine($"450cc: {countOf450} out of {totalCount}. Ratio of {totalCount * 100:f2}%");
 
             Dictionary<string, int> makeCountPairs = new();
 
