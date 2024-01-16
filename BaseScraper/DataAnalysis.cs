@@ -107,14 +107,22 @@ namespace BaseScraper
         public async Task SoldMotorcyclesAnalysis(MotoContext context)
         {
             List<MotocrossSoldEntry> soldEntries = context.MotocrossSoldEntries.ToList();
+            List<MotocrossMarketPrice> marketPrices = context.MotocrossMarketPrices.ToList();
+
             HashSet<MotocrossSoldEntry> soldEntriesSet = new(soldEntries);
+            HashSet<MotocrossMarketPrice > marketPricesSet = new(marketPrices);
 
             StreamWriter saleReportWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "SaleReport.csv"));
             saleReportWriter.WriteLine(DateTime.Now);
 
             foreach (var entry in soldEntriesSet)
             {
-                saleReportWriter.WriteLine($"{entry.Make.Make}, {entry.Year.Year}, {entry.Cc}, {entry.DateAdded.ToShortDateString()}, {entry.DateSold.ToShortDateString()}");
+                saleReportWriter.WriteLine($"{entry.Make.Make}, {entry.Year.Year}, {entry.Cc}, {entry.Price}, {entry.DateAdded.ToShortDateString()}, {entry.DateSold.ToShortDateString()}");
+
+                var currentPrice = marketPricesSet.Where(m => m.Make.Make == entry.Make.Make &&
+                                                                  m.Year.Year == entry.Year.Year).FirstOrDefault();
+
+                saleReportWriter.WriteLine($"This motorcycle was sold for: {entry.Price}. Average Market Price: {currentPrice.AvgPrice}");
             }
 
             var averagePrice = soldEntries.Average(m => m.Price);
@@ -153,11 +161,12 @@ namespace BaseScraper
                 saleReportWriter.WriteLine($"A total of {kvp.Value} {kvp.Key} sold!");
             }
 
+            //Check whether the price is more or less than the market price
+
             saleReportWriter.Dispose();
 
             //TODO - SALE REPORT - LIST BELOW:
             //How to correctly calculate announcement's uptime period, more data?
-            //Check whether the price is more or less than the market price
         }
     }
 }
