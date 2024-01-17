@@ -110,8 +110,8 @@ namespace BaseScraper
             List<MotocrossSoldEntry> soldEntries = context.MotocrossSoldEntries.ToList();
             List<MotocrossMarketPrice> marketPrices = context.MotocrossMarketPrices.ToList();
 
-            HashSet<MotocrossSoldEntry> soldEntriesSet = new(soldEntries);
-            HashSet<MotocrossMarketPrice > marketPricesSet = new(marketPrices);
+            HashSet<MotocrossSoldEntry> soldEntriesSet = new(soldEntries.OrderBy(m => m.Make.Make).ThenBy(m => m.Year.Year));
+            HashSet<MotocrossMarketPrice > marketPricesSet = new(marketPrices.OrderBy(m => m.Make.Make).ThenBy(m => m.Year.Year));
 
             StreamWriter saleReportWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "SaleReport.csv"));
             saleReportWriter.WriteLine(DateTime.Now);

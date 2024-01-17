@@ -1,4 +1,5 @@
 ﻿using BaseScraper.Data.Models;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BaseScraper.Calculations
 {
@@ -13,6 +14,8 @@ namespace BaseScraper.Calculations
 
                 if (currentPrice != null)
                 {
+                    entry.Cc ??= "N/A";
+
                     saleReportWriter.WriteLine($"{entry.Make.Make}, {entry.Year.Year}, {entry.Cc}, {entry.Price}, {currentPrice.AvgPrice:f0}, {entry.DateAdded:d}, {entry.DateSold:d}");
                 }
             }
