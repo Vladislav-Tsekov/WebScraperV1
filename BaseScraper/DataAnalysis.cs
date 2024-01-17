@@ -114,15 +114,15 @@ namespace BaseScraper
 
             StreamWriter saleReportWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "SaleReport.csv"));
             saleReportWriter.WriteLine(DateTime.Now);
+            saleReportWriter.WriteLine($"Make, Year, CC, Price Sold, Avg Market Price, Date Listed, Date Sold");
 
             foreach (var entry in soldEntriesSet)
             {
-                saleReportWriter.WriteLine($"{entry.Make.Make}, {entry.Year.Year}, {entry.Cc}, {entry.Price}, {entry.DateAdded.ToShortDateString()}, {entry.DateSold.ToShortDateString()}");
+                var currentPrice = marketPricesSet
+                    .Where(m => m.Make.Make == entry.Make.Make && m.Year.Year == entry.Year.Year)
+                    .First(); //TROUBLESHOOT - FirstOrDefault();
 
-                var currentPrice = marketPricesSet.Where(m => m.Make.Make == entry.Make.Make &&
-                                                                  m.Year.Year == entry.Year.Year).FirstOrDefault();
-
-                saleReportWriter.WriteLine($"This motorcycle was sold for: {entry.Price}. Average Market Price: {currentPrice.AvgPrice}");
+                saleReportWriter.WriteLine($"{entry.Make.Make}, {entry.Year.Year}, {entry.Cc}, {entry.Price}, Avg: {currentPrice.AvgPrice:f0}, {entry.DateAdded.ToShortDateString()}, {entry.DateSold.ToShortDateString()}");
             }
 
             var averagePrice = soldEntries.Average(m => m.Price);
@@ -136,9 +136,9 @@ namespace BaseScraper
 
             saleReportWriter.WriteLine($"The average price for all sold entries is: {averagePrice:f2}");
             saleReportWriter.WriteLine($"The average year for all sold entries is: {Math.Round(averageYear)}");
-            saleReportWriter.WriteLine($"250cc: {countOf250} out of {totalCount}. Ratio of {totalCount * 100:f2}%");
-            saleReportWriter.WriteLine($"350cc: {countOf350} out of {totalCount}. Ratio of {totalCount * 100:f2}%");
-            saleReportWriter.WriteLine($"450cc: {countOf450} out of {totalCount}. Ratio of {totalCount * 100:f2}%");
+            saleReportWriter.WriteLine($"250cc: {countOf250} out of {totalCount}. Ratio of {(countOf250 / totalCount) * 100:f2}%");
+            saleReportWriter.WriteLine($"350cc: {countOf350} out of {totalCount}. Ratio of {(countOf350 / totalCount) * 100:f2}%");
+            saleReportWriter.WriteLine($"450cc: {countOf450} out of {totalCount}. Ratio of {(countOf450 / totalCount) * 100:f2}%");
 
             Dictionary<string, int> makeCountPairs = new();
 
@@ -160,8 +160,6 @@ namespace BaseScraper
             {
                 saleReportWriter.WriteLine($"A total of {kvp.Value} {kvp.Key} sold!");
             }
-
-            //Check whether the price is more or less than the market price
 
             saleReportWriter.Dispose();
 
