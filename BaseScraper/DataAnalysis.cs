@@ -1,4 +1,5 @@
-﻿using BaseScraper.Config;
+﻿using BaseScraper.Calculations;
+using BaseScraper.Config;
 using BaseScraper.Data;
 using BaseScraper.Data.Models;
 
@@ -104,7 +105,7 @@ namespace BaseScraper
             rangeWriter.Dispose();
         }
 
-        public async Task SoldMotorcyclesAnalysis(MotoContext context)
+        public async Task SoldMotorcyclesReport(MotoContext context, SaleReport saleReport)
         {
             List<MotocrossSoldEntry> soldEntries = context.MotocrossSoldEntries.ToList();
             List<MotocrossMarketPrice> marketPrices = context.MotocrossMarketPrices.ToList();
@@ -116,50 +117,10 @@ namespace BaseScraper
             saleReportWriter.WriteLine(DateTime.Now);
             saleReportWriter.WriteLine($"Make, Year, CC, Price Sold, Avg Market Price, Date Listed, Date Sold");
 
-            foreach (var entry in soldEntriesSet)
-            {
-                var currentPrice = marketPricesSet
-                    .Where(m => m.Make.Make == entry.Make.Make && m.Year.Year == entry.Year.Year)
-                    .First(); //TROUBLESHOOT - FirstOrDefault();
-
-                saleReportWriter.WriteLine($"{entry.Make.Make}, {entry.Year.Year}, {entry.Cc}, {entry.Price}, Avg: {currentPrice.AvgPrice:f0}, {entry.DateAdded.ToShortDateString()}, {entry.DateSold.ToShortDateString()}");
-            }
-
-            var averagePrice = soldEntries.Average(m => m.Price);
-            var averageYear = soldEntries.Average(m => m.Year.Year);
-
-            double countOf250 = soldEntriesSet.Where(m => m.Cc == "250").Count();
-            double countOf350 = soldEntriesSet.Where(m => m.Cc == "350").Count();
-            double countOf450 = soldEntriesSet.Where(m => m.Cc == "450").Count();
-
-            double totalCount = soldEntriesSet.Where(m => m.Cc == "250" || m.Cc == "350" || m.Cc == "450").Count();
-
-            saleReportWriter.WriteLine($"The average price for all sold entries is: {averagePrice:f2}");
-            saleReportWriter.WriteLine($"The average year for all sold entries is: {Math.Round(averageYear)}");
-            saleReportWriter.WriteLine($"250cc: {countOf250} out of {totalCount}. Ratio of {(countOf250 / totalCount) * 100:f2}%");
-            saleReportWriter.WriteLine($"350cc: {countOf350} out of {totalCount}. Ratio of {(countOf350 / totalCount) * 100:f2}%");
-            saleReportWriter.WriteLine($"450cc: {countOf450} out of {totalCount}. Ratio of {(countOf450 / totalCount) * 100:f2}%");
-
-            Dictionary<string, int> makeCountPairs = new();
-
-            foreach (var motorcycle in soldEntriesSet)
-            {
-                if (!makeCountPairs.ContainsKey(motorcycle.Make.Make.ToString()))
-                {
-                    makeCountPairs.Add(motorcycle.Make.Make, 0);
-                }
-            }
-
-            foreach (var motorcycle in soldEntriesSet)
-            {
-                makeCountPairs[motorcycle.Make.Make.ToString()] += 1;
-            }
-
-            //TODO - BREAK DOWN AND ANALYZE FURTHER?
-            foreach (var kvp in makeCountPairs)
-            {
-                saleReportWriter.WriteLine($"A total of {kvp.Value} {kvp.Key} sold!");
-            }
+            saleReport.SoldMotorcyclesList(soldEntriesSet, marketPricesSet, saleReportWriter);
+            saleReport.CalculateAbsoluteAverages(soldEntriesSet, saleReportWriter);
+            saleReport.EngineDisplacementCount(soldEntriesSet, saleReportWriter);
+            saleReport.CountOfSalesPerMake(soldEntriesSet, saleReportWriter);
 
             saleReportWriter.Dispose();
 

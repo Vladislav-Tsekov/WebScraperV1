@@ -1,4 +1,5 @@
-﻿using BaseScraper.Config;
+﻿using BaseScraper.Calculations;
+using BaseScraper.Config;
 using BaseScraper.Data;
 using BaseScraper.Models;
 using HtmlAgilityPack;
@@ -222,6 +223,9 @@ public class Scraper
         await dataAnalysis.TotalMotorcyclesCountByYear(context);
         await dataAnalysis.MotorcyclesWithHighVariance(context);
         await dataAnalysis.MotorcyclesWithHighPriceRange(context);
-        await dataAnalysis.SoldMotorcyclesAnalysis(context);
+
+        SaleReport saleReport = new();
+
+        await dataAnalysis.SoldMotorcyclesReport(context, saleReport);
     }
 }
