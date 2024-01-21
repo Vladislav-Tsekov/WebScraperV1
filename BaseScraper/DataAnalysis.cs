@@ -107,6 +107,7 @@ namespace BaseScraper
 
         public async Task SoldMotorcyclesReport(MotoContext context, SaleReport saleReport)
         {
+            int totalNumber = context.MotocrossEntries.Count();
             List<MotocrossSoldEntry> soldEntries = context.MotocrossSoldEntries.ToList();
             List<MotocrossMarketPrice> marketPrices = context.MotocrossMarketPrices.ToList();
 
@@ -115,6 +116,7 @@ namespace BaseScraper
 
             StreamWriter saleReportWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "SaleReport.csv"));
             saleReportWriter.WriteLine(DateTime.Now);
+            saleReportWriter.WriteLine($"There are currently {totalNumber} Motocross announcements.");
             saleReportWriter.WriteLine($"Make, Year, CC, Price Sold, Avg Market Price, Date Listed, Date Sold");
 
             saleReport.SoldMotorcyclesList(soldEntriesSet, marketPricesSet, saleReportWriter);
