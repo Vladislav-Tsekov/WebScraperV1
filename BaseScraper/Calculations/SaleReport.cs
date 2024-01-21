@@ -68,7 +68,7 @@ namespace BaseScraper.Calculations
 
         public void CountOfSalesPerDay(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
         {
-            Dictionary<DateTime, int> salesPerDay = new();
+            SortedDictionary<DateTime, int> salesPerDay = new();
 
             foreach (var entry in soldEntriesSet)
             {
@@ -84,6 +84,12 @@ namespace BaseScraper.Calculations
             {
                 saleReportWriter.WriteLine($"On {kvp.Key:d}, {kvp.Value} motorcycles were sold.");
             }
+
+            double totalSales = soldEntriesSet.Count;
+            double totalDays = salesPerDay.Count;
+            double averageSalesPerDay = totalSales / totalDays;
+
+            saleReportWriter.WriteLine($"The average motorcycles sold per day is: {averageSalesPerDay:f1}");
         }
     }
 }
