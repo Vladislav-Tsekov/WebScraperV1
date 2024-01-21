@@ -121,6 +121,7 @@ namespace BaseScraper
             saleReport.CalculateAbsoluteAverages(soldEntriesSet, saleReportWriter);
             saleReport.EngineDisplacementCount(soldEntriesSet, saleReportWriter);
             saleReport.CountOfSalesPerMake(soldEntriesSet, saleReportWriter);
+            saleReport.CountOfSalesPerDay(soldEntriesSet, saleReportWriter);
 
             saleReportWriter.Dispose();
 

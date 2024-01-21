@@ -65,5 +65,25 @@ namespace BaseScraper.Calculations
                 saleReportWriter.WriteLine($"A total of {kvp.Value} {kvp.Key} sold!");
             }
         }
+
+        public void CountOfSalesPerDay(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
+        {
+            Dictionary<DateTime, int> salesPerDay = new();
+
+            foreach (var entry in soldEntriesSet)
+            {
+                if (!salesPerDay.ContainsKey(entry.DateSold.Date))
+                {
+                    salesPerDay.Add(entry.DateSold.Date, 0);
+                }
+
+                salesPerDay[entry.DateSold.Date] += 1;
+            }
+
+            foreach (var kvp in salesPerDay)
+            {
+                saleReportWriter.WriteLine($"On {kvp.Key:d}, {kvp.Value} motorcycles were sold.");
+            }
+        }
     }
 }
