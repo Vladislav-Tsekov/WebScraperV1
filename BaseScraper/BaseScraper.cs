@@ -218,7 +218,9 @@ public class Scraper
         await dataExport.TransferSoldEntries(context);
 
         DataAnalysis dataAnalysis = new();
+        StreamWriter marketOverview = new(Path.Combine(ScraperSettings.OutputFolderPath, "MxMarketOverview.csv"));
 
+        await dataAnalysis.MarketOverview(context, marketOverview);
         await dataAnalysis.TotalMotorcyclesCountByMake(context);
         await dataAnalysis.TotalMotorcyclesCountByYear(context);
         await dataAnalysis.MotorcyclesWithHighVariance(context);

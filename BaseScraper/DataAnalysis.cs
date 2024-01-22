@@ -9,6 +9,27 @@ namespace BaseScraper
     {
         //TODO - MUST FIND A WAY TO INDENTIFY TRENDS
         //TODO - IDEAS FOR DATA INTERPRETATION OF SOLD ENTRIES
+        public async Task MarketOverview(MotoContext context, StreamWriter marketOverview) 
+        {
+            //TODO - LIST IS INCOMPLETE, ADD MORE STATS TO FOLLOW
+
+            List<MotocrossEntry> entriesList = context.MotocrossEntries.ToList();
+            HashSet<MotocrossEntry> entriesSet = new(entriesList);
+
+            int totalEntries = entriesSet.Count;
+            int countOf250s = entriesSet.Where(m => m.Cc == "250").Count();
+            int countOf350s = entriesSet.Where(m => m.Cc == "350").Count();
+            int countOf450s = entriesSet.Where(m => m.Cc == "450").Count();
+            int unknownCcCount = entriesSet.Where(m => m.Cc is null).Count();
+
+            marketOverview.WriteLine($"There are currently {totalEntries} Motocross announcements.");
+
+            //TODO - ADD % RATIOS AS WELL
+            marketOverview.WriteLine($"{countOf250s} out of {totalEntries} are 250 cc.");
+            marketOverview.WriteLine($"{countOf350s} out of {totalEntries} are 350 cc (only KTM / Husqvarna).");
+            marketOverview.WriteLine($"{countOf450s} out of {totalEntries} are 450 cc.");
+            marketOverview.WriteLine($"{unknownCcCount} out of {totalEntries} contain no information about engine displacement.");
+        }
 
         public async Task TotalMotorcyclesCountByMake(MotoContext context)
         {
@@ -107,7 +128,6 @@ namespace BaseScraper
 
         public async Task SoldMotorcyclesReport(MotoContext context, SaleReport saleReport)
         {
-            int totalNumber = context.MotocrossEntries.Count();
             List<MotocrossSoldEntry> soldEntries = context.MotocrossSoldEntries.ToList();
             List<MotocrossMarketPrice> marketPrices = context.MotocrossMarketPrices.ToList();
 
@@ -116,7 +136,6 @@ namespace BaseScraper
 
             StreamWriter saleReportWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "SaleReport.csv"));
             saleReportWriter.WriteLine(DateTime.Now);
-            saleReportWriter.WriteLine($"There are currently {totalNumber} Motocross announcements.");
             saleReportWriter.WriteLine($"Make, Year, CC, Price Sold, Avg Market Price, Date Listed, Date Sold");
 
             saleReport.SoldMotorcyclesList(soldEntriesSet, marketPricesSet, saleReportWriter);
