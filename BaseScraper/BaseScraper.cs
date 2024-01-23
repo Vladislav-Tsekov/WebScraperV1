@@ -218,15 +218,16 @@ public class Scraper
         await dataExport.TransferSoldEntries(context);
 
         DataAnalysis dataAnalysis = new();
+
         StreamWriter marketOverview = new(Path.Combine(ScraperSettings.OutputFolderPath, "MxMarketOverview.csv"));
+        marketOverview.WriteLine(DateTime.Now);
 
         await dataAnalysis.MarketOverview(context, marketOverview);
-        await dataAnalysis.TotalMotorcyclesCountByMake(context);
-        await dataAnalysis.TotalMotorcyclesCountByYear(context);
-        await dataAnalysis.MotorcyclesWithHighVariance(context);
-        await dataAnalysis.MotorcyclesWithHighPriceRange(context);
 
         marketOverview.Dispose();
+
+        await dataAnalysis.MotorcyclesWithHighVariance(context);
+        await dataAnalysis.MotorcyclesWithHighPriceRange(context);
 
         SaleReport saleReport = new();
 

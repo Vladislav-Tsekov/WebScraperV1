@@ -13,6 +13,8 @@ namespace BaseScraper
         {
             //TODO - LIST IS INCOMPLETE, ADD MORE STATS TO FOLLOW
 
+            //METHOD - MARKET SHARE BY ENGINE DISPLACEMENT
+
             List<MotocrossEntry> entriesList = context.MotocrossEntries.ToList();
             HashSet<MotocrossEntry> entriesSet = new(entriesList);
 
@@ -33,9 +35,46 @@ namespace BaseScraper
             marketOverview.WriteLine($"250, {(countOf250s / existingCcCount) * 100:f2}");
             marketOverview.WriteLine($"350, {(countOf350s / existingCcCount) * 100:f2}");
             marketOverview.WriteLine($"450, {(countOf450s / existingCcCount) * 100:f2}");
+
+            //METHOD - MARKET SHARE BY MAKE AND YEAR
+
+            List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.ToList();
+
+            Dictionary<string, int> makeCountPairs = new();
+            SortedDictionary<int, int> yearCountPairs = new();
+
+            foreach (var motorcycle in pricesList)
+            {
+                if (!makeCountPairs.ContainsKey(motorcycle.Make.Make.ToString()))
+                {
+                    makeCountPairs.Add(motorcycle.Make.Make, 0);
+                }
+
+                if (!yearCountPairs.ContainsKey(motorcycle.Year.Year))
+                {
+                    yearCountPairs.Add(motorcycle.Year.Year, 0);
+                }
+            }
+
+            foreach (var motorcycle in pricesList)
+            {
+                makeCountPairs[motorcycle.Make.Make.ToString()] += motorcycle.MotoCount;
+
+                yearCountPairs[motorcycle.Year.Year] += motorcycle.MotoCount;
+            }
+
+            foreach (var kvp in makeCountPairs)
+            {
+                marketOverview.WriteLine($"{kvp.Key.ToUpper()}, {kvp.Value}");
+            }
+
+            foreach (var kvp in yearCountPairs)
+            {
+                marketOverview.WriteLine($"{kvp.Key}, {kvp.Value}");
+            }
         }
 
-        public async Task TotalMotorcyclesCountByMake(MotoContext context)
+        /*public async Task TotalMotorcyclesCountByMake(MotoContext context)
         {
             List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.ToList();
 
@@ -49,7 +88,7 @@ namespace BaseScraper
                 }
             }
 
-            foreach (var motorcycle in pricesList) 
+            foreach (var motorcycle in pricesList)
             {
                 makeCountPairs[motorcycle.Make.Make.ToString()] += motorcycle.MotoCount;
             }
@@ -64,9 +103,9 @@ namespace BaseScraper
             }
 
             makeCountWriter.Dispose();
-        }
+        }*/
 
-        public async Task TotalMotorcyclesCountByYear(MotoContext context) 
+        /*public async Task TotalMotorcyclesCountByYear(MotoContext context)
         {
             List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.ToList();
             //TODO - LEARN WHY .ASNOTRACKING() CAUSES PROBLEMS HERE
@@ -87,7 +126,7 @@ namespace BaseScraper
             }
 
             StreamWriter yearCountWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "CountByYear.csv"));
-            
+
             yearCountWriter.WriteLine(DateTime.Now);
 
             foreach (var kvp in yearCountPairs)
@@ -96,7 +135,7 @@ namespace BaseScraper
             }
 
             yearCountWriter.Dispose();
-        }
+        }*/
 
         public async Task MotorcyclesWithHighVariance(MotoContext context) 
         {
