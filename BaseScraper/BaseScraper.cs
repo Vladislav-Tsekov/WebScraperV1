@@ -226,6 +226,8 @@ public class Scraper
         await dataAnalysis.MotorcyclesWithHighVariance(context);
         await dataAnalysis.MotorcyclesWithHighPriceRange(context);
 
+        marketOverview.Dispose();
+
         SaleReport saleReport = new();
 
         await dataAnalysis.SoldMotorcyclesReport(context, saleReport);
