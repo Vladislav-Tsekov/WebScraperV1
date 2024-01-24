@@ -230,6 +230,7 @@ public class Scraper
         await dataAnalysis.UnusualPriceValues(context, marketOutliers);
 
         marketOverview.Dispose();
+        marketOutliers.Dispose();
 
         await dataAnalysis.SoldMotorcyclesReport(context, saleReport);
     }
