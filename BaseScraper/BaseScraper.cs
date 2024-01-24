@@ -17,7 +17,7 @@ public class Scraper
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
         string appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), AppSettingsPath);
-                                            
+
         IConfiguration configuration = new ConfigurationBuilder()
             .AddJsonFile(appSettingsPath)
             .Build();
@@ -218,18 +218,18 @@ public class Scraper
         await dataExport.TransferSoldEntries(context);
 
         DataAnalysis dataAnalysis = new();
+        SaleReport saleReport = new();
 
-        StreamWriter marketOverview = new(Path.Combine(ScraperSettings.OutputFolderPath, "MxMarketOverview.csv"));
-        marketOverview.WriteLine(DateTime.Now);
+        StreamWriter marketOverview = new(Path.Combine(ScraperSettings.OutputFolderPath, "MarketOverview.csv"));
+        StreamWriter marketOutliers = new(Path.Combine(ScraperSettings.OutputFolderPath, "MarketOutliers.csv"));
+
+        marketOverview.WriteLine($"{DateTime.Now:d}");
+        marketOutliers.WriteLine($"{DateTime.Now:d}");
 
         await dataAnalysis.MarketOverview(context, marketOverview);
+        await dataAnalysis.UnusualPriceValues(context, marketOutliers);
 
         marketOverview.Dispose();
-
-        await dataAnalysis.MotorcyclesWithHighVariance(context);
-        await dataAnalysis.MotorcyclesWithHighPriceRange(context);
-
-        SaleReport saleReport = new();
 
         await dataAnalysis.SoldMotorcyclesReport(context, saleReport);
     }

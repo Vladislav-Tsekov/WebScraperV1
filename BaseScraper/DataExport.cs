@@ -147,7 +147,7 @@ namespace BaseScraper
             .ThenBy(m => m.AveragePrice)
             .ToList();
 
-            using StreamWriter priceWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "AvgPriceMotocross.csv"));
+            StreamWriter priceWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "AvgPriceMotocross.csv"));
             priceWriter.WriteLine($"Make, Year, Count, Average Price, Mean Price, StdDev Price, Median Price, Price Variance");
 
             HashSet<MotocrossMarketPrice> marketPrices = new();
