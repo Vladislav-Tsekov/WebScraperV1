@@ -219,19 +219,16 @@ public class Scraper
 
         DataAnalysis dataAnalysis = new();
         SaleReport saleReport = new();
+        MarketOverview marketOverview = new();
 
-        StreamWriter marketOverview = new(Path.Combine(ScraperSettings.OutputFolderPath, "MarketOverview.csv"));
         StreamWriter marketOutliers = new(Path.Combine(ScraperSettings.OutputFolderPath, "MarketOutliers.csv"));
 
-        marketOverview.WriteLine($"{DateTime.Now:d}");
         marketOutliers.WriteLine($"{DateTime.Now:d}");
 
-        await dataAnalysis.MarketOverview(context, marketOverview);
-        await dataAnalysis.UnusualPriceValues(context, marketOutliers);
-
-        marketOverview.Dispose();
-        marketOutliers.Dispose();
-
+        await dataAnalysis.MarketOverviewReport(context, marketOverview);
         await dataAnalysis.SoldMotorcyclesReport(context, saleReport);
+        await dataAnalysis.UnusualValuesReport(context, marketOutliers);
+
+        marketOutliers.Dispose();
     }
 }
