@@ -4,11 +4,8 @@ namespace BaseScraper.Calculations
 {
     public class MarketOverview
     {
-        public void MarketShareByEngineDisplacement() 
+        public void MarketShareByEngineDisplacement(HashSet<MotocrossEntry> entriesSet, StreamWriter marketWriter) 
         {
-            List<MotocrossEntry> entriesList = context.MotocrossEntries.ToList();
-            HashSet<MotocrossEntry> entriesSet = new(entriesList);
-
             double totalEntries = entriesSet.Count;
             double countOf250s = entriesSet.Where(m => m.Cc == "250").Count();
             double countOf350s = entriesSet.Where(m => m.Cc == "350").Count();
@@ -16,22 +13,19 @@ namespace BaseScraper.Calculations
             double unknownCcCount = entriesSet.Where(m => m.Cc is null).Count();
             double existingCcCount = totalEntries - unknownCcCount;
 
-            marketOverview.WriteLine($"There are currently {totalEntries} Motocross announcements.");
-
-            marketOverview.WriteLine($"{countOf250s} out of {totalEntries} are 250 cc.");
-            marketOverview.WriteLine($"{countOf350s} out of {totalEntries} are 350 cc.");
-            marketOverview.WriteLine($"{countOf450s} out of {totalEntries} are 450 cc.");
-            marketOverview.WriteLine($"{unknownCcCount} out of {totalEntries} are neither of the above or do not contain engine displacement information.");
-            marketOverview.WriteLine($"Market Share (CC, %):");
-            marketOverview.WriteLine($"250, {(countOf250s / existingCcCount) * 100:f2}");
-            marketOverview.WriteLine($"350, {(countOf350s / existingCcCount) * 100:f2}");
-            marketOverview.WriteLine($"450, {(countOf450s / existingCcCount) * 100:f2}");
+            marketWriter.WriteLine($"There are currently {totalEntries} Motocross announcements.");
+            marketWriter.WriteLine($"{countOf250s} out of {totalEntries} are 250 cc.");
+            marketWriter.WriteLine($"{countOf350s} out of {totalEntries} are 350 cc.");
+            marketWriter.WriteLine($"{countOf450s} out of {totalEntries} are 450 cc.");
+            marketWriter.WriteLine($"{unknownCcCount} out of {totalEntries} are neither of the above or do not contain engine displacement information.");
+            marketWriter.WriteLine($"Market Share (CC, %):");
+            marketWriter.WriteLine($"250, {(countOf250s / existingCcCount) * 100:f2}");
+            marketWriter.WriteLine($"350, {(countOf350s / existingCcCount) * 100:f2}");
+            marketWriter.WriteLine($"450, {(countOf450s / existingCcCount) * 100:f2}");
         }
 
-        public void MarketShareByMakeAndYear()
+        public void MarketShareByMakeAndYear(List<MotocrossMarketPrice> pricesList, StreamWriter marketWriter)
         {
-            List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.ToList();
-
             Dictionary<string, int> makeCountPairs = new();
             SortedDictionary<int, int> yearCountPairs = new();
 
@@ -57,12 +51,12 @@ namespace BaseScraper.Calculations
 
             foreach (var kvp in makeCountPairs)
             {
-                marketOverview.WriteLine($"{kvp.Key.ToUpper()}, {kvp.Value}");
+                marketWriter.WriteLine($"{kvp.Key.ToUpper()}, {kvp.Value}");
             }
 
             foreach (var kvp in yearCountPairs)
             {
-                marketOverview.WriteLine($"{kvp.Key}, {kvp.Value}");
+                marketWriter.WriteLine($"{kvp.Key}, {kvp.Value}");
             }
         }
     }

@@ -11,12 +11,18 @@ namespace BaseScraper
         //TODO - IDEAS FOR DATA INTERPRETATION OF SOLD ENTRIES
         public async Task MarketOverviewReport(MotoContext context, MarketOverview marketOverview) 
         {
-            StreamWriter marketReport = new(Path.Combine(ScraperSettings.OutputFolderPath, "MarketOverview.csv"));
+            List<MotocrossEntry> entriesList = context.MotocrossEntries.ToList();
+            List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.ToList();
 
-            marketOverview.MarketShareByEngineDisplacement();
-            marketOverview.MarketShareByMakeAndYear();
+            HashSet<MotocrossEntry> entriesSet = new(entriesList);
 
+            StreamWriter marketWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MarketOverview.csv"));
+            marketWriter.WriteLine(DateTime.Now);
 
+            marketOverview.MarketShareByEngineDisplacement(entriesSet, marketWriter);
+            marketOverview.MarketShareByMakeAndYear(pricesList, marketWriter);
+
+            marketWriter.Dispose();
         }
 
         public async Task UnusualValuesReport(MotoContext context, StreamWriter marketOutliers)
@@ -49,17 +55,17 @@ namespace BaseScraper
             HashSet<MotocrossSoldEntry> soldEntriesSet = new(soldEntries.OrderBy(m => m.Make.Make).ThenBy(m => m.Year.Year));
             HashSet<MotocrossMarketPrice > marketPricesSet = new(marketPrices.OrderBy(m => m.Make.Make).ThenBy(m => m.Year.Year));
 
-            StreamWriter salesReport = new(Path.Combine(ScraperSettings.OutputFolderPath, "SaleReport.csv"));
-            salesReport.WriteLine(DateTime.Now);
-            salesReport.WriteLine($"Make, Year, CC, Price Sold, Avg Market Price, Date Listed, Date Sold");
+            StreamWriter salesWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "SaleReport.csv"));
+            salesWriter.WriteLine(DateTime.Now);
+            salesWriter.WriteLine($"Make, Year, CC, Price Sold, Avg Market Price, Date Listed, Date Sold");
 
-            saleReport.SoldMotorcyclesList(soldEntriesSet, marketPricesSet, salesReport);
-            saleReport.CalculateAbsoluteAverages(soldEntriesSet, salesReport);
-            saleReport.EngineDisplacementCount(soldEntriesSet, salesReport);
-            saleReport.CountOfSalesPerMake(soldEntriesSet, salesReport);
-            saleReport.CountOfSalesPerDay(soldEntriesSet, salesReport);
+            saleReport.SoldMotorcyclesList(soldEntriesSet, marketPricesSet, salesWriter);
+            saleReport.CalculateAbsoluteAverages(soldEntriesSet, salesWriter);
+            saleReport.EngineDisplacementCount(soldEntriesSet, salesWriter);
+            saleReport.CountOfSalesPerMake(soldEntriesSet, salesWriter);
+            saleReport.CountOfSalesPerDay(soldEntriesSet, salesWriter);
 
-            salesReport.Dispose();
+            salesWriter.Dispose();
 
             //TODO - SALE REPORT - LIST BELOW:
             //How to correctly calculate announcement's uptime period, more data?
