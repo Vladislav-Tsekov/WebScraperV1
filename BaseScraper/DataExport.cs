@@ -147,8 +147,8 @@ namespace BaseScraper
             .ThenBy(m => m.AveragePrice)
             .ToList();
 
-            StreamWriter priceWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "AvgPriceMotocross.csv"));
-            priceWriter.WriteLine($"Make, Year, Count, Average Price, Mean Price, StdDev Price, Median Price, Price Variance");
+            StreamWriter priceWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, MarketPriceCsv));
+            priceWriter.WriteLine(MarketPriceTitles);
 
             HashSet<MotocrossMarketPrice> marketPrices = new();
 
@@ -190,7 +190,7 @@ namespace BaseScraper
                     marketPrices.Add(entity);
                 }
 
-                priceWriter.WriteLine($"{m.Make}, {m.Year}, {m.MotorcycleCount}, {m.AveragePrice:f0}, {m.MeanPrice:f0}, {m.DevPrice:f0}, {m.MedianPrice:f0}, {m.PriceVariance:f3}");
+                priceWriter.WriteLine(String.Format(MarketPriceMotoInfo, m.Make, m.Year, m.MotorcycleCount, m.AveragePrice, m.MeanPrice, m.DevPrice, m.MedianPrice, m.PriceVariance));
             }
 
             priceWriter.Dispose();
