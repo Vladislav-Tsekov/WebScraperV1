@@ -1,7 +1,7 @@
-25.1.2024 г.
+26.1.2024 г.
 Make,Year,Count,Variance
 Други,2023,2,0.237
-Kawasaki,2023,2,0.350
+Kawasaki,2023,4,0.247
 Ktm,2006,3,0.243
 Yamaha,2018,5,0.303
 Yamaha,2021,3,0.407
@@ -23,7 +23,7 @@ Kawasaki,2016,9,2400
 Kawasaki,2018,3,2701
 Kawasaki,2020,8,2489
 Kawasaki,2022,5,7000
-Kawasaki,2023,2,7200
+Kawasaki,2023,4,7200
 Ktm,2006,3,3000
 Ktm,2015,10,2299
 Ktm,2017,15,2800
@@ -36,6 +36,6 @@ Yamaha,2010,3,2800
 Yamaha,2012,4,2300
 Yamaha,2017,8,4401
 Yamaha,2018,5,8800
-Yamaha,2019,11,5000
+Yamaha,2019,10,5000
 Yamaha,2020,5,2500
 Yamaha,2021,3,8200

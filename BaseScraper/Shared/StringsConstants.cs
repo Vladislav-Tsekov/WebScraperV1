@@ -1,4 +1,6 @@
-﻿namespace BaseScraper.Config;
+﻿using System.Linq;
+
+namespace BaseScraper.Config;
 
 public static class StringsConstants
 {
@@ -20,7 +22,7 @@ public static class StringsConstants
     public const string HrefAttribute = "href";
     public const string HrefDefault = "";
 
-    //Output
+    //Output - Base Scraper
     public const string YearIsNull = "0";
     public const string NotAvailable = "N/A";
     public const string NoTitlesFound = "No titles found on the page.";
@@ -28,6 +30,14 @@ public static class StringsConstants
     public const string NoYearsFound = "No years found on the page.";
     public const string NoLinksFound = "No matching links found.";
     public const string FailedToRetreivePage = "Failed to retrieve the web page.";
+
+    //StreamWriters
+    //DataExport => AddMotorcycleEntries
+    public const string AllLinksCsv = "AllMotocrossLinks.csv";
+    public const string AllLinksTitles = "Make, CC, Year, Price, Link";
+    public const string AllLinksMotoInfo = "{0},{1},{2},{3},{4}";
+    public const string AllLinksPriceChange = "Updating {0}. Old Price: {1}, New Price: {2}";
+    public const string AllLinksEntryExists = "Entry with link {0} already exists, and prices match.";
 
     //RegEx
     public const string CcPattern = @"\d{3}";

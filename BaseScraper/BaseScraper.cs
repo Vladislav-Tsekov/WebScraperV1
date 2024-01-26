@@ -162,12 +162,6 @@ public class Scraper
                                 continue;
                             else
                             {
-                                //Links must be saved like this:
-                                //https://www.mobile.bg/pcgi/mobile.cgi?act=4&amp;adv=51523296516703158
-                                //Links are now saved like this, which is the same page, accessed by different search options:
-                                //https://www.mobile.bg/pcgi/mobile.cgi?act=4&amp;adv=51523296516703158&amp;slink=uy15oi
-                                //https://www.mobile.bg/pcgi/mobile.cgi?act=4&amp;adv=51523296516703158&amp;slink=v1fahs
-
                                 string modifiedLink = link[2..63];
                                 motoLink.Add(modifiedLink);
                             }
@@ -223,8 +217,6 @@ public class Scraper
 
         await dataAnalysis.MarketOverviewReport(context, marketOverview);
         await dataAnalysis.SoldMotorcyclesReport(context, saleReport);
-
-
 
         //TODO - FOLLOW THE PREVIOUS TWO METHODS' PATTERN
         StreamWriter marketOutliers = new(Path.Combine(ScraperSettings.OutputFolderPath, "MarketOutliers.csv"));

@@ -3,6 +3,7 @@ using BaseScraper.Config;
 using BaseScraper.Data;
 using BaseScraper.Data.Models;
 using BaseScraper.Models;
+using static BaseScraper.Config.StringsConstants;
 
 namespace BaseScraper
 {
@@ -54,8 +55,8 @@ namespace BaseScraper
 
         public async Task AddMotorcycleEntries(ICollection<Motorcycle> scrapedMoto, MotoContext context)
         {
-            //using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "AllMotocrossLinks.csv"));
-            //motoWriter.WriteLine($"Make, CC, Year, Price, Link");
+            using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, AllLinksCsv));
+            motoWriter.WriteLine(AllLinksTitles);
 
             var dbEntries = context.MotocrossEntries.ToList();
 
@@ -67,7 +68,7 @@ namespace BaseScraper
                 MotoMake make = context.Makes.FirstOrDefault(mExists => mExists.Make == moto.Make);
                 MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == int.Parse(moto.Year));
 
-                //motoWriter.WriteLine($"{moto.Make},{moto.CC},{moto.Year},{moto.Price},{moto.Link}");
+                motoWriter.WriteLine(String.Format(AllLinksMotoInfo, moto.Make, moto.CC, moto.Year, moto.Price, moto.Link));
 
                 if (!dbEntries.Any(e => e.Link == moto.Link))
                 {
@@ -96,22 +97,21 @@ namespace BaseScraper
                     {
                         if (currentEntry.Price != moto.Price)
                         {
-                            Console.WriteLine($"Updating entry with link {moto.Link}. Old Price: {currentEntry.Price}, New Price: {moto.Price}");
+                            Console.WriteLine(String.Format(AllLinksPriceChange, moto.Link, currentEntry.Price, moto.Price));
 
                             currentEntry.Price = moto.Price;
 
                             //TODO - ADD AN OPTION TO TRACK PRICE CHANGES? COUNTER MAYBE? 
-                            //currentEntry.DateAdded = DateTime.Now;
                         }
-                        //else
-                        //{
-                        //    Console.WriteLine($"Entry with link {moto.Link} already exists, and prices match.");
-                        //}
+                        else
+                        {
+                            Console.WriteLine(String.Format(AllLinksEntryExists, moto.Link));
+                        }
                     }
                 }
             }
 
-            //motoWriter.Dispose();
+            motoWriter.Dispose();
 
             foreach (var existingEntry in dbEntries)
             {

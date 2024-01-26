@@ -12,7 +12,7 @@ namespace BaseScraper
         public async Task MarketOverviewReport(MotoContext context, MarketOverview marketOverview) 
         {
             List<MotocrossEntry> entriesList = context.MotocrossEntries.ToList();
-            List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.ToList();
+            List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.Where(m => m.Year.Year != 0).ToList();
 
             HashSet<MotocrossEntry> entriesSet = new(entriesList);
 
