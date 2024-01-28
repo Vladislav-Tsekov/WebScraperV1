@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BaseScraper")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b7fffe15d0a0916ae804d2943652c71730750616")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2dfc632cfd29f8592295a00acfd7678264b7b95e")]
 [assembly: System.Reflection.AssemblyProductAttribute("BaseScraper")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BaseScraper")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
