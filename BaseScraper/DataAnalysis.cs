@@ -9,7 +9,7 @@ namespace BaseScraper
     {
         //TODO - MUST FIND A WAY TO INDENTIFY TRENDS
         //TODO - IDEAS FOR DATA INTERPRETATION OF SOLD ENTRIES
-        public async Task MarketOverviewReport(MotoContext context, MarketOverview marketOverview) 
+        public Task MarketOverviewReport(MotoContext context, MarketOverview marketOverview) 
         {
             List<MotocrossEntry> entriesList = context.MotocrossEntries.ToList();
             List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.Where(m => m.Year.Year != 0).ToList();
@@ -23,9 +23,11 @@ namespace BaseScraper
             marketOverview.MarketShareByMakeAndYear(pricesList, marketWriter);
 
             marketWriter.Dispose();
+
+            return Task.CompletedTask;
         }
 
-        public async Task UnusualValuesReport(MotoContext context, StreamWriter marketOutliers)
+        public Task UnusualValuesReport(MotoContext context, StreamWriter marketOutliers)
         {
             //TODO - ADD EVEN MORE STATS TO FOLLOW
 
@@ -45,9 +47,11 @@ namespace BaseScraper
             {
                 marketOutliers.WriteLine($"{entity.Make.Make},{entity.Year.Year},{entity.MotoCount},{entity.PriceRange:f0}");
             }
+
+            return Task.CompletedTask;
         }
 
-        public async Task SoldMotorcyclesReport(MotoContext context, SaleReport saleReport)
+        public Task SoldMotorcyclesReport(MotoContext context, SaleReport saleReport)
         {
             List<MotocrossSoldEntry> soldEntries = context.MotocrossSoldEntries.ToList();
             List<MotocrossMarketPrice> marketPrices = context.MotocrossMarketPrices.ToList();
@@ -66,6 +70,8 @@ namespace BaseScraper
             saleReport.CountOfSalesPerDay(soldEntriesSet, salesWriter);
 
             salesWriter.Dispose();
+
+            return Task.CompletedTask;
 
             //TODO - SALE REPORT - LIST BELOW:
             //How to correctly calculate announcement's uptime period, more data?
