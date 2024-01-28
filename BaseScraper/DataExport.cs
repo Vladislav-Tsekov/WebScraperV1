@@ -11,8 +11,8 @@ namespace BaseScraper
     {
         public async Task PopulateMakesTable(List<string> distinctMakes, MotoContext context)
         {
-            HashSet<MotoMake> makesToAdd = new();
             List<string> existingMakes = context.Makes.Select(m => m.Make).ToList();
+            HashSet<MotoMake> makesToAdd = new();
 
             foreach (var make in distinctMakes)
             {
@@ -23,30 +23,32 @@ namespace BaseScraper
                 } 
             }
 
-            await context.Makes.AddRangeAsync(makesToAdd);
-            await context.SaveChangesAsync();
+            if (makesToAdd.Count > 0)
+            {
+                await context.Makes.AddRangeAsync(makesToAdd);
+                await context.SaveChangesAsync();
+            }
         }
 
         public async Task PopulateYearsTable(List<int> distinctYears, MotoContext context)
         {
-            var dbYears = context.Years.ToList();
+            List<int> existingYears = context.Years.Select(m => m.Year).ToList();
+            HashSet<MotoYear> yearsToAdd = new();
 
-            HashSet<MotoYear> years = new();
-            HashSet<MotoYear> existingYears = new(dbYears);
-
-            years.IntersectWith(existingYears);
-
-            if (years.Count > 0)
+            foreach (var year in distinctYears)
             {
-                foreach (var year in distinctYears)
+                if (!existingYears.Contains(year))
                 {
                     var currentYear = new MotoYear { Year = (year) };
-                    years.Add(currentYear);
-                }
+                    yearsToAdd.Add(currentYear);
+                } 
+            }
 
-                await context.Years.AddRangeAsync(years);
+            if (yearsToAdd.Count > 0)
+            {
+                await context.Years.AddRangeAsync(yearsToAdd);
                 await context.SaveChangesAsync();
-            } 
+            }  
         }
 
         public async Task AddMotorcycleEntries(ICollection<Motorcycle> scrapedMoto, MotoContext context)
