@@ -11,24 +11,16 @@ namespace BaseScraper
     {
         public async Task PopulateMakesTable(List<string> distinctMakes, MotoContext context)
         {
-            var dbMakes = context.Makes.ToList();
+            HashSet<MotoMake> makesToAdd = new();
 
-            HashSet<MotoMake> makes = new();
-            HashSet<MotoMake> existingMakes = new(dbMakes);
-
-            makes.IntersectWith(existingMakes);
-
-            if (makes.Count > 0)
+            foreach (var make in distinctMakes)
             {
-                foreach (var make in distinctMakes)
-                {
-                    var currentMake = new MotoMake { Make = make };
-                    makes.Add(currentMake);
-                }
-
-                await context.Makes.AddRangeAsync(makes);
-                await context.SaveChangesAsync();
+                var currentMake = new MotoMake { Make = make };
+                makesToAdd.Add(currentMake);
             }
+
+            await context.Makes.AddRangeAsync(makesToAdd);
+            await context.SaveChangesAsync();
         }
 
         public async Task PopulateYearsTable(List<int> distinctYears, MotoContext context)
