@@ -218,7 +218,7 @@ public class Scraper
         await dataAnalysis.MarketOverviewReport(context, marketOverview);
         await dataAnalysis.SoldMotorcyclesReport(context, saleReport);
 
-        //TODO - FOLLOW THE PREVIOUS TWO METHODS' PATTERN
+        //TODO - FOLLOW THE PREVIOUS TWO METHODS' PATTERN IF THE METHOD GROWS LARGER
         StreamWriter marketOutliers = new(Path.Combine(ScraperSettings.OutputFolderPath, "MarketOutliers.csv"));
         marketOutliers.WriteLine($"{DateTime.Now:d}");
         await dataAnalysis.UnusualValuesReport(context, marketOutliers);

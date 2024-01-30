@@ -9,6 +9,7 @@ namespace BaseScraper
     {
         //TODO - MUST FIND A WAY TO INDENTIFY TRENDS
         //TODO - IDEAS FOR DATA INTERPRETATION OF SOLD ENTRIES
+
         public Task MarketOverviewReport(MotoContext context, MarketOverview marketOverview) 
         {
             List<MotocrossEntry> entriesList = context.MotocrossEntries.ToList();

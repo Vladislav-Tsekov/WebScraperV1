@@ -97,9 +97,9 @@ namespace BaseScraper
                         {
                             Console.WriteLine(String.Format(AllLinksPriceChange, moto.Link, currentEntry.Price, moto.Price));
 
+                            currentEntry.OldPrice = currentEntry.Price;
                             currentEntry.Price = moto.Price;
-
-                            //TODO - ADD AN OPTION TO TRACK PRICE CHANGES? COUNTER MAYBE? 
+                            currentEntry.PriceChanges += 1;
                         }
                         else
                         {
