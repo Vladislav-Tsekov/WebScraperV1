@@ -5,7 +5,7 @@
         public const double trimPercentage = 0.20;
         public const double deviationThreshold = 1;
 
-        public static double Dev(IEnumerable<double> prices, double deviationThreshold)
+        public static double StdDev(IEnumerable<double> prices, double deviationThreshold)
         {
             double[] pricesArray = prices.ToArray();
             double mean = pricesArray.Average();

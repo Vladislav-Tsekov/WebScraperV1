@@ -133,7 +133,7 @@ namespace BaseScraper
                 group.Key.Year,
                 AveragePrice = group.Average(m => m.Price),
                 MeanPrice = MeanValues.MeanTrim(group.Select(m => m.Price), MeanValues.trimPercentage),
-                DevPrice = MeanValues.Dev(group.Select(m => m.Price), MeanValues.deviationThreshold),
+                DevPrice = MeanValues.StdDev(group.Select(m => m.Price), MeanValues.deviationThreshold),
                 MedianPrice = MeanValues.Median(group.Select(m => m.Price)),
                 ModePrice = MeanValues.Mode(group.Select(m => m.Price)),
                 PriceVariance = MeanValues.Variance(group.Select(m => m.Price)),
