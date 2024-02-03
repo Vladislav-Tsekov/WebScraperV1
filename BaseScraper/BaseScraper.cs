@@ -4,6 +4,7 @@ using BaseScraper.Data;
 using BaseScraper.Models;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
+using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 using static BaseScraper.Config.StringsConstants;
@@ -85,12 +86,21 @@ public class Scraper
 
                                 foreach (string cubicCent in titleTokens)
                                 {
+                                    
                                     Match ccMatch = Regex.Match(cubicCent, CcPattern);
-                                    if (ccMatch.Success)
+                                    bool isMatched = false;
+
+                                    if (ccMatch.Success && isMatched == false)
                                     {
                                         string ccValue = ccMatch.Value;
                                         cc = ccValue;
                                         motoCc.Add(cc);
+                                        isMatched = true;
+                                    }
+
+                                    if (isMatched)
+                                    {
+                                        break;
                                     }
                                 }
                                 if (cc == StringsConstants.NotAvailable)
@@ -137,8 +147,18 @@ public class Scraper
 
                             if (yearMatch.Success)
                             {
+                                //if (yearMatch.Success && int.TryParse(yearMatch.Value, out int parsedYear) 
+                                //    && parsedYear >= 2005 && parsedYear <= 2025)
+                                //{
+                                //    motoYear.Add(year);
+                                //}
+                                //else
+                                //{
+                                //    motoYear.Add(YearIsNull);
+                                //}
+
                                 string year = yearMatch.Value;
-                                motoYear.Add(year);
+                                motoYear.Add(year);    
                             }
                             else
                             {
