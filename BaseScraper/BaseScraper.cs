@@ -4,7 +4,6 @@ using BaseScraper.Data;
 using BaseScraper.Models;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
-using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 using static BaseScraper.Config.StringsConstants;
