@@ -216,7 +216,10 @@ namespace BaseScraper
                     DateSold = DateTime.Now
                 };
 
-                transferEntries.Add(newSoldEntry);
+                if (newSoldEntry.Year is not null)
+                {
+                    transferEntries.Add(newSoldEntry);
+                }
             }
 
             context.MotocrossEntries.RemoveRange(soldEntries);
