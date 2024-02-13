@@ -188,7 +188,15 @@ namespace BaseScraper
                     marketPrices.Add(entity);
                 }
 
-                priceWriter.WriteLine(String.Format(MarketPriceMotoInfo, m.Make, m.Year, m.MotorcycleCount, m.AveragePrice, m.MeanPrice, m.DevPrice, m.MedianPrice, m.PriceVariance));
+                priceWriter.WriteLine(String.Format(MarketPriceMotoInfo, 
+                                                    m.Make,
+                                                    m.Year, 
+                                                    m.MotorcycleCount, 
+                                                    m.AveragePrice, 
+                                                    m.MeanPrice, 
+                                                    m.DevPrice, 
+                                                    m.MedianPrice, 
+                                                    m.PriceVariance));
             }
 
             priceWriter.Dispose();

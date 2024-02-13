@@ -42,7 +42,7 @@ public static class StringsConstants
     //DataExport => AddMarketPrices
     public const string MarketPriceCsv = "AvgPriceMotocross.csv";
     public const string MarketPriceTitles = "Make, Year, Count, Average Price, Mean Price, StdDev Price, Median Price, Price Variance";
-    public const string MarketPriceMotoInfo = "{0}, {1}, {2}, {3:NO}, {4:NO}, {5:NO}, {6:NO}, {7:f3}";
+    public const string MarketPriceMotoInfo = "{0}, {1}, {2}, {3:0}, {4:0}, {5:0}, {6:0}, {7:f3}";
 
     //RegEx
     public const string CcPattern = @"\d{3}";
