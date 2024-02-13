@@ -31,53 +31,33 @@ namespace BaseScraper.Calculations
 
             foreach (var motorcycle in pricesList)
             {
-                try
+                if (!makeCountPairs.ContainsKey(motorcycle.Make.Make.ToString()))
                 {
-                    if (!makeCountPairs.ContainsKey(motorcycle.Make.Make.ToString()))
-                    {
-                        makeCountPairs.Add(motorcycle.Make.Make, 0);
-                    }
-
-                    if (!yearCountPairs.ContainsKey(motorcycle.Year.Year))
-                    {
-                        yearCountPairs.Add(motorcycle.Year.Year, 0);
-                    }
+                    makeCountPairs.Add(motorcycle.Make.Make, 0);
                 }
-                catch (Exception ex)
+
+                if (!yearCountPairs.ContainsKey(motorcycle.Year.Year) && motorcycle.Year.Year != 0)
                 {
-                    throw new ArgumentException(ex.Message, ex.Source, ex.InnerException);
+                    yearCountPairs.Add(motorcycle.Year.Year, 0);
                 }
             }
 
             foreach (var motorcycle in pricesList)
             {
-                try
-                {
-                    makeCountPairs[motorcycle.Make.Make.ToString()] += motorcycle.MotoCount;
 
-                    yearCountPairs[motorcycle.Year.Year] += motorcycle.MotoCount;
-                }
-                catch (Exception ex)
-                {
-                    throw new ArgumentException(ex.Message, ex.Source, ex.InnerException);
-                }
+                makeCountPairs[motorcycle.Make.Make.ToString()] += motorcycle.MotoCount;
+
+                yearCountPairs[motorcycle.Year.Year] += motorcycle.MotoCount;
             }
 
-            try
+            foreach (var kvp in makeCountPairs)
             {
-                foreach (var kvp in makeCountPairs)
-                {
-                    marketWriter.WriteLine($"{kvp.Key.ToUpper()}, {kvp.Value}");
-                }
-
-                foreach (var kvp in yearCountPairs)
-                {
-                    marketWriter.WriteLine($"{kvp.Key}, {kvp.Value}");
-                }
+                marketWriter.WriteLine($"{kvp.Key.ToUpper()}, {kvp.Value}");
             }
-            catch (Exception ex)
+
+            foreach (var kvp in yearCountPairs)
             {
-                throw new ArgumentException(ex.Message, ex.Source, ex.InnerException);
+                marketWriter.WriteLine($"{kvp.Key}, {kvp.Value}");
             }
         }
     }
