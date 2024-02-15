@@ -32,6 +32,8 @@ public class Scraper
 
         using HttpClient client = new();
 
+        //TODO - MUST MODIFY THE WAY DATA USED TO BE SCRAPED - SITE HAS BEEN MODIFIED, CONSIDER USING SELENIUM
+
         try
         {
             string baseUrl = StringsConstants.MxBaseUrl;
@@ -146,16 +148,6 @@ public class Scraper
 
                             if (yearMatch.Success)
                             {
-                                //if (yearMatch.Success && int.TryParse(yearMatch.Value, out int parsedYear) 
-                                //    && parsedYear >= 2005 && parsedYear <= 2025)
-                                //{
-                                //    motoYear.Add(year);
-                                //}
-                                //else
-                                //{
-                                //    motoYear.Add(YearIsNull);
-                                //}
-
                                 string year = yearMatch.Value;
                                 motoYear.Add(year);    
                             }
