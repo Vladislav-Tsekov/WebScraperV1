@@ -8,14 +8,14 @@ public static class StringsConstants
     public const string AppSettingsPath = "appsettings.json";
 
     //Base URLs
-    public const string MxBaseUrl = "https://www.mobile.bg/obiavi/motori/krosov/ot-2006/do-2024";
+    public const string MxBaseUrl = "https://www.mobile.bg/obiavi/motori/krosov/ot-2006/do-2024/p-";
     public const string EnduroBaseUrl = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=umpnpb&f1=";
 
     //Encoding
     public const string Encode = "windows-1251";
 
     //Nodes
-    public const string TitleNodes = "//a[@class='mmm']";
+    public const string TitleNodes = "//a[@class='mmmL']";
     public const string PriceNodes = "//span[@class='price']";
     public const string DescriptionNodes = "//td[(contains(@colspan,'3') or contains(@colspan,'4')) and contains(@style,'padding-left:')]";
     public const string LinkNodes = "//a[@class='mmm']";

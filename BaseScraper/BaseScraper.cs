@@ -33,8 +33,6 @@ public class Scraper
 
         using HttpClient client = new();
 
-        //TODO - MUST MODIFY THE WAY DATA USED TO BE SCRAPED - SITE HAS BEEN MODIFIED, CONSIDER USING SELENIUM
-
         try
         {
             string baseUrl = MxBaseUrl;
