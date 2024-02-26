@@ -1,13 +1,12 @@
-﻿using BaseScraper.Calculations;
-using BaseScraper.Config;
+﻿using BaseScraper.Config;
 using BaseScraper.Data;
 using BaseScraper.Models;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.Text.RegularExpressions;
-using static BaseScraper.Config.StringsConstants;
 using static BaseScraper.Config.ScraperSettings;
+using static BaseScraper.Config.StringsConstants;
 
 namespace BaseScraper;
 
@@ -201,29 +200,22 @@ public class Scraper
                             .ThenBy(m => m.Price)
                             .ToList();
 
-        DataExport dataExport = new();
-        MotoContext context = new();
 
         List<string> distinctMakes = makes.Distinct().OrderBy(m => m).ToList();
         List<int> distinctYears = years.Distinct().OrderBy(y => y).ToList();
 
-        await dataExport.PopulateMakesTable(distinctMakes, context);
-        await dataExport.PopulateYearsTable(distinctYears, context);
-        await dataExport.AddMotorcycleEntries(scrapedMoto, context);
-        await dataExport.AddMarketPrices(scrapedMoto, context);
-        await dataExport.TransferSoldEntries(context);
+        MotoContext context = new();
 
-        DataAnalysis dataAnalysis = new();
-        SaleReport saleReport = new();
-        MarketOverview marketOverview = new();
+        await DataExport.UpdateMakesTable(distinctMakes, context);
+        await DataExport.UpdateYearsTable(distinctYears, context);
+        await DataExport.AddMotorcycleEntries(scrapedMoto, context);
+        await DataExport.AddMarketPrices(scrapedMoto, context);
+        await DataExport.TransferSoldEntries(context);
 
-        await DataAnalysis.MarketOverviewReport(context, marketOverview);
-        await dataAnalysis.SoldMotorcyclesReport(context, saleReport);
+        await DataAnalysis.MarketOverviewReport(context);
+        await DataAnalysis.SoldMotorcyclesReport(context);
+        await DataAnalysis.UnusualValuesReport(context);
 
-        //TODO - FOLLOW THE PREVIOUS TWO METHODS' PATTERN IF THE METHOD GROWS LARGER
-        StreamWriter marketOutliers = new(Path.Combine(OutputFolderPath, "MarketOutliers.csv"));
-        marketOutliers.WriteLine($"{DateTime.Now:d}");
-        await DataAnalysis.UnusualValuesReport(context, marketOutliers);
-        marketOutliers.Dispose();
+        await context.DisposeAsync();
     }
 }

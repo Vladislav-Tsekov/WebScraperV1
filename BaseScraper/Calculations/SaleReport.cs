@@ -4,7 +4,7 @@ namespace BaseScraper.Calculations
 {
     public  class SaleReport
     {
-        public void SoldMotorcyclesList(HashSet<MotocrossSoldEntry> soldEntriesSet, HashSet<MotocrossMarketPrice> marketPricesSet, StreamWriter saleReportWriter)
+        public static void SoldMotorcyclesList(HashSet<MotocrossSoldEntry> soldEntriesSet, HashSet<MotocrossMarketPrice> marketPricesSet, StreamWriter saleReportWriter)
         {
             foreach (var entry in soldEntriesSet)
             {
@@ -18,7 +18,7 @@ namespace BaseScraper.Calculations
             }
         }
 
-        public void CalculateAbsoluteAverages(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
+        public static void CalculateAbsoluteAverages(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
         {
             var averagePrice = soldEntriesSet.Average(m => m.Price);
             var averageYear = soldEntriesSet.Average(m => m.Year.Year);
@@ -27,7 +27,7 @@ namespace BaseScraper.Calculations
             saleReportWriter.WriteLine($"The average year for all sold entries is: {Math.Round(averageYear)}");
         }
 
-        public void EngineDisplacementCount(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
+        public static void EngineDisplacementCount(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
         {
             double countOf250 = soldEntriesSet.Count(m => m.Cc == 250);
             double countOf350 = soldEntriesSet.Count(m => m.Cc == 350);
@@ -40,9 +40,9 @@ namespace BaseScraper.Calculations
             saleReportWriter.WriteLine($"450cc: {countOf450} out of {totalCount}. Ratio of {(countOf450 / totalCount) * 100:f2}%");
         }
 
-        public void CountOfSalesPerMake(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter) 
+        public static void CountOfSalesPerMake(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
         {
-            Dictionary<string, int> makeCountPairs = new Dictionary<string, int>();
+            Dictionary<string, int> makeCountPairs = new();
 
             foreach (var motorcycle in soldEntriesSet)
             {
@@ -63,7 +63,7 @@ namespace BaseScraper.Calculations
             }
         }
 
-        public void CountOfSalesPerDay(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
+        public static void CountOfSalesPerDay(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
         {
             SortedDictionary<DateTime, int> salesPerDay = new();
 

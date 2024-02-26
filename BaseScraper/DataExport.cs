@@ -9,7 +9,7 @@ namespace BaseScraper
 {
     public class DataExport
     {
-        public async Task PopulateMakesTable(List<string> distinctMakes, MotoContext context)
+        public static async Task UpdateMakesTable(List<string> distinctMakes, MotoContext context)
         {
             List<string> existingMakes = context.Makes.Select(m => m.Make).ToList();
             HashSet<MotoMake> makesToAdd = new();
@@ -30,7 +30,7 @@ namespace BaseScraper
             }
         }
 
-        public async Task PopulateYearsTable(List<int> distinctYears, MotoContext context)
+        public static async Task UpdateYearsTable(List<int> distinctYears, MotoContext context)
         {
             List<int> existingYears = context.Years.Select(m => m.Year).ToList();
             HashSet<MotoYear> yearsToAdd = new();
@@ -51,7 +51,7 @@ namespace BaseScraper
             }  
         }
 
-        public async Task AddMotorcycleEntries(ICollection<Motocross> scrapedMoto, MotoContext context)
+        public static async Task AddMotorcycleEntries(ICollection<Motocross> scrapedMoto, MotoContext context)
         {
             using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, AllLinksCsv));
             motoWriter.WriteLine(AllLinksTitles);
@@ -119,7 +119,7 @@ namespace BaseScraper
             await context.SaveChangesAsync();
         }
 
-        public async Task AddMarketPrices(ICollection<Motocross> filteredMoto, MotoContext context)
+        public static async Task AddMarketPrices(ICollection<Motocross> filteredMoto, MotoContext context)
         {
             var averagePrices = filteredMoto
             .GroupBy(m => new { m.Make, m.Year })
@@ -201,7 +201,7 @@ namespace BaseScraper
             await context.SaveChangesAsync();
         }
 
-        public async Task TransferSoldEntries(MotoContext context) 
+        public static async Task TransferSoldEntries(MotoContext context)
         {
             var dbEntries = context.MotocrossEntries.Where(e => e.IsSold == true).ToList();
 
