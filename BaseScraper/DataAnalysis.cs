@@ -10,7 +10,7 @@ namespace BaseScraper
         //TODO - MUST FIND A WAY TO INDENTIFY TRENDS
         //TODO - IDEAS FOR DATA INTERPRETATION OF SOLD ENTRIES
 
-        public Task MarketOverviewReport(MotoContext context, MarketOverview marketOverview) 
+        public static Task MarketOverviewReport(MotoContext context, MarketOverview marketOverview) 
         {
             List<MotocrossEntry> entriesList = context.MotocrossEntries.ToList();
             List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.Where(m => m.Year.Year != 0).ToList();
@@ -20,15 +20,15 @@ namespace BaseScraper
             StreamWriter marketWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, "MarketOverview.csv"));
             marketWriter.WriteLine(DateTime.Now);
 
-            marketOverview.MarketShareByEngineDisplacement(entriesSet, marketWriter);
-            marketOverview.MarketShareByMakeAndYear(pricesList, marketWriter);
+            MarketOverview.MarketShareByEngineDisplacement(entriesSet, marketWriter);
+            MarketOverview.MarketShareByMakeAndYear(pricesList, marketWriter);
 
             marketWriter.Dispose();
 
             return Task.CompletedTask;
         }
 
-        public Task UnusualValuesReport(MotoContext context, StreamWriter marketOutliers)
+        public static Task UnusualValuesReport(MotoContext context, StreamWriter marketOutliers)
         {
             //TODO - ADD EVEN MORE STATS TO FOLLOW
 

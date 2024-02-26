@@ -4,7 +4,7 @@ namespace BaseScraper.Calculations
 {
     public class MarketOverview
     {
-        public void MarketShareByEngineDisplacement(HashSet<MotocrossEntry> entriesSet, StreamWriter marketWriter) 
+        public static void MarketShareByEngineDisplacement(HashSet<MotocrossEntry> entriesSet, StreamWriter marketWriter) 
         {
             double totalEntries = entriesSet.Count;
             double countOf250s = entriesSet.Where(m => m.Cc == 250).Count();
@@ -24,7 +24,7 @@ namespace BaseScraper.Calculations
             marketWriter.WriteLine($"450, {(countOf450s / existingCcCount) * 100:f2}");
         }
 
-        public void MarketShareByMakeAndYear(List<MotocrossMarketPrice> pricesList, StreamWriter marketWriter)
+        public static void MarketShareByMakeAndYear(List<MotocrossMarketPrice> pricesList, StreamWriter marketWriter)
         {
             Dictionary<string, int> makeCountPairs = new();
             SortedDictionary<int, int> yearCountPairs = new();

@@ -4,7 +4,7 @@ namespace BaseScraper.Calculations
 {
     public  class SaleReport
     {
-        public static void SoldMotorcyclesList(HashSet<MotocrossSoldEntry> soldEntriesSet, HashSet<MotocrossMarketPrice> marketPricesSet, StreamWriter saleReportWriter)
+        public void SoldMotorcyclesList(HashSet<MotocrossSoldEntry> soldEntriesSet, HashSet<MotocrossMarketPrice> marketPricesSet, StreamWriter saleReportWriter)
         {
             foreach (var entry in soldEntriesSet)
             {
@@ -29,11 +29,11 @@ namespace BaseScraper.Calculations
 
         public void EngineDisplacementCount(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
         {
-            double countOf250 = soldEntriesSet.Count(m => m.Cc == "250");
-            double countOf350 = soldEntriesSet.Count(m => m.Cc == "350");
-            double countOf450 = soldEntriesSet.Count(m => m.Cc == "450");
+            double countOf250 = soldEntriesSet.Count(m => m.Cc == 250);
+            double countOf350 = soldEntriesSet.Count(m => m.Cc == 350);
+            double countOf450 = soldEntriesSet.Count(m => m.Cc == 450);
 
-            double totalCount = soldEntriesSet.Count(m => m.Cc == "250" || m.Cc == "350" || m.Cc == "450");
+            double totalCount = soldEntriesSet.Count(m => m.Cc == 250 || m.Cc == 350 || m.Cc == 450);
 
             saleReportWriter.WriteLine($"250cc: {countOf250} out of {totalCount}. Ratio of {(countOf250 / totalCount) * 100:f2}%");
             saleReportWriter.WriteLine($"350cc: {countOf350} out of {totalCount}. Ratio of {(countOf350 / totalCount) * 100:f2}%");

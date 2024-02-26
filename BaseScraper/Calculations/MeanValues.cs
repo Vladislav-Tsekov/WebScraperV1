@@ -3,38 +3,38 @@
     public class MeanValues
     {
         public const double trimPercentage = 0.20;
-        public const double deviationThreshold = 1;
+        public const decimal deviationThreshold = 1.0m;
 
-        public static double StdDev(IEnumerable<double> prices, double deviationThreshold)
+        public static decimal StdDev(IEnumerable<decimal> prices)
         {
-            double[] pricesArray = prices.ToArray();
-            double mean = pricesArray.Average();
+            decimal[] pricesArray = prices.ToArray();
+            decimal mean = pricesArray.Average();
 
-            double standardDeviation = Math.Sqrt(pricesArray.Select(x => Math.Pow(x - mean, 2)).Average());
-            double deviationLimit = deviationThreshold * standardDeviation;
+            decimal standardDeviation = (decimal)Math.Sqrt(pricesArray.Select(x => (double)Math.Pow((double)(x - mean), 2)).Average());
+            decimal deviationLimit = deviationThreshold * standardDeviation;
 
-            double[] trimmedData = pricesArray.Where(x => Math.Abs(x - mean) <= deviationLimit).ToArray();
-            double trimmedMean = trimmedData.Average();
+            decimal[] trimmedData = pricesArray.Where(x => Math.Abs(x - mean) <= deviationLimit).ToArray();
+            decimal trimmedMean = trimmedData.Average();
 
             return trimmedMean;
         }
 
-        public static double MeanTrim(IEnumerable<double> prices, double trimPercentage)
+        public static decimal MeanTrim(IEnumerable<decimal> prices)
         {
-            double[] pricesArray = prices.ToArray();
-            double[] sortedPrices = pricesArray.OrderBy(x => x).ToArray();
+            decimal[] pricesArray = prices.ToArray();
+            decimal[] sortedPrices = pricesArray.OrderBy(x => x).ToArray();
 
             int trimCount = (int)(pricesArray.Length * trimPercentage);
 
-            double[] trimmedData = sortedPrices.Skip(trimCount).Take(pricesArray.Length - 2 * trimCount).ToArray();
-            double trimmedMean = trimmedData.Average();
+            decimal[] trimmedData = sortedPrices.Skip(trimCount).Take(pricesArray.Length - 2 * trimCount).ToArray();
+            decimal trimmedMean = trimmedData.Average();
 
             return trimmedMean;
         }
 
-        public static double Median(IEnumerable<double> prices)
+        public static decimal Median(IEnumerable<decimal> prices)
         {
-            double[] pricesArray = prices.ToArray();
+            decimal[] pricesArray = prices.ToArray();
             Array.Sort(pricesArray);
 
             if (pricesArray.Length % 2 == 0)
@@ -42,7 +42,7 @@
                 int middleIndex1 = pricesArray.Length / 2 - 1;
                 int middleIndex2 = pricesArray.Length / 2;
 
-                return (pricesArray[middleIndex1] + pricesArray[middleIndex2]) / 2.0; //type upon exit?
+                return (pricesArray[middleIndex1] + pricesArray[middleIndex2]) / 2.0m; //type upon exit?
             }
             else
             {
@@ -52,7 +52,7 @@
             }
         }
 
-        public static double Mode(IEnumerable<double> prices)
+        public static decimal Mode(IEnumerable<decimal> prices)
         {
             var groupedPrices = prices.GroupBy(x => x);
             var maxFrequency = groupedPrices.Max(g => g.Count());
@@ -66,21 +66,21 @@
             return mode;
         }
 
-        public static double Range(IEnumerable<double> prices)
+        public static decimal Range(IEnumerable<decimal> prices)
         {
-            double[] pricesArray = prices.ToArray();
+            decimal[] pricesArray = prices.ToArray();
 
             return pricesArray.Max() - pricesArray.Min();
         }
 
-        public static double Variance(IEnumerable<double> prices)
+        public static decimal Variance(IEnumerable<decimal> prices)
         {
-            double[] pricesArray = prices.ToArray();
-            double mean = pricesArray.Average();
+            decimal[] pricesArray = prices.ToArray();
+            decimal mean = pricesArray.Average();
 
-            double variance = pricesArray.Select(x => Math.Pow(x - mean, 2)).Average();
-            double standardDeviation = Math.Sqrt(variance);
-            double coefficientOfVariation = standardDeviation / mean;
+            decimal variance = pricesArray.Select(x => (decimal)Math.Pow((double)(x - mean), 2)).Average();
+            decimal standardDeviation = (decimal)Math.Sqrt((double)variance);
+            decimal coefficientOfVariation = standardDeviation / mean;
 
             return coefficientOfVariation;
         }

@@ -64,7 +64,7 @@ namespace BaseScraper
             foreach (var moto in scrapedMoto)
             {
                 MotoMake make = context.Makes.FirstOrDefault(mExists => mExists.Make == moto.Make);
-                MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == int.Parse(moto.Year));
+                MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == moto.Year);
 
                 motoWriter.WriteLine(String.Format(AllLinksMotoInfo, moto.Make, moto.CC, moto.Year, moto.Price, moto.Link));
 
@@ -72,17 +72,13 @@ namespace BaseScraper
                 {
                     var entry = new MotocrossEntry()
                     {
-                        Price = moto.Price,
-                        Link = moto.Link,
                         Make = make,
                         Year = year,
+                        Cc = moto.CC,
+                        Price = moto.Price,
+                        Link = moto.Link,
                         DateAdded = DateTime.Now
                     };
-
-                    if (moto.CC == StringsConstants.CcNotAvailable)
-                        entry.Cc = null;
-                    else
-                        entry.Cc = moto.CC;
 
                     entries.Add(entry);
 
@@ -132,8 +128,8 @@ namespace BaseScraper
                 group.Key.Make,
                 group.Key.Year,
                 AveragePrice = group.Average(m => m.Price),
-                MeanPrice = MeanValues.MeanTrim(group.Select(m => m.Price), MeanValues.trimPercentage),
-                DevPrice = MeanValues.StdDev(group.Select(m => m.Price), MeanValues.deviationThreshold),
+                MeanPrice = MeanValues.MeanTrim(group.Select(m => m.Price)),
+                DevPrice = MeanValues.StdDev(group.Select(m => m.Price)),
                 MedianPrice = MeanValues.Median(group.Select(m => m.Price)),
                 ModePrice = MeanValues.Mode(group.Select(m => m.Price)),
                 PriceVariance = MeanValues.Variance(group.Select(m => m.Price)),
@@ -153,7 +149,7 @@ namespace BaseScraper
             foreach (var m in averagePrices)
             {
                 MotocrossMarketPrice motoExists = context.MotocrossMarketPrices
-                    .FirstOrDefault(record => record.Make.Make == m.Make && record.Year.Year == int.Parse(m.Year));
+                    .FirstOrDefault(record => record.Make.Make == m.Make && record.Year.Year == m.Year);
 
                 if (motoExists != null)
                 {
@@ -169,7 +165,7 @@ namespace BaseScraper
                 else
                 {
                     MotoMake make = context.Makes.FirstOrDefault(mExists => mExists.Make == m.Make);
-                    MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == int.Parse(m.Year));
+                    MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == m.Year);
 
                     var entity = new MotocrossMarketPrice
                     {
