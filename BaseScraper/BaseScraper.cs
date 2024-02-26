@@ -25,11 +25,11 @@ public class Scraper
 
         ScraperSettings scraperSettings = new(configuration);
 
-        List<string> motoMake = new();
-        List<string> motoCc = new();
-        List<double> motoPrice = new();
-        List<string> motoYear = new();
-        List<string> motoLink = new();
+        List<string> makes = new();
+        List<int> displacements = new();
+        List<decimal> prices = new();
+        List<int> years = new();
+        List<string> links = new();
 
         using HttpClient client = new();
 
@@ -42,7 +42,7 @@ public class Scraper
 
             for (int i = 1; i <= maxPages; i++)
             {
-                if (doomCounter == 1)
+                if (doomCounter > 1)
                 {
                     i = MaxPages + 1;
                 }
@@ -60,10 +60,10 @@ public class Scraper
                     HtmlDocument doc = new();
                     doc.LoadHtml(htmlContent);
 
-                    var titleNodes = doc.DocumentNode.SelectNodes(TitleNodes);
-                    var priceNodes = doc.DocumentNode.SelectNodes(PriceNodes);
-                    var descriptionNodes = doc.DocumentNode.SelectNodes(DescriptionNodes);
-                    var linkNodes = doc.DocumentNode.SelectNodes(LinkNodes);
+                    HtmlNodeCollection titleNodes = doc.DocumentNode.SelectNodes(TitleNodes);
+                    HtmlNodeCollection priceNodes = doc.DocumentNode.SelectNodes(PriceNodes);
+                    HtmlNodeCollection descriptionNodes = doc.DocumentNode.SelectNodes(DescriptionNodes);
+                    HtmlNodeCollection linkNodes = doc.DocumentNode.SelectNodes(LinkNodes);
 
                     if (titleNodes != null)
                     {
@@ -80,38 +80,33 @@ public class Scraper
                                 string[] titleTokens = title.Split();
 
                                 string make = titleTokens[0];
-                                motoMake.Add(make);
+                                makes.Add(make);
 
-                                string cc = NotAvailable;
+                                int cc = CcNotAvailable;
 
                                 foreach (string cubicCent in titleTokens)
                                 {
-                                    
                                     Match ccMatch = Regex.Match(cubicCent, CcPattern);
-                                    bool isMatched = false;
 
-                                    if (ccMatch.Success && isMatched == false)
+                                    if (ccMatch.Success)
                                     {
                                         string ccValue = ccMatch.Value;
-                                        cc = ccValue;
-                                        motoCc.Add(cc);
-                                        isMatched = true;
-                                    }
-
-                                    if (isMatched)
-                                    {
+                                        cc = int.Parse(ccValue);
+                                        displacements.Add(cc);
                                         break;
                                     }
                                 }
-                                if (cc == NotAvailable)
+
+                                if (cc == CcNotAvailable)
                                 {
-                                    motoCc.Add(cc);
+                                    displacements.Add(cc);
                                 }
                             }
                         }
                     }
                     else
                     {
+                        doomCounter++;
                         Console.WriteLine(NoTitlesFound);
                     }
 
@@ -120,15 +115,15 @@ public class Scraper
                         foreach (var priceNode in priceNodes)
                         {
                             string priceInnerText = priceNode.InnerText;
-                            string price = Regex.Replace(priceInnerText, PriceIdentify, PriceReplace);
+                            string priceEdit = Regex.Replace(priceInnerText, PriceIdentify, PriceReplace);
 
-                            if (double.TryParse(price, out double priceValue))
+                            if (decimal.TryParse(priceEdit, out decimal price))
                             {
-                                motoPrice.Add(priceValue);
+                                prices.Add(price);
                             }
                             else
                             {
-                                motoPrice.Add(0);
+                                prices.Add(0);
                             }
                         }
                     }
@@ -147,12 +142,12 @@ public class Scraper
 
                             if (yearMatch.Success)
                             {
-                                string year = yearMatch.Value;
-                                motoYear.Add(year);    
+                                int year = int.Parse(yearMatch.Value);
+                                years.Add(year);    
                             }
                             else
                             {
-                                motoYear.Add(YearIsNull);
+                                years.Add(YearIsNull);
                             }
                         }
                     }
@@ -170,7 +165,7 @@ public class Scraper
 
                             //CHECK LINK LENGTH IN CASE OF ERRORS
                             string modifiedLink = link[2..40];
-                            motoLink.Add(modifiedLink);
+                            links.Add(modifiedLink);
                         }
                     }
                     else
@@ -193,10 +188,10 @@ public class Scraper
 
         HashSet<Motocross> motorcycles = new();
 
-        for (int i = 0; i < motoMake.Count; i++)
+        for (int i = 0; i < makes.Count; i++)
         {
-            Motocross motorcycle = new(motoMake[i], motoCc[i], motoYear[i], motoPrice[i], motoLink[i]);
-            motorcycles.Add(motorcycle);
+            Motocross currentMoto = new(makes[i], displacements[i], years[i], prices[i], links[i]);
+            motorcycles.Add(currentMoto);
         }
 
         List<Motocross> scrapedMoto = motorcycles
@@ -209,8 +204,8 @@ public class Scraper
         DataExport dataExport = new();
         MotoContext context = new();
 
-        List<string> distinctMakes = motoMake.Distinct().OrderBy(x => x).ToList();
-        List<int> distinctYears = motoYear.Select(s => int.Parse(s)).Distinct().OrderBy(x => x).ToList();
+        List<string> distinctMakes = makes.Distinct().OrderBy(m => m).ToList();
+        List<int> distinctYears = years.Distinct().OrderBy(y => y).ToList();
 
         await dataExport.PopulateMakesTable(distinctMakes, context);
         await dataExport.PopulateYearsTable(distinctYears, context);

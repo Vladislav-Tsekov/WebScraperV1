@@ -3,28 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\scrapingmodels\\motorcycle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\scrapingmodels\\motorcycle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\calculations\\salereport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\calculations\\salereport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\data\\models\\motocrossentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\data\\models\\motocrossentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\data\\models\\motocrosssoldentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\data\\models\\motocrosssoldentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\basescraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\basescraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\shared\\scrapersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\shared\\scrapersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\data\\motocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\data\\motocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\data\\databasesettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\data\\databasesettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\shared\\stringsconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\shared\\stringsconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\calculations\\marketoverview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\calculations\\marketoverview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\data\\models\\motocrossmarketprice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\data\\models\\motocrossmarketprice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\calculations\\salereport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\calculations\\salereport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\data\\models\\motocrossentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\data\\models\\motocrossentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -55,64 +67,103 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Motorcycle.cs",
-              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\ScrapingModels\\Motorcycle.cs",
-              "RelativeDocumentMoniker": "BaseScraper\\ScrapingModels\\Motorcycle.cs",
-              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\ScrapingModels\\Motorcycle.cs",
-              "RelativeToolTip": "BaseScraper\\ScrapingModels\\Motorcycle.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T16:35:49.241Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MotocrossEntry.cs",
-              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Data\\Models\\MotocrossEntry.cs",
-              "RelativeDocumentMoniker": "BaseScraper\\Data\\Models\\MotocrossEntry.cs",
-              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Data\\Models\\MotocrossEntry.cs",
-              "RelativeToolTip": "BaseScraper\\Data\\Models\\MotocrossEntry.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAQwB4AAAA7AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T16:33:44.523Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "SaleReport.cs",
               "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Calculations\\SaleReport.cs",
               "RelativeDocumentMoniker": "BaseScraper\\Calculations\\SaleReport.cs",
               "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Calculations\\SaleReport.cs",
               "RelativeToolTip": "BaseScraper\\Calculations\\SaleReport.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAABAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T16:31:42.378Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MarketOverview.cs",
-              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Calculations\\MarketOverview.cs",
-              "RelativeDocumentMoniker": "BaseScraper\\Calculations\\MarketOverview.cs",
-              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Calculations\\MarketOverview.cs",
-              "RelativeToolTip": "BaseScraper\\Calculations\\MarketOverview.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T16:31:22.906Z",
+              "WhenOpened": "2024-02-26T17:35:47.276Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "ScraperSettings.cs",
+              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Shared\\ScraperSettings.cs",
+              "RelativeDocumentMoniker": "BaseScraper\\Shared\\ScraperSettings.cs",
+              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Shared\\ScraperSettings.cs",
+              "RelativeToolTip": "BaseScraper\\Shared\\ScraperSettings.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T17:33:56.203Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MotoContext.cs",
+              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Data\\MotoContext.cs",
+              "RelativeDocumentMoniker": "BaseScraper\\Data\\MotoContext.cs",
+              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Data\\MotoContext.cs",
+              "RelativeToolTip": "BaseScraper\\Data\\MotoContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T17:32:54.607Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DatabaseSettings.cs",
+              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Data\\DatabaseSettings.cs",
+              "RelativeDocumentMoniker": "BaseScraper\\Data\\DatabaseSettings.cs",
+              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Data\\DatabaseSettings.cs",
+              "RelativeToolTip": "BaseScraper\\Data\\DatabaseSettings.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T17:32:51.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MotocrossSoldEntry.cs",
+              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Data\\Models\\MotocrossSoldEntry.cs",
+              "RelativeDocumentMoniker": "BaseScraper\\Data\\Models\\MotocrossSoldEntry.cs",
+              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Data\\Models\\MotocrossSoldEntry.cs",
+              "RelativeToolTip": "BaseScraper\\Data\\Models\\MotocrossSoldEntry.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAQwBcAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T17:29:18.21Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MotocrossMarketPrice.cs",
+              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Data\\Models\\MotocrossMarketPrice.cs",
+              "RelativeDocumentMoniker": "BaseScraper\\Data\\Models\\MotocrossMarketPrice.cs",
+              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Data\\Models\\MotocrossMarketPrice.cs",
+              "RelativeToolTip": "BaseScraper\\Data\\Models\\MotocrossMarketPrice.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T17:28:53.664Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MotocrossEntry.cs",
+              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Data\\Models\\MotocrossEntry.cs",
+              "RelativeDocumentMoniker": "BaseScraper\\Data\\Models\\MotocrossEntry.cs",
+              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Data\\Models\\MotocrossEntry.cs",
+              "RelativeToolTip": "BaseScraper\\Data\\Models\\MotocrossEntry.cs",
+              "ViewState": "AQIAABQAAAAAAAAAAAAgwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T17:28:36.396Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "StringsConstants.cs",
               "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Shared\\StringsConstants.cs",
               "RelativeDocumentMoniker": "BaseScraper\\Shared\\StringsConstants.cs",
               "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Shared\\StringsConstants.cs",
               "RelativeToolTip": "BaseScraper\\Shared\\StringsConstants.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAA7AAAA",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAAwBgAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-24T15:48:45.829Z",
               "EditorCaption": ""
@@ -125,7 +176,7 @@
               "RelativeDocumentMoniker": "BaseScraper\\BaseScraper.cs",
               "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\BaseScraper.cs",
               "RelativeToolTip": "BaseScraper\\BaseScraper.cs",
-              "ViewState": "AQIAAMQAAAAAAAAAAAAQwLwAAAAaAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABMAAABUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-24T14:37:57.631Z",
               "EditorCaption": ""

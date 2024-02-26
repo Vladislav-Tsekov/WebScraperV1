@@ -4,7 +4,7 @@ namespace BaseScraper.Calculations
 {
     public  class SaleReport
     {
-        public void SoldMotorcyclesList(HashSet<MotocrossSoldEntry> soldEntriesSet, HashSet<MotocrossMarketPrice> marketPricesSet, StreamWriter saleReportWriter)
+        public static void SoldMotorcyclesList(HashSet<MotocrossSoldEntry> soldEntriesSet, HashSet<MotocrossMarketPrice> marketPricesSet, StreamWriter saleReportWriter)
         {
             foreach (var entry in soldEntriesSet)
             {
@@ -13,8 +13,6 @@ namespace BaseScraper.Calculations
 
                 if (currentPrice != null)
                 {
-                    entry.Cc ??= "N/A";
-
                     saleReportWriter.WriteLine($"{entry.Make.Make}, {entry.Year.Year}, {entry.Cc}, {entry.Price}, {currentPrice.AvgPrice:f0}, {entry.DateAdded:d}, {entry.DateSold:d}");
                 }
             }

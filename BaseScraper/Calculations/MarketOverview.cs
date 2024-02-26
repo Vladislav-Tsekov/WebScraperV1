@@ -7,10 +7,10 @@ namespace BaseScraper.Calculations
         public void MarketShareByEngineDisplacement(HashSet<MotocrossEntry> entriesSet, StreamWriter marketWriter) 
         {
             double totalEntries = entriesSet.Count;
-            double countOf250s = entriesSet.Where(m => m.Cc == "250").Count();
-            double countOf350s = entriesSet.Where(m => m.Cc == "350").Count();
-            double countOf450s = entriesSet.Where(m => m.Cc == "450").Count();
-            double unknownCcCount = entriesSet.Where(m => m.Cc is null).Count();
+            double countOf250s = entriesSet.Where(m => m.Cc == 250).Count();
+            double countOf350s = entriesSet.Where(m => m.Cc == 350).Count();
+            double countOf450s = entriesSet.Where(m => m.Cc == 450).Count();
+            double unknownCcCount = entriesSet.Where(m => m.Cc == 0).Count();
             double existingCcCount = totalEntries - unknownCcCount;
 
             marketWriter.WriteLine($"There are currently {totalEntries} Motocross announcements.");

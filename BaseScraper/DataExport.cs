@@ -79,7 +79,7 @@ namespace BaseScraper
                         DateAdded = DateTime.Now
                     };
 
-                    if (moto.CC == StringsConstants.NotAvailable)
+                    if (moto.CC == StringsConstants.CcNotAvailable)
                         entry.Cc = null;
                     else
                         entry.Cc = moto.CC;

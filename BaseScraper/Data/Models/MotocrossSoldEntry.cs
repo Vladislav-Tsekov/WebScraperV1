@@ -21,11 +21,11 @@ namespace BaseScraper.Data.Models
         public int YearId { get; set; }
 
         [Comment("Motorcycle's engine displacement")]
-        public string Cc { get; set; }
+        public int Cc { get; set; }
 
         [Comment("Motorcycle's price")]
         [Required]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         [Comment("Date of announcement's addition to the database")]
         [Required]
