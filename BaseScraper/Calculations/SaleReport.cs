@@ -1,5 +1,4 @@
 ﻿using BaseScraper.Data.Models;
-using Microsoft.IdentityModel.Tokens;
 
 namespace BaseScraper.Calculations
 {

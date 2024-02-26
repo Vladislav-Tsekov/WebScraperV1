@@ -175,6 +175,7 @@ public class Scraper
                     }
                     else
                     {
+                        doomCounter++;
                         Console.WriteLine(NoLinksFound);
                     }
                 }
@@ -190,15 +191,15 @@ public class Scraper
             Console.WriteLine(ex.Message);
         }
 
-        HashSet<Motorcycle> motorcycles = new();
+        HashSet<Motocross> motorcycles = new();
 
         for (int i = 0; i < motoMake.Count; i++)
         {
-            Motorcycle motorcycle = new(motoMake[i], motoCc[i], motoYear[i], motoPrice[i], motoLink[i]);
+            Motocross motorcycle = new(motoMake[i], motoCc[i], motoYear[i], motoPrice[i], motoLink[i]);
             motorcycles.Add(motorcycle);
         }
 
-        List<Motorcycle> scrapedMoto = motorcycles
+        List<Motocross> scrapedMoto = motorcycles
                             .Where(m => m.Price > 3000)
                             .OrderBy(m => m.Make)
                             .ThenBy(m => m.Year)

@@ -51,7 +51,7 @@ namespace BaseScraper
             }  
         }
 
-        public async Task AddMotorcycleEntries(ICollection<Motorcycle> scrapedMoto, MotoContext context)
+        public async Task AddMotorcycleEntries(ICollection<Motocross> scrapedMoto, MotoContext context)
         {
             using StreamWriter motoWriter = new(Path.Combine(ScraperSettings.OutputFolderPath, AllLinksCsv));
             motoWriter.WriteLine(AllLinksTitles);
@@ -123,7 +123,7 @@ namespace BaseScraper
             await context.SaveChangesAsync();
         }
 
-        public async Task AddMarketPrices(ICollection<Motorcycle> filteredMoto, MotoContext context)
+        public async Task AddMarketPrices(ICollection<Motocross> filteredMoto, MotoContext context)
         {
             var averagePrices = filteredMoto
             .GroupBy(m => new { m.Make, m.Year })

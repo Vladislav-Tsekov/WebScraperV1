@@ -22,18 +22,18 @@ namespace BaseScraper.Data.Models
         public int YearId { get; set; }
 
         [Comment("Motorcycle's engine displacement")]
-        public string Cc { get; set; }
+        public int Cc { get; set; }
 
         [Comment("Motorcycle's actual price")]
         [Required]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         [Comment("Announcement's number of price changes")]
         [Required]
         public int PriceChanges { get; set; } = 0;
 
         [Comment("The price's value before it was changed")]
-        public double OldPrice { get; set; }
+        public decimal OldPrice { get; set; }
 
         [Comment("Date of announcement's addition to the database")]
         [Required]
