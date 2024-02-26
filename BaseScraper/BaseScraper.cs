@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.Text.RegularExpressions;
 using static BaseScraper.Config.StringsConstants;
+using static BaseScraper.Config.ScraperSettings;
 
 namespace BaseScraper;
 
@@ -36,16 +37,16 @@ public class Scraper
 
         try
         {
-            string baseUrl = StringsConstants.MxBaseUrl;
+            string baseUrl = MxBaseUrl;
 
-            int maxPages = ScraperSettings.MaxPages;
+            int maxPages = MaxPages;
             int doomCounter = 0;
 
             for (int i = 1; i <= maxPages; i++)
             {
                 if (doomCounter > 1)
                 {
-                    i = ScraperSettings.MaxPages + 1;
+                    i = MaxPages + 1;
                 }
 
                 string currentPage = baseUrl + i;
@@ -83,7 +84,7 @@ public class Scraper
                                 string make = titleTokens[0];
                                 motoMake.Add(make);
 
-                                string cc = StringsConstants.NotAvailable;
+                                string cc = NotAvailable;
 
                                 foreach (string cubicCent in titleTokens)
                                 {
@@ -104,7 +105,7 @@ public class Scraper
                                         break;
                                     }
                                 }
-                                if (cc == StringsConstants.NotAvailable)
+                                if (cc == NotAvailable)
                                 {
                                     motoCc.Add(cc);
                                 }
@@ -230,7 +231,7 @@ public class Scraper
         await dataAnalysis.SoldMotorcyclesReport(context, saleReport);
 
         //TODO - FOLLOW THE PREVIOUS TWO METHODS' PATTERN IF THE METHOD GROWS LARGER
-        StreamWriter marketOutliers = new(Path.Combine(ScraperSettings.OutputFolderPath, "MarketOutliers.csv"));
+        StreamWriter marketOutliers = new(Path.Combine(OutputFolderPath, "MarketOutliers.csv"));
         marketOutliers.WriteLine($"{DateTime.Now:d}");
         await dataAnalysis.UnusualValuesReport(context, marketOutliers);
         marketOutliers.Dispose();

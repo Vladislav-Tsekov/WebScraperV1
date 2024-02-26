@@ -8,7 +8,7 @@ public static class StringsConstants
     public const string AppSettingsPath = "appsettings.json";
 
     //Base URLs
-    public const string MxBaseUrl = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=vhuh5w&f1=";
+    public const string MxBaseUrl = "https://www.mobile.bg/obiavi/motori/krosov/ot-2006/do-2024";
     public const string EnduroBaseUrl = "https://www.mobile.bg/pcgi/mobile.cgi?act=3&slink=umpnpb&f1=";
 
     //Encoding
