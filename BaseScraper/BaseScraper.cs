@@ -42,7 +42,7 @@ public class Scraper
 
             for (int i = 1; i <= maxPages; i++)
             {
-                if (doomCounter > 1)
+                if (doomCounter == 1)
                 {
                     i = MaxPages + 1;
                 }
@@ -168,13 +168,9 @@ public class Scraper
                         {
                             string link = href.GetAttributeValue(HrefAttribute, HrefDefault);
 
-                            if (link.Length < 50)
-                                continue;
-                            else
-                            {
-                                string modifiedLink = link[2..63];
-                                motoLink.Add(modifiedLink);
-                            }
+                            //CHECK LINK LENGTH IN CASE OF ERRORS
+                            string modifiedLink = link[2..40];
+                            motoLink.Add(modifiedLink);
                         }
                     }
                     else

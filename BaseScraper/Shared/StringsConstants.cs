@@ -18,7 +18,7 @@ public static class StringsConstants
     public const string TitleNodes = "//a[@class='mmmL']";
     public const string PriceNodes = "//span[@class='price']";
     public const string DescriptionNodes = "//td[(contains(@colspan,'3') or contains(@colspan,'4')) and contains(@style,'padding-left:')]";
-    public const string LinkNodes = "//a[@class='mmm']";
+    public const string LinkNodes = "//a[@class='photoLinkL']"; 
     public const string HrefAttribute = "href";
     public const string HrefDefault = "";
 
