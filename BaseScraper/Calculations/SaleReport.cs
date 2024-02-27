@@ -20,6 +20,11 @@ namespace BaseScraper.Calculations
 
         public static void CalculateAbsoluteAverages(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
         {
+            if (soldEntriesSet.Count == 0)
+            {
+                return;
+            }
+
             var averagePrice = soldEntriesSet.Average(m => m.Price);
             var averageYear = soldEntriesSet.Average(m => m.Year.Year);
 
