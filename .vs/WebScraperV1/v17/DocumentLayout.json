@@ -3,28 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\basescraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\basescraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\dataanalysis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\dataanalysis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\shared\\stringsconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\shared\\stringsconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\calculations\\salereport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\calculations\\salereport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\dataexport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\dataexport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\calculations\\meanvalues.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\calculations\\meanvalues.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\calculations\\marketoverview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\calculations\\marketoverview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\basescraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\basescraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,72 +26,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 6,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SaleReport.cs",
-              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Calculations\\SaleReport.cs",
-              "RelativeDocumentMoniker": "BaseScraper\\Calculations\\SaleReport.cs",
-              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Calculations\\SaleReport.cs",
-              "RelativeToolTip": "BaseScraper\\Calculations\\SaleReport.cs",
-              "ViewState": "AQIAAEMAAAAAAAAAAAAowCsAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T22:27:41.602Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DataAnalysis.cs",
-              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\DataAnalysis.cs",
-              "RelativeDocumentMoniker": "BaseScraper\\DataAnalysis.cs",
-              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\DataAnalysis.cs",
-              "RelativeToolTip": "BaseScraper\\DataAnalysis.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAjwDIAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T21:58:41.617Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "BaseScraper.cs",
-              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\BaseScraper.cs",
-              "RelativeDocumentMoniker": "BaseScraper\\BaseScraper.cs",
-              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\BaseScraper.cs",
-              "RelativeToolTip": "BaseScraper\\BaseScraper.cs",
-              "ViewState": "AQIAAMQAAAAAAAAAAAAAAAMAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T21:57:46.804Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MarketOverview.cs",
-              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Calculations\\MarketOverview.cs",
-              "RelativeDocumentMoniker": "BaseScraper\\Calculations\\MarketOverview.cs",
-              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Calculations\\MarketOverview.cs",
-              "RelativeToolTip": "BaseScraper\\Calculations\\MarketOverview.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T21:54:59.298Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MeanValues.cs",
-              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Calculations\\MeanValues.cs",
-              "RelativeDocumentMoniker": "BaseScraper\\Calculations\\MeanValues.cs",
-              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Calculations\\MeanValues.cs",
-              "RelativeToolTip": "BaseScraper\\Calculations\\MeanValues.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEQAAABAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T21:42:01.93Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
             },
             {
               "$type": "Bookmark",
@@ -119,15 +50,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DataExport.cs",
-              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\DataExport.cs",
-              "RelativeDocumentMoniker": "BaseScraper\\DataExport.cs",
-              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\DataExport.cs",
-              "RelativeToolTip": "BaseScraper\\DataExport.cs",
-              "ViewState": "AQIAAIAAAAAAAAAAAAAnwHwAAAAxAAAA",
+              "DocumentIndex": 1,
+              "Title": "StringsConstants.cs",
+              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Shared\\StringsConstants.cs",
+              "RelativeDocumentMoniker": "BaseScraper\\Shared\\StringsConstants.cs",
+              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Shared\\StringsConstants.cs",
+              "RelativeToolTip": "BaseScraper\\Shared\\StringsConstants.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADYAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T21:41:54.298Z",
+              "WhenOpened": "2024-02-27T10:12:00.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DataAnalysis.cs",
+              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\DataAnalysis.cs",
+              "RelativeDocumentMoniker": "BaseScraper\\DataAnalysis.cs",
+              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\DataAnalysis.cs",
+              "RelativeToolTip": "BaseScraper\\DataAnalysis.cs",
+              "ViewState": "AQIAADAAAAAAAAAAAAAjwE4AAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T21:58:41.617Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BaseScraper.cs",
+              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\BaseScraper.cs",
+              "RelativeDocumentMoniker": "BaseScraper\\BaseScraper.cs",
+              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\BaseScraper.cs",
+              "RelativeToolTip": "BaseScraper\\BaseScraper.cs",
+              "ViewState": "AQIAAMYAAAAAAAAAAAAAANYAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-27T09:56:33.294Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SaleReport.cs",
+              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Calculations\\SaleReport.cs",
+              "RelativeDocumentMoniker": "BaseScraper\\Calculations\\SaleReport.cs",
+              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Calculations\\SaleReport.cs",
+              "RelativeToolTip": "BaseScraper\\Calculations\\SaleReport.cs",
+              "ViewState": "AQIAABQAAAAAAAAAAAAQwCgAAABFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T22:27:41.602Z",
               "EditorCaption": ""
             }
           ]
