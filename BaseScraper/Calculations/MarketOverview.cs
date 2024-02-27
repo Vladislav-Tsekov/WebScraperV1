@@ -24,15 +24,19 @@ namespace BaseScraper.Calculations
             //marketWriter.WriteLine($"350, {(countOf350s / existingCcCount) * 100:f2}");
             //marketWriter.WriteLine($"450, {(countOf450s / existingCcCount) * 100:f2}");
 
-            int totalEntries = entriesSet.Count;
-            var ccCounts = entriesSet.GroupBy(m => m.Cc).ToDictionary(g => g.Key, g => g.Count());
+            int totalEntries = entriesSet.Where(m => m.Cc == 250 || m.Cc == 350 || m.Cc == 450).Count();
+            Dictionary<int,int> ccCounts = entriesSet
+                            .Where(m => m.Cc == 250 || m.Cc == 350 || m.Cc == 450)
+                            .GroupBy(m => m.Cc)
+                            .OrderByDescending(m => m.Key)
+                            .ToDictionary(g => g.Key, g => g.Count());
 
             StringBuilder sb = new();
             sb.AppendLine($"There are currently {totalEntries} Motocross announcements.");
 
             foreach (var ccEntry in ccCounts)
             {
-                string cc = ccEntry.Key == 0 ? "unknown or missing" : ccEntry.Key.ToString();
+                string cc = ccEntry.Key.ToString();
                 double percentage = (double)ccEntry.Value / totalEntries * 100;
                 sb.AppendLine($"{ccEntry.Value} out of {totalEntries} are {cc} cc. ({percentage:f2}%)");
             }

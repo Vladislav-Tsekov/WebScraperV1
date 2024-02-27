@@ -194,7 +194,7 @@ public class Scraper
         }
 
         List<Motocross> scrapedMoto = motorcycles
-                            .Where(m => m.Price > 3000)
+                            .Where(m => m.Price > 3000 && m.Year >= 2006 && m.Year <= 2030)
                             .OrderBy(m => m.Make)
                             .ThenBy(m => m.Year)
                             .ThenBy(m => m.Price)
