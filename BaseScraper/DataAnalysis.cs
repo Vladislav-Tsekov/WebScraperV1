@@ -3,6 +3,7 @@ using BaseScraper.Config;
 using BaseScraper.Data;
 using BaseScraper.Data.Models;
 using static BaseScraper.Config.ScraperSettings;
+using static BaseScraper.Config.StringsConstants;
 
 namespace BaseScraper
 {
@@ -18,7 +19,7 @@ namespace BaseScraper
 
             HashSet<MotocrossEntry> entriesSet = new(entriesList);
 
-            StreamWriter marketWriter = new(Path.Combine(OutputFolderPath, "MarketOverview.csv"));
+            StreamWriter marketWriter = new(Path.Combine(OutputFolderPath, MarketOverviewCsv));
             marketWriter.WriteLine(DateTime.Now);
 
             MarketOverview.MarketShareByEngineDisplacement(entriesSet, marketWriter);
@@ -36,7 +37,7 @@ namespace BaseScraper
             List<MotocrossMarketPrice> highVariance = context.MotocrossMarketPrices.Where(m => m.PriceVariance > 0.19m).ToList();
             List<MotocrossMarketPrice> extremeRange = context.MotocrossMarketPrices.Where(m => m.PriceRange > 2000).ToList();
 
-            StreamWriter marketOutliers = new(Path.Combine(OutputFolderPath, "MarketOutliers.csv"));
+            StreamWriter marketOutliers = new(Path.Combine(OutputFolderPath, MarketOutliersCsv));
             marketOutliers.WriteLine($"{DateTime.Now:d}");
 
             marketOutliers.WriteLine("Make,Year,Count,Variance");
@@ -66,7 +67,12 @@ namespace BaseScraper
             HashSet<MotocrossSoldEntry> soldEntriesSet = new(soldEntries.OrderBy(m => m.Make.Make).ThenBy(m => m.Year.Year));
             HashSet<MotocrossMarketPrice > marketPricesSet = new(marketPrices.OrderBy(m => m.Make.Make).ThenBy(m => m.Year.Year));
 
-            StreamWriter salesWriter = new(Path.Combine(OutputFolderPath, "SaleReport.csv"));
+            if (soldEntriesSet.Count < 1)
+            {
+                return Task.FromCanceled(CancellationToken.None);
+            }
+
+            StreamWriter salesWriter = new(Path.Combine(OutputFolderPath, SaleReportCsv));
             salesWriter.WriteLine(DateTime.Now);
             salesWriter.WriteLine($"Make, Year, CC, Price Sold, Avg Market Price, Date Listed, Date Sold");
 

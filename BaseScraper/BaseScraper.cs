@@ -81,7 +81,7 @@ public class Scraper
                                 string make = titleTokens[0];
                                 makes.Add(make);
 
-                                int cc = CcNotAvailable;
+                                int cc = CcIsNull;
 
                                 foreach (string cubicCent in titleTokens)
                                 {
@@ -96,7 +96,7 @@ public class Scraper
                                     }
                                 }
 
-                                if (cc == CcNotAvailable)
+                                if (cc == CcIsNull)
                                 {
                                     displacements.Add(cc);
                                 }
@@ -199,7 +199,6 @@ public class Scraper
                             .ThenBy(m => m.Year)
                             .ThenBy(m => m.Price)
                             .ToList();
-
 
         List<string> distinctMakes = makes.Distinct().OrderBy(m => m).ToList();
         List<int> distinctYears = years.Distinct().OrderBy(y => y).ToList();
