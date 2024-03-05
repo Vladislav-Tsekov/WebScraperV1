@@ -210,10 +210,24 @@ namespace BaseScraper
 
             foreach (var entry in soldEntries)
             {
+                MotoMake newMake = new();
+                MotoYear newYear = new();
+
+                try
+                {
+                    newMake = await context.Makes.FindAsync(entry.MakeId);
+                    newYear = await context.Years.FindAsync(entry.YearId);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Make or Year non-existent.");
+                    continue;
+                }
+
                 MotocrossSoldEntry newSoldEntry = new() 
                 {
-                    Make = entry.Make,
-                    Year = entry.Year,
+                    Make = newMake,
+                    Year = newYear,
                     Cc = entry.Cc,
                     Price = entry.Price,
                     DateAdded = entry.DateAdded,
