@@ -63,8 +63,13 @@ namespace BaseScraper
 
             foreach (var moto in scrapedMoto)
             {
-                MotoMake make = context.Makes.FirstOrDefault(mExists => mExists.Make == moto.Make);
-                MotoYear year = context.Years.FirstOrDefault(yExists => yExists.Year == moto.Year);
+                MotoMake make = context.Makes.FirstOrDefault(m => m.Make == moto.Make);
+                MotoYear year = context.Years.FirstOrDefault(y => y.Year == moto.Year);
+
+                if (make is null || year is null)
+                {
+                    continue;
+                }
 
                 motoWriter.WriteLine(String.Format(AllLinksMotoInfo, moto.Make, moto.CC, moto.Year, moto.Price, moto.Link));
 
@@ -81,7 +86,6 @@ namespace BaseScraper
                     };
 
                     entries.Add(entry);
-
                 }
                 else
                 {

@@ -8,6 +8,7 @@ namespace BaseScraper.Calculations
         public static void MarketShareByEngineDisplacement(HashSet<MotocrossEntry> entriesSet, StreamWriter marketWriter) 
         {
             int totalEntries = entriesSet.Where(m => m.Cc == 250 || m.Cc == 350 || m.Cc == 450).Count();
+
             Dictionary<int,int> ccCounts = entriesSet
                             .Where(m => m.Cc == 250 || m.Cc == 350 || m.Cc == 450)
                             .GroupBy(m => m.Cc)
@@ -32,25 +33,35 @@ namespace BaseScraper.Calculations
             SortedDictionary<string, int> makeCountPairs = new();
             SortedDictionary<int, int> yearCountPairs = new();
 
+
+            //TODO - MISTAKES, PERHAPS ENCODING ("Други")
             foreach (var motorcycle in pricesList)
             {
-                if (!makeCountPairs.ContainsKey(motorcycle.Make.Make.ToString()))
+                if (motorcycle.Make != null)
                 {
-                    makeCountPairs.Add(motorcycle.Make.Make, 0);
+                    if (!makeCountPairs.ContainsKey(motorcycle.Make.Make))
+                    {
+                        makeCountPairs.Add(motorcycle.Make.Make, 0);
+                    }
                 }
 
-                if (!yearCountPairs.ContainsKey(motorcycle.Year.Year) && motorcycle.Year.Year != 0)
+                if (motorcycle.Year != null && motorcycle.Year.Year != 0)
                 {
-                    yearCountPairs.Add(motorcycle.Year.Year, 0);
+                    if (!yearCountPairs.ContainsKey(motorcycle.Year.Year))
+                    {
+                        yearCountPairs.Add(motorcycle.Year.Year, 0);
+                    }
                 }
             }
 
             foreach (var motorcycle in pricesList)
             {
+                if (motorcycle.Make != null)
+                {
+                    makeCountPairs[motorcycle.Make.Make] += motorcycle.MotoCount;
 
-                makeCountPairs[motorcycle.Make.Make.ToString()] += motorcycle.MotoCount;
-
-                yearCountPairs[motorcycle.Year.Year] += motorcycle.MotoCount;
+                    yearCountPairs[motorcycle.Year.Year] += motorcycle.MotoCount;
+                }
             }
 
             StringBuilder sb = new();
