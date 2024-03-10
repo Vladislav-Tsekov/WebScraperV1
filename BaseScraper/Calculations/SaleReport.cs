@@ -1,4 +1,5 @@
 ﻿using BaseScraper.Data.Models;
+using System.Text;
 
 namespace BaseScraper.Calculations
 {
@@ -29,15 +30,21 @@ namespace BaseScraper.Calculations
 
         public static void EngineDisplacementCount(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
         {
-            double countOf250 = soldEntriesSet.Count(m => m.Cc == 250);
-            double countOf350 = soldEntriesSet.Count(m => m.Cc == 350);
-            double countOf450 = soldEntriesSet.Count(m => m.Cc == 450);
+            int[] engineDisplacements = { 250, 350, 450 };
 
-            double totalCount = soldEntriesSet.Count(m => m.Cc == 250 || m.Cc == 350 || m.Cc == 450);
+            double totalCount = soldEntriesSet.Count(m => engineDisplacements.Contains(m.Cc));
 
-            saleReportWriter.WriteLine($"250cc: {countOf250} out of {totalCount}. Ratio of {(countOf250 / totalCount) * 100:f2}%");
-            saleReportWriter.WriteLine($"350cc: {countOf350} out of {totalCount}. Ratio of {(countOf350 / totalCount) * 100:f2}%");
-            saleReportWriter.WriteLine($"450cc: {countOf450} out of {totalCount}. Ratio of {(countOf450 / totalCount) * 100:f2}%");
+            StringBuilder sb = new();
+
+            foreach (int cc in engineDisplacements)
+            {
+                double count = soldEntriesSet.Count(m => m.Cc == cc);
+                double ratio = (count / totalCount) * 100.0;
+
+                sb.AppendLine($"{cc}cc: {count} out of {totalCount}. Ratio of {ratio:f2}%");
+            }
+
+            saleReportWriter.Write(sb.ToString());
         }
 
         public static void CountOfSalesPerMake(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)

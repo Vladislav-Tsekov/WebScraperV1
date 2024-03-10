@@ -81,7 +81,7 @@ public class Scraper
                                 string make = titleTokens[0];
                                 makes.Add(make);
 
-                                int cc = CcNotAvailable;
+                                int cc = CcIsNull;
 
                                 foreach (string cubicCent in titleTokens)
                                 {
@@ -96,7 +96,7 @@ public class Scraper
                                     }
                                 }
 
-                                if (cc == CcNotAvailable)
+                                if (cc == CcIsNull)
                                 {
                                     displacements.Add(cc);
                                 }
@@ -161,6 +161,8 @@ public class Scraper
                         foreach (var href in linkNodes)
                         {
                             string link = href.GetAttributeValue(HrefAttribute, HrefDefault);
+
+                            //CHECK LINK LENGTH IN CASE OF ERRORS
                             string modifiedLink = link[2..40];
                             links.Add(modifiedLink);
                         }
@@ -192,12 +194,11 @@ public class Scraper
         }
 
         List<Motocross> scrapedMoto = motorcycles
-                            .Where(m => m.Price > 3000 && m.Year >= 2006 && m.Year <= DateTime.Now.Year)
+                            .Where(m => m.Price > 3000 && m.Year >= 2006 && m.Year <= 2030)
                             .OrderBy(m => m.Make)
                             .ThenBy(m => m.Year)
                             .ThenBy(m => m.Price)
                             .ToList();
-
 
         List<string> distinctMakes = makes.Distinct().OrderBy(m => m).ToList();
         List<int> distinctYears = years.Distinct().OrderBy(y => y).ToList();

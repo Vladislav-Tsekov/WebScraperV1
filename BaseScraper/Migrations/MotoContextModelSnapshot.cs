@@ -62,8 +62,8 @@ namespace BaseScraper.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasComment("Each announcement link is unique, therefore used as a key");
 
-                    b.Property<string>("Cc")
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int>("Cc")
+                        .HasColumnType("int")
                         .HasComment("Motorcycle's engine displacement");
 
                     b.Property<DateTime>("DateAdded")
@@ -77,12 +77,12 @@ namespace BaseScraper.Migrations
                     b.Property<int>("MakeId")
                         .HasColumnType("int");
 
-                    b.Property<double>("OldPrice")
-                        .HasColumnType("float")
+                    b.Property<decimal>("OldPrice")
+                        .HasColumnType("decimal(18,2)")
                         .HasComment("The price's value before it was changed");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)")
                         .HasComment("Motorcycle's actual price");
 
                     b.Property<int>("PriceChanges")
@@ -159,8 +159,8 @@ namespace BaseScraper.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Cc")
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int>("Cc")
+                        .HasColumnType("int")
                         .HasComment("Motorcycle's engine displacement");
 
                     b.Property<DateTime>("DateAdded")
@@ -174,8 +174,8 @@ namespace BaseScraper.Migrations
                     b.Property<int>("MakeId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)")
                         .HasComment("Motorcycle's price");
 
                     b.Property<int>("YearId")

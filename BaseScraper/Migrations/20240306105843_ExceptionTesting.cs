@@ -5,7 +5,7 @@
 namespace BaseScraper.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedRelations : Migration
+    public partial class ExceptionTesting : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

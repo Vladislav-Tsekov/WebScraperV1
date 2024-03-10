@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BaseScraper.Migrations
 {
     [DbContext(typeof(MotoContext))]
-    [Migration("20240113151345_ColumnArrangement")]
-    partial class ColumnArrangement
+    [Migration("20240227094101_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,22 +62,35 @@ namespace BaseScraper.Migrations
             modelBuilder.Entity("BaseScraper.Data.Models.MotocrossEntry", b =>
                 {
                     b.Property<string>("Link")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(450)")
+                        .HasComment("Each announcement link is unique, therefore used as a key");
 
-                    b.Property<string>("Cc")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Cc")
+                        .HasColumnType("int")
+                        .HasComment("Motorcycle's engine displacement");
 
                     b.Property<DateTime>("DateAdded")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("Date of announcement's addition to the database");
 
                     b.Property<bool>("IsSold")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasComment("Keeps track whether the motorcycle has been sold");
 
                     b.Property<int>("MakeId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<decimal>("OldPrice")
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("The price's value before it was changed");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("Motorcycle's actual price");
+
+                    b.Property<int>("PriceChanges")
+                        .HasColumnType("int")
+                        .HasComment("Announcement's number of price changes");
 
                     b.Property<int>("YearId")
                         .HasColumnType("int");
@@ -88,7 +101,10 @@ namespace BaseScraper.Migrations
 
                     b.HasIndex("YearId");
 
-                    b.ToTable("MotocrossEntries");
+                    b.ToTable("MotocrossEntries", t =>
+                        {
+                            t.HasComment("Table of all Motocross announcements");
+                        });
                 });
 
             modelBuilder.Entity("BaseScraper.Data.Models.MotocrossMarketPrice", b =>
@@ -100,28 +116,36 @@ namespace BaseScraper.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("AvgPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("The Average Price for each make/year combination");
 
                     b.Property<decimal>("MeanTrimPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("The Mean Price for each make/year combination, calculated with a trim factor of 0.20");
 
                     b.Property<decimal>("MedianPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("The Median Price for each make/year combination");
 
                     b.Property<decimal>("ModePrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("The Mode Price (most frequent value, if such exists) for each make/year combination");
 
                     b.Property<int>("MotoCount")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasComment("The number of motorcycle announcements for the current make/year combination");
 
                     b.Property<decimal>("PriceRange")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("The Price Range (most expensive - cheapest announcement) for each make/year combination");
 
                     b.Property<decimal>("PriceVariance")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("The Price Variance coefficient for each make/year combination");
 
                     b.Property<decimal>("StdDevPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("The Standard Deviation Price for each make/year combination");
 
                     b.HasKey("MakeId", "YearId");
 
@@ -138,20 +162,24 @@ namespace BaseScraper.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Cc")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Cc")
+                        .HasColumnType("int")
+                        .HasComment("Motorcycle's engine displacement");
 
                     b.Property<DateTime>("DateAdded")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("Date of announcement's addition to the database");
 
                     b.Property<DateTime>("DateSold")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("Date of announcement's removal from the website");
 
                     b.Property<int>("MakeId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("Motorcycle's price");
 
                     b.Property<int>("YearId")
                         .HasColumnType("int");
@@ -162,7 +190,10 @@ namespace BaseScraper.Migrations
 
                     b.HasIndex("YearId");
 
-                    b.ToTable("MotocrossSoldEntries");
+                    b.ToTable("MotocrossSoldEntries", t =>
+                        {
+                            t.HasComment("A table of all sold motorcycles");
+                        });
                 });
 
             modelBuilder.Entity("BaseScraper.Data.Models.MotocrossEntry", b =>
