@@ -1,5 +1,4 @@
 ﻿using BaseScraper.Calculations;
-using BaseScraper.Config;
 using BaseScraper.Data;
 using BaseScraper.Data.Models;
 using static BaseScraper.Config.ScraperSettings;
@@ -15,7 +14,7 @@ namespace BaseScraper
         public static Task MarketOverviewReport(MotoContext context) 
         {
             List<MotocrossEntry> entriesList = context.MotocrossEntries.ToList();
-            List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.Where(m => m.Year.Year != 0).ToList();
+            List<MotocrossMarketPrice> pricesList = context.MotocrossMarketPrices.ToList();
 
             HashSet<MotocrossEntry> entriesSet = new(entriesList);
 
@@ -69,7 +68,7 @@ namespace BaseScraper
 
             if (soldEntriesSet.Count < 1)
             {
-                return Task.FromCanceled(CancellationToken.None);
+                return Task.CompletedTask;
             }
 
             StreamWriter salesWriter = new(Path.Combine(OutputFolderPath, SaleReportCsv));
