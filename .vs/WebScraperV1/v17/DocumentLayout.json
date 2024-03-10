@@ -3,6 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\",
   "Documents": [
     {
+<<<<<<< Updated upstream
       "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\basescraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\basescraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -25,6 +26,22 @@
     {
       "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\calculations\\marketoverview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\calculations\\marketoverview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\scrapingmodels\\motocross.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\scrapingmodels\\motocross.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\shared\\scrapersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\shared\\scrapersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\shared\\stringsconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\shared\\stringsconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|c:\\users\\tseko\\onedrive\\documents\\softuni\\c# personal projects\\webscraperv1\\basescraper\\basescraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13A19197-6635-4B0B-B036-4F2E4ABC461A}|BaseScraper\\BaseScraper.csproj|solutionrelative:basescraper\\basescraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> Stashed changes
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +51,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< Updated upstream
           "SelectedChildIndex": 2,
+=======
+          "SelectedChildIndex": 5,
+>>>>>>> Stashed changes
           "Children": [
             {
               "$type": "Document",
@@ -119,6 +140,7 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 3,
               "Title": "DataExport.cs",
               "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\DataExport.cs",
@@ -128,6 +150,56 @@
               "ViewState": "AQIAAIAAAAAAAAAAAAAnwHwAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-26T21:41:54.298Z",
+=======
+              "DocumentIndex": 0,
+              "Title": "Motocross.cs",
+              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\ScrapingModels\\Motocross.cs",
+              "RelativeDocumentMoniker": "BaseScraper\\ScrapingModels\\Motocross.cs",
+              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\ScrapingModels\\Motocross.cs",
+              "RelativeToolTip": "BaseScraper\\ScrapingModels\\Motocross.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-09T10:09:29.887Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "StringsConstants.cs",
+              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Shared\\StringsConstants.cs",
+              "RelativeDocumentMoniker": "BaseScraper\\Shared\\StringsConstants.cs",
+              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Shared\\StringsConstants.cs",
+              "RelativeToolTip": "BaseScraper\\Shared\\StringsConstants.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAABRAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-09T09:42:57.533Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ScraperSettings.cs",
+              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Shared\\ScraperSettings.cs",
+              "RelativeDocumentMoniker": "BaseScraper\\Shared\\ScraperSettings.cs",
+              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\Shared\\ScraperSettings.cs",
+              "RelativeToolTip": "BaseScraper\\Shared\\ScraperSettings.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-09T09:10:33.248Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BaseScraper.cs",
+              "DocumentMoniker": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\BaseScraper.cs",
+              "RelativeDocumentMoniker": "BaseScraper\\BaseScraper.cs",
+              "ToolTip": "C:\\Users\\tseko\\OneDrive\\Documents\\SoftUni\\C# Personal Projects\\WebScraperV1\\BaseScraper\\BaseScraper.cs",
+              "RelativeToolTip": "BaseScraper\\BaseScraper.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAKIAAABdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-09T09:09:10.762Z",
+>>>>>>> Stashed changes
               "EditorCaption": ""
             }
           ]

@@ -161,8 +161,6 @@ public class Scraper
                         foreach (var href in linkNodes)
                         {
                             string link = href.GetAttributeValue(HrefAttribute, HrefDefault);
-
-                            //CHECK LINK LENGTH IN CASE OF ERRORS
                             string modifiedLink = link[2..40];
                             links.Add(modifiedLink);
                         }
@@ -194,7 +192,7 @@ public class Scraper
         }
 
         List<Motocross> scrapedMoto = motorcycles
-                            .Where(m => m.Price > 3000)
+                            .Where(m => m.Price > 3000 && m.Year >= 2006 && m.Year <= DateTime.Now.Year)
                             .OrderBy(m => m.Make)
                             .ThenBy(m => m.Year)
                             .ThenBy(m => m.Price)

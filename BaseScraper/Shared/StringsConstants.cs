@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace BaseScraper.Config;
+﻿namespace BaseScraper.Config;
 
 public static class StringsConstants
 {
