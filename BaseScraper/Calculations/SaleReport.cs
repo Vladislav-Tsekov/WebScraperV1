@@ -5,21 +5,23 @@ namespace BaseScraper.Calculations
 {
     public  class SaleReport
     {
-        public static void SoldMotorcyclesList(HashSet<MotocrossSoldEntry> soldEntriesSet, HashSet<MotocrossMarketPrice> marketPricesSet, StreamWriter saleReportWriter)
+        public static void SoldMotorcyclesList(List<MotocrossSoldEntry> soldEntriesSet, List<MotocrossMarketPrice> marketPricesSet, StreamWriter saleReportWriter)
         {
             foreach (var entry in soldEntriesSet)
             {
-                var currentPrice = marketPricesSet
-                    .FirstOrDefault(m => m.Make.Make == entry.Make.Make && m.Year.Year == entry.Year.Year);
-
-                if (currentPrice != null)
+                if (entry.Make?.Make != null && entry.Year?.Year != 0)
                 {
-                    saleReportWriter.WriteLine($"{entry.Make.Make}, {entry.Year.Year}, {entry.Cc}, {entry.Price}, {currentPrice.AvgPrice:f0}, {entry.DateAdded:d}, {entry.DateSold:d}");
+                    var currentPrice = marketPricesSet.FirstOrDefault(m => m.Make?.Make == entry.Make.Make && m.Year?.Year == entry.Year.Year);
+
+                    if (currentPrice != null)
+                    {
+                        saleReportWriter.WriteLine($"{entry.Make.Make}, {entry.Year.Year}, {entry.Cc}, {entry.Price}, {currentPrice.AvgPrice:f0}, {entry.DateAdded:d}, {entry.DateSold:d}");
+                    }
                 }
             }
         }
 
-        public static void CalculateAbsoluteAverages(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
+        public static void CalculateAbsoluteAverages(List<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
         {
             var averagePrice = soldEntriesSet.Average(m => m.Price);
             var averageYear = soldEntriesSet.Average(m => m.Year.Year);
@@ -28,7 +30,7 @@ namespace BaseScraper.Calculations
             saleReportWriter.WriteLine($"The average year for all sold entries is: {Math.Round(averageYear)}");
         }
 
-        public static void EngineDisplacementCount(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
+        public static void EngineDisplacementCount(List<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
         {
             int[] engineDisplacements = { 250, 350, 450 };
 
@@ -47,21 +49,29 @@ namespace BaseScraper.Calculations
             saleReportWriter.Write(sb.ToString());
         }
 
-        public static void CountOfSalesPerMake(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
+        public static void CountOfSalesPerMake(List<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
         {
-            Dictionary<string, int> makeCountPairs = new();
+            var makeCountPairs = new Dictionary<string, int>();
 
             foreach (var motorcycle in soldEntriesSet)
             {
-                if (!makeCountPairs.ContainsKey(motorcycle.Make.Make.ToString()))
+                var make = motorcycle.Make?.Make;
+                if (make != null)
                 {
-                    makeCountPairs.Add(motorcycle.Make.Make, 0);
+                    if (!makeCountPairs.ContainsKey(make))
+                    {
+                        makeCountPairs.Add(make, 0);
+                    }
                 }
             }
 
             foreach (var motorcycle in soldEntriesSet)
             {
-                makeCountPairs[motorcycle.Make.Make.ToString()] += 1;
+                var make = motorcycle.Make?.Make;
+                if (make != null)
+                {
+                    makeCountPairs[make]++;
+                }
             }
 
             foreach (var kvp in makeCountPairs)
@@ -70,7 +80,7 @@ namespace BaseScraper.Calculations
             }
         }
 
-        public static void CountOfSalesPerDay(HashSet<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
+        public static void CountOfSalesPerDay(List<MotocrossSoldEntry> soldEntriesSet, StreamWriter saleReportWriter)
         {
             SortedDictionary<DateTime, int> salesPerDay = new();
 

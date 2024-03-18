@@ -1,6 +1,7 @@
 ﻿using BaseScraper.Calculations;
 using BaseScraper.Data;
 using BaseScraper.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using static BaseScraper.Config.ScraperSettings;
 using static BaseScraper.Config.StringsConstants;
 
@@ -60,13 +61,10 @@ namespace BaseScraper
 
         public static Task SoldMotorcyclesReport(MotoContext context)
         {
-            List<MotocrossSoldEntry> soldEntries = context.MotocrossSoldEntries.ToList();
-            List<MotocrossMarketPrice> marketPrices = context.MotocrossMarketPrices.ToList();
+            List<MotocrossSoldEntry> soldEntries = context.MotocrossSoldEntries.OrderBy(m => m.Make.Make).ThenBy(m => m.Year.Year).ToList();
+            List<MotocrossMarketPrice> marketPrices = context.MotocrossMarketPrices.OrderBy(m => m.Make.Make).ThenBy(m => m.Year.Year).ToList();
 
-            HashSet<MotocrossSoldEntry> soldEntriesSet = new(soldEntries.OrderBy(m => m.Make.Make).ThenBy(m => m.Year.Year));
-            HashSet<MotocrossMarketPrice > marketPricesSet = new(marketPrices.OrderBy(m => m.Make.Make).ThenBy(m => m.Year.Year));
-
-            if (soldEntriesSet.Count < 1)
+            if (soldEntries.Count < 1)
             {
                 return Task.CompletedTask;
             }
@@ -75,11 +73,11 @@ namespace BaseScraper
             salesWriter.WriteLine(DateTime.Now);
             salesWriter.WriteLine($"Make, Year, CC, Price Sold, Avg Market Price, Date Listed, Date Sold");
 
-            SaleReport.SoldMotorcyclesList(soldEntriesSet, marketPricesSet, salesWriter);
-            SaleReport.CalculateAbsoluteAverages(soldEntriesSet, salesWriter);
-            SaleReport.EngineDisplacementCount(soldEntriesSet, salesWriter);
-            SaleReport.CountOfSalesPerMake(soldEntriesSet, salesWriter);
-            SaleReport.CountOfSalesPerDay(soldEntriesSet, salesWriter);
+            SaleReport.SoldMotorcyclesList(soldEntries, marketPrices, salesWriter);
+            SaleReport.CalculateAbsoluteAverages(soldEntries, salesWriter);
+            SaleReport.EngineDisplacementCount(soldEntries, salesWriter);
+            SaleReport.CountOfSalesPerMake(soldEntries, salesWriter);
+            SaleReport.CountOfSalesPerDay(soldEntries, salesWriter);
 
             salesWriter.Dispose();
 

@@ -59,13 +59,13 @@ namespace BaseScraper.Migrations
                         column: x => x.MakeId,
                         principalTable: "Makes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_MotocrossEntries_Years_YearId",
                         column: x => x.YearId,
                         principalTable: "Years",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 },
                 comment: "Table of all Motocross announcements");
 
@@ -92,13 +92,13 @@ namespace BaseScraper.Migrations
                         column: x => x.MakeId,
                         principalTable: "Makes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_MotocrossMarketPrices_Years_YearId",
                         column: x => x.YearId,
                         principalTable: "Years",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -122,13 +122,13 @@ namespace BaseScraper.Migrations
                         column: x => x.MakeId,
                         principalTable: "Makes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_MotocrossSoldEntries_Years_YearId",
                         column: x => x.YearId,
                         principalTable: "Years",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 },
                 comment: "A table of all sold motorcycles");
 

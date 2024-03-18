@@ -238,7 +238,7 @@ namespace BaseScraper
                     DateSold = DateTime.Now
                 };
 
-                if (newSoldEntry.Year is not null)
+                if (newSoldEntry.Make is not null && newSoldEntry.Year is not null)
                 {
                     transferEntries.Add(newSoldEntry);
                 }
